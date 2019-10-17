@@ -1,0 +1,198 @@
+@keyframes doux-slide{
+	0%{
+        transform: translateX(-50px);
+        opacity:0 ;
+	}
+    70%{
+        transform: translateX(-50px);
+        opacity:0 ;
+	}
+	100%{
+		
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+@keyframes doux-up{
+	0%{
+        transform: translateY(30px);
+        opacity:0 ;
+	}
+    70%{
+        transform: translateY(30px);
+        opacity:0 ;
+	}
+	100%{
+		
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+@keyframes visible{
+	0%{
+        opacity:0 ;
+        transform: rotateY(40deg)
+	}
+   
+	100%{
+        opacity: 1;
+        transform: rotateY(0deg)
+    }
+}
+@keyframes visible2{
+	0%{
+        transform: translateY(30px);
+        opacity:0 ;
+	}
+    70%{
+        transform: translateY(30px);
+        opacity:0 ;
+	}
+	100%{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+/* Theme AFFICHER sur tableau */
+/* theme1 */
+.theme1 h1{
+    margin: 0px;
+    padding: 12px 0px;
+    padding-left: 20px;
+}
+.theme1 div{
+    width: 90%;
+    margin-left:10%;
+    padding-top:30px;
+    font-size:22px;
+    color: white; 
+    transition: 0.2s;
+}
+.theme1 div:hover{
+    color: rgb(255, 166, 0);
+}
+.theme1 div:hover .fa{
+    margin-left: 20px;
+}
+.theme1  .ico-titre{
+    margin-right: 10px;
+    color: rgb(255, 166, 0);
+}
+.theme1 div .fa{
+    margin-right: 10px;
+    font-size: 25px;
+    color: rgb(255, 166, 0);
+    transition: 0.2s;
+}
+.theme1 div:nth-child(1){ animation: doux-slide 1s;}
+.theme1 div:nth-child(2){ animation: doux-slide 1.2s;}
+.theme1 div:nth-child(3){ animation: doux-slide 1.4s;}
+.theme1 div:nth-child(4){ animation: doux-slide 1.6s;}
+.theme1 div:nth-child(5){ animation: doux-slide 1.8s;}
+.theme1 div:nth-child(6){ animation: doux-slide 2s;}
+.theme1 div:nth-child(7){ animation: doux-slide 2.2s;}
+.theme1 div:nth-child(8){ animation: doux-slide 2.4s;}
+.theme1 div:nth-child(9){ animation: doux-slide 2.6s;}
+.theme1 div:nth-child(10){ animation: doux-slide 2.8s;}
+.theme1 div:nth-child(11){ animation: doux-slide 3s;}
+.theme1 div:nth-child(12){ animation: doux-slide 3.2s;}
+.theme1 div:nth-child(13){ animation: doux-slide 3.4s;}
+.theme1 div:nth-child(14){ animation: doux-slide 3.6s;}
+.theme1 div:nth-child(15){ animation: doux-slide 3.8s;}
+.theme1 div:nth-child(16){ animation: doux-slide 4s;}
+.theme1 div:nth-child(17){ animation: doux-slide 4.2s;}
+.theme1 div:nth-child(18){ animation: doux-slide 4.4s;}
+.theme1 div:nth-child(19){ animation: doux-slide 4.6s;}
+.theme1 div:nth-child(20){ animation: doux-slide 4.8s;}
+.theme1 div:nth-child(21){ animation: doux-slide 5s;}
+.theme1 div:nth-child(22){ animation: doux-slide 5.2s;}
+
+.ls1{
+    display:block;
+}
+.in{
+    display:none;
+}
+
+
+
+
+
+/* theme2 */
+.theme2 div{
+    width: 150px;
+    margin: 40px 50px;
+    padding: 50px 0px;
+    border-radius: 2px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    background: rgba(2, 2, 2, 0.568);
+    transition: 0.2s;
+}
+.theme2 div:hover{
+    /* color: rgb(255, 166, 0); */
+    background: rgb(255, 166, 0);
+}
+.theme2 div:nth-child(1){ animation: doux-slide 1s;}
+.theme2 div:nth-child(2){ animation: doux-slide 1.2s;}
+.theme2 div:nth-child(3){ animation: doux-slide 1.4s;}
+
+/* theme3 */
+.theme3 {
+    padding:10px;
+}
+.theme3 .box{
+    width: 250px;
+    background: rgba(255, 255, 255, 0.918);
+    border-radius: 15px 10px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 40px 20px;
+    text-align: center;
+    animation: doux-slide 0.5s;
+    transition:0.2s;
+}
+.theme3 .box:hover{
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.4);
+}
+.theme3 .box img{
+    width: 120px !important;
+    height: 120px;
+    margin: 0 auto;
+    border-radius: 50%;
+    opacity: 0.95;
+    overflow: hidden;
+}
+.theme3 .box h2{
+   font-size: 20px;
+   color: #262626;
+   animation: visible2 1.3s;
+}
+.theme3 .box span{
+    width: auto !important;
+    font-size: 15px;
+    background: #e91e63;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 50px;
+    animation: visible2 1.6s;
+ }
+ .theme3 .box p{
+    color: #262626;
+    text-align: center;
+    animation: visible2 1.9s;
+   }
+ .theme3 .box .fa{
+    color: #aaa;
+    margin: 0px 10px;
+    font-size: 20px;
+    transition: 0.5s;
+    animation: visible2 2.2s;
+ }
+ .theme3 .box a:hover .fa{
+    color:#e91e63;
+    transform: rotateY(360deg)
+ }
+

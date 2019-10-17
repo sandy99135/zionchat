@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>factureZion4</title>
+
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/contener.css" />
+    <link rel="stylesheet" href="css/facture/facture.css" />
+  
+</head>
+<body>
+  <div id="container"> 
+    <div id="tete">
+           <div class="logo">
+                <i class="fa fa-xing" style="color:white;" ></i>
+                <span class="zion">Zion</span> 
+                <i class="fa fa-th  hamberger"></i>
+                <i class="fa fa-th  retour"></i>
+           </div>
+
+           <div class="headermenu">
+                <i class="fa fa-user"  ></i>
+                <i class="fa fa-plus-circle"  ></i>
+                <i class="fa fa-search"  ></i>
+                <i class="fa fa-cog"  ></i>
+                <i class="fa fa-question"  ></i>
+           </div>
+    </div>
+        
+    <div id="blockmenu">
+       <a href="index.html" class=" select"> <div class="menu select"> <i class="fa fa-pie-chart"  ></i><p>Tableau de bord</p></div> </a>
+       <a href="facture.html"> <div class="menu">  <i class="fa fa-file-text"  ></i><p>Facture</p> </div> </a>
+       <a href="devis.html"> <div class="menu">  <i class="fa fa-building"  ></i><p>Devis</p></div> </a>
+       <a href="vente.html"> <div class="menu">  <i class="fa fa-plus"  ></i><p>Ventes</p></div> </a>
+       <a href="achat.html"> <div class="menu">  <i class="fa fa-minus"  ></i><p>Achats</p></div> </a>
+       <a href="produit.html"> <div class="menu">  <i class="fa fa-cart-arrow-down"  ></i><p>Produit</p></div> </a>
+       <a href="clients.html"> <div class="menu">  <i class="fa fa-street-view"  ></i><p>Clients</p></div> </a>
+       <a href="equipe.html"> <div class="menu">  <i class="fa fa-slideshare"  ></i><p>Equipe</p></div> </a>
+       <a href="rapport.html"> <div class="menu">  <i class="fa fa-server"  ></i><p>Rapport</p></div> </a>
+       <a href="comptable.html"> <div class="menu">  <i class="fa fa-table"  ></i><p>Comptable</p></div> </a>
+       <a href="conference.html"> <div class="menu">  <i class="fa fa-video-camera"  ></i><p>Conference</p></div> </a>
+
+    </div>
+
+
+    <!-- zoom parametre -->
+    <div class="zoom">
+        <span class="affiche-zoom">100%</span>
+        <input type="range" value="0" min="0" max="10" class="range" onmousemove="rangeSlider(this.value)" onchange="rangeSlider(this.value)">
+        
+    </div>
+
+    <!-- CORP FACTURE -->
+    <div class="fond-zoom-apercus"></div>
+    <div id="corp-facture">
+        <h2>Creer facture personalisé</h2>
+
+        <div class="bloc-facture">
+            <div class="parametre">
+                <div class="menu-facture">
+                    <div class="mn mn1">Theme</div>
+                    <div class="mn mn2">Contenue</div>
+                    <div class="mn mn3">Email</div>
+                </div>
+                <p>L'enregistrement s'effectue automatiquement</p>
+
+                <div class="theme MN">
+                    <div class="modele">
+                        <p>Modele</p> 
+                        <div class="change-theme"><img src="images/theme1.png" alt=""></div>
+                        <div class="change-theme"><img src="images/theme2.png" alt=""></div>
+                        <div class="change-theme"><img src="images/theme3.png" alt=""></div>
+                        <div class="change-theme"><img src="images/theme4.png" alt=""></div>
+                        <div class="change-theme"><img src="images/theme5.png" alt=""></div>
+                        <!-- <div class="change-theme"><img src="images/theme6.png" alt=""></div> -->
+                    </div>
+                    <div class="ajout-logo">
+                        <p>Logo</p> 
+                        <div class="change-logo">
+                            <div class="logo-box">
+                                <div class="plus"><i class="fa fa-plus"  ></i> </div>  <!-- logo par defaut -->
+                                <img src="images/logo.jpg" alt="">
+                                <div class="plus"><i class="fa fa-plus"  ></i> </div>
+                                <input type="file" class="file"/>
+                            </div>
+                            <div class="ok-file ">OK</div>
+                            
+                        </div>
+                        <div class="affiche-logo"><div class="aff-logo">Afficher</div><div class="sup-logo">Enlever</div> </div>
+                    </div>
+                    <div class="couleur">
+                        <p>Couleur</p> 
+                        <div class="change-color">
+                            <input type="color" class="color"/>
+                            <div class="ok">OK</div>
+                        </div>
+                        
+                    </div>
+                    <div class="font-familly">
+                        <p>Font</p> 
+                        <div class="block-font">
+                        <div class="change-police">
+                                <select name="font" class="font">
+                                        <option value="Open sans">Open sans</option>
+                                        <option value="verdana">Verdana</option>
+                                        <option value="sans-serif">Sans-serif</option>
+                                        <option value="Arial">Arial</option>
+                                        <option value="Times New Roman">Times New Roman</option>
+                                        <option value="Georgia">Georgia</option>
+                                        <option value="Cambria">Cambria</option>
+                                </select>
+                        </div>
+                        <div class="ok-font" >OK</div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="contenue MN">
+                    <div class="en-tete">
+                    <div class="menus-contenue  top"><h4 class="en-tt">En tete <i class="fa fa-plus" style="margin-left:10px;"></i></h4> <h4 class="aff-dt">Document et Affichage<i class="fa fa-plus" style="margin-left:10px;"></i></h4></div> 
+                    <div class="menus-contenue  bottom"><h4 class="tb-act">Table d'activité <i class="fa fa-plus" style="margin-left:10px;"></i></h4> <h4 class="pd">Pied de page<i class="fa fa-plus" style="margin-left:10px;"></i></h4></div>
+                    
+                    <form method="post"action="traitement.php" class="formulaire-tete">
+                            <p>En tete</p>
+                            <label for="Sujet">Nom de l'entreprise</label>
+                            <input type="text" name="Sujet" id="pseudo"placeholder="  "size="30"maxlength="30" class="A"/>
+                            <label for="Sujet">Telephone</label>
+                            <input type="text" name="Sujet" id="pseudo"placeholder="  "size="30"maxlength="30" class="B"/>
+                            <label for="Sujet">E-mail</label>
+                            <input type="text" name="Sujet" id="pseudo"placeholder=" "size="30"maxlength="30" class="C"/>
+                            <label for="Sujet">Ville</label><br>
+                            <input type="text" name="Sujet" id="pseudo"placeholder=" "size="30"maxlength="30" class="D"/>
+                            <label for="Sujet">Adresse postale</label>
+                            <input type="text" name="Sujet" id="pseudo"placeholder=" "size="30"maxlength="30" class="E"/>
+                            <label for="Sujet">Code postale</label>
+                            <input type="text" name="Sujet" id="pseudo"placeholder=" "size="30"maxlength="30" class="F"/>
+                            <label for="Sujet">Solde</label>
+                            <input type="text" name="Sujet" id="pseudo"placeholder="  "size="30"maxlength="30" class="G"/><br>
+                          
+                             <input type="submit"value="AJOUTER" class="envoyer"/>	
+                   </form>
+                   </div>
+                   <div class="document-affichage">
+                   <div class="document">
+                       <p>Document</p>
+                      <form method="post"action="traitement.php" >
+                        <label for="Sujet">Nom du document</label>
+                        <input type="text" name="Sujet" id="pseudo"placeholder="  FACTURE/DEVIS"size="30"maxlength="30" class="A"/>
+                        <label for="Sujet">Numéro du document</label>
+                        <input type="text" name="Sujet" id="pseudo"placeholder="  1800-07"size="30"maxlength="30" class="A"/>
+                       </form>
+                   </div>
+                   <div class="affichage">
+                       <p>Affichage</p>
+                       <div class="aff"><div class="checked"></div>Adresse de facturation</div> 
+                       <div class="aff"><div class="checked"></div>Expedition</div>
+                       <div class="aff"><div class="checked"></div>Condition</div>
+                       <div class="aff"><div class="checked"></div>Echeance</div>
+                       <div class="aff"><div class="checked"></div>Mode de paiement</div>
+                       <div class="aff"><div class="checked"></div>N° de TVA intracommunautaire du client</div>
+
+                       <div class="aff input-1"><div class="checked"></div><input type="text" placeholder="  Ref commande"> </div>
+                       <div class="aff"><div class="checked"></div><input type="text" placeholder="  Nom personnalisé"> </div>
+                       <div class="aff"><div class="checked"></div><input type="text" placeholder="  Nom personnalisé"> </div>
+                   </div>
+                   </div>
+                   <div class="BLactivité">
+                        <p>Table d'activité</p>
+                        <div class="aff-act"><input type="submit"value="REMOUVE" class="nouveau"/></div>
+
+                        <p>Cocher les colonnes a affichés</p>
+                        <div class="aff"><div class="checked co-1 col z-0"></div><div class="checked  de-1 col2"></div>Date</div> 
+                        <div class="aff"><div class="checked co-2 col" ></div><div class="checked  de-2 col2"></div>Produit/Service</div>
+                        <div class="aff"><div class="checked co-3 col z-0"></div><div class="checked  de-3 col2"></div>Description</div>
+                        <div class="aff"><div class="checked co-4 col"></div><div class="checked  de-4 col2"></div>Quantité</div>
+                        <div class="aff"><div class="checked co-5 col"></div><div class="checked  de-5 col2"></div>Prix unitaire</div>
+                        <div class="aff"><div class="checked co-6 col"></div><div class="checked  de-6 col2"></div>TVA</div>
+                        <div class="aff"><div class="checked co-7 col"></div><div class="checked  de-7 col2"></div>Ref</div>
+                        <div class="aff"><div class="checked co-8 col"></div><div class="checked  de-8 col2"></div>Remise</div>
+                        <div class="aff"><div class="checked co-9 col z-0"></div><div class="checked  de-9 col2"></div>Montant</div>
+                        
+                        <p>Ajouter une ligne</p>
+                        <form method="post"action="traitement.php" class="formulaire-activité">
+
+                        <div class="aff-act  input-1"><input type="text" placeholder=" Activité"> </div>
+                        <div class="aff-act tap block"><input type="text" placeholder="  Date"> </div>
+                        <div class="aff-act tap"><input type="text" placeholder="  Produit/Service"> </div>
+                        <div class="aff-act tap block"><input type="text" placeholder="  Description"> </div>
+                        <div class="aff-act tap"><input type="text" placeholder="  Quantité"> </div>
+                        <div class="aff-act tap"><input type="text" placeholder="  Prix unitaire"> </div>
+                        <div class="aff-act tap"><input type="text" placeholder="  TVA"> </div>
+                        <div class="aff-act tap"><input type="text" placeholder="  Ref"> </div>
+                        <div class="aff-act tap"><input type="text" placeholder="  Remise"> </div>
+                        <div class="aff-act tap block"><input type="text" > </div>
+                        <div class="aff-act"><input type="submit"value="AJOUTER" class="envoyer"/></div>
+                        </form>
+                    
+                   </div>
+                   <div class="BLpied">
+                        <p>Pied de page</p>
+                        <form action="">
+                            <input type="text" placeholder="  TOTAL TVA">
+                            <label for="">Message au client</label><br>
+                            <textarea name="" placeholder=" Merci de votre confiance et bonne journée" class=""></textarea>
+                            <div class="m-légale">
+                            <label for="">Mentions légales</label><br>
+                            <textarea name="" placeholder=" Declaration du retard mensuelle 10% plus les dette a payer sur votre creeance" class=""></textarea><br>
+                            <select name="police" class="police">
+                                    <option class="po" value="13">13pt</option>
+                                    <option class="po" value="14">14pt</option>
+                                    <option class="po" value="15">15pt</option>
+                                    <option class="po" value="16">16pt</option>
+                            </select>
+                            </div>
+                            <label for="">Capital social</label>
+                            <input type="text" placeholder="  500 000">
+                            <label for="">N° RCS</label>
+                            <input type="text" placeholder="  RCS TANA 1245">
+                            <label for="">N° Siret</label>
+                            <input type="text" placeholder="  4648658968095">
+                        </form>
+
+                   </div>
+                    
+                </div>
+
+                 <div class="email MN">
+                     <p>Email</p>
+                 </div>
+               
+
+            </div>
+            
+
+
+             <div id="HTMLtoPDF" class="apercus" >       <!--gere l'apercu du pdf -->
+
+                <div class="apercu-theme1 chg-th">
+                <div class="apercus-block">
+                   <div class="en-tete">     <!--en-tete-apercu -->
+                       <div class="apercus-logo">
+                           <img src="images/logo.jpg" alt="">
+                        </div>
+                       <h4 class="a-colorer">Societé Hightech</h4>
+                       <p>2G 23R Ambohimirary</p>
+                       <p>1234 Tana</p>
+                       <p>andritoky@gmail.com</p>
+                       <p>N°de TVA intercommunotaire RCS</p>
+                       <p>Paris 103</p><br>
+                       <!-- <strong class="strong-facture">FACTURE</strong><br><br> -->
+                       <div class="en-tete-facture">
+                           <div class="">
+                              <p><strong> FACTURE : </strong># 1234</p>
+                              <p><strong> DATE : </strong>30/12/93</p>
+                              <p><strong>  ECHEANCE : </strong>15032019</p>
+                              <p><strong> CONDITION : </strong>NET 30</p>   
+                            </div> 
+                           
+                       </div>
+                       <div class="adresse-facturation">
+                           <strong>ADRESSE DE FACTURATION</strong>
+                           <p>Zion Manager</p>
+                           <p>Ivandry 12 Bis</p>
+                           <p>Tana 101 </p>
+                           <p>N° TVA</p>
+                           <p>blalalalbalalbala</p>
+                       </div>
+                   </div>
+
+                   <div class="activité">                                  <!--Activité l'apercu  -->
+                    <table>
+                        <thead>
+                             
+                                <tr class="a-colorer">
+                                    
+                                    <th >ACTIVITE</th>
+                                    <th class="act t-1">DATE</th>
+                                    <th class="act t-2"></th>
+                                    <th class="act t-3">DESCRIPTION</th>
+                                    <th class="act t-4"></th>
+                                    <th class="act t-5"></th>
+                                    <th class="act t-6"></th>
+                                    <th class="act t-7"></th>
+                                    <th class="act t-8"></th>
+                                    <th class="act right t-9">MONTANT EN AR</th>  
+                                   
+                                </tr> 
+                        </thead>
+                        <tbody>
+                                <tr>
+                                   
+                                   <td> Nom de l'article</td>
+                                   <td class="aj t-1">DATE</td>
+                                   <td class="aj t-2">  </td>
+                                   <td class="aj t-3"> Salon canape </td>
+                                   <td class="aj t-4"> </td>
+                                   <td class="aj t-5"> </td>
+                                   <td class="aj t-6"> </td>
+                                   <td class="aj t-7"> </td>
+                                   <td class="aj t-8"> </td>
+                                   <td class="aj right t-9">300000 </td>
+                                  
+                                </tr>
+                                
+                                 
+
+                                
+                        </tbody>
+                     </table>
+
+                   </div>
+
+                   <div class="pied">
+                       <div class="message-et-solde">
+                           <p class="message"><em>Merci de votre confiance </em></p>
+                           <table>
+                                     <tr>
+                                        <td><strong class="a-colorer">TOTAL HT</strong></td>
+                                        <td>30000 </td>
+                                     </tr>
+                                     <tr>
+                                        <td><strong class="a-colorer">TOTAL TVA</strong></td>
+                                        <td>4000 </td>
+                                     </tr>
+                               
+                                     
+                                     <tr class="sold-a-payee">
+                                        <td><strong>SOLDE A PAYER</strong></td>
+                                        <td><strong>3000000 AR</strong> </td>
+                                     </tr>
+                           </table>
+                       </div>
+                           <div class="mention-légale">
+                               <p>Declaration du retard musuelle 10% plus les dette a payer sur votre creeance </p>
+                           </div>
+                           <p class="bas-pied"> Capitale sociale N° RCS N°Siret </p>
+
+                   </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+        <div class="apercus-theme2  chg-th">                 <!--apercuTHEME 2 -->
+                <div class="a-propos a-fond">
+                        <div class="apercus-logo">
+                            <img src="images/logo.jpg" alt="">
+                         </div>
+                        <h4 class="">Societé Hightech</h4>
+                        <p class="">2G 23R Ambohimirary</p>
+                        <p class="">1234 Tana</p>
+                        <p class="">andritoky@gmail.com</p>
+                        <p class="">N°de TVA intercommunotaire RCS</p>
+                        <p class="">Paris 103</p>
+               </div>
+                <div class="apercus-block">
+                   <div class="en-tete">     <!--en-tete-apercu -->
+                     
+                       <div class="en-tete-facture">
+                           <div class="">
+                              <p><strong> FACTURE : </strong># 1234</p>
+                              <p><strong> DATE : </strong>30/12/93</p>
+                              <p><strong>  ECHEANCE : </strong>15032019</p>
+                              <p><strong> CONDITION : </strong>NET 30</p>   
+                            </div> 
+                           
+                       </div>
+                       <div class="adresse-facturation">
+                           <strong>ADRESSE DE FACTURATION</strong>
+                           <p>Zion Manager</p>
+                           <p>Ivandry 12 Bis</p>
+                           <p>Tana 101 </p>
+                           <p>N° TVA</p>
+                           <p>blalalalbalalbala</p>
+                       </div>
+                   </div>
+
+                   <div class="activité">                                  <!--Activité l'apercu 2 -->
+                    <table>
+                        <thead>
+                                <tr class="a-colorer">
+                                    
+                                    <th >ACTIVITE</th>
+                                    <th class="act t-1">DATE</th>
+                                    <th class="act t-2"></th>
+                                    <th class="act t-3">DESCRIPTION</th>
+                                    <th class="act t-4"></th>
+                                    <th class="act t-5"></th>
+                                    <th class="act t-6"></th>
+                                    <th class="act t-7"></th>
+                                    <th class="act t-8"></th>
+                                    <th class="act right t-9">MONTANT EN AR</th> 
+                                   
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                   
+                                    <td> Nom de l'article</td>
+                                    <td class="aj t-1"> 12 </td>
+                                    <td class="aj t-2"> </td>
+                                    <td class="aj t-3"> Salon canape </td>
+                                    <td class="aj t-4"> </td>
+                                    <td class="aj t-5"> </td>
+                                    <td class="aj t-6"> </td>
+                                    <td class="aj t-7"> </td>
+                                    <td class="aj t-8"></td>
+                                    <td class="aj right t-9">300000 </td>
+                                  
+                                </tr>
+                                
+                    
+
+                                
+                        </tbody>
+                     </table>
+
+                   </div>
+
+                   <div class="pied">
+                       <div class="message-et-solde">
+                           <p class="message"><em>Merci de votre confiance </em></p>
+                           <table>
+                                     <tr>
+                                        <td><strong >TOTAL HT</strong></td>
+                                        <td>30000 </td>
+                                     </tr>
+                                     <tr>
+                                        <td><strong >TOTAL TVA</strong></td>
+                                        <td>4000 </td>
+                                     </tr>
+                                    
+                                    
+                                     
+                                     <tr class="sold-a-payee">
+                                        <td><strong class="a-colorer">SOLDE A PAYER</strong></td>
+                                        <td><strong class="a-colorer">3000000 AR</strong> </td>
+                                     </tr>
+                           </table>
+                       </div>
+                           <div class="mention-légale">
+                               <p>Declaration du retard musuelle 10% plus les dette a payer sur votre creeance </p>
+                           </div>
+                           <p class="bas-pied"> Capitale sociale N° RCS N°Siret </p>
+
+                   </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="apercus-theme3  chg-th">                 <!--THEME 3 -->
+            <div class="a-propos ">
+                <div class="deco1"></div>
+                <div class="deco2 a-fond"></div>
+                <div class="deco3"></div>
+                <div class="apercus-logo">
+                   <img src="images/logo.jpg" alt="">
+                </div>
+                <h4 class="h4" style="margin-left:50px">FACTURE</h4> 
+                <div class="en-tete-3">
+                    
+                    <h4 style="margin:0px">Nom de l'Entreprise</h4>
+                    <p class="">2G 23R Ambohimirary</p>
+                    <p class="">1234 Tana</p>
+                    <p class="">andritoky@gmail.com</p>
+                    <p class="">N°de TVA intercommunotaire RCS</p>
+                    <p class="">Paris 103</p>
+                </div>
+           </div>
+            <div class="apercus-block">
+               <div class="en-tete">     <!--en-tete-apercu -->
+                 
+                   <div class="adresse-facturation">
+                       <strong>Adresse de facturation </strong>
+                       <p>Societe Star</p>
+                       <p>Ivandry 12 Bis</p>
+                       <p>Tana 101 </p>
+                       <p>N° TVA</p>
+                       <p>blalalalbalalbala</p>
+                   </div>
+               </div>
+
+               <div class="activité">                 <!--Activité l'apercu 3 -->
+                 <div class="fond-tab  a-fond"></div>          <!--fond activité -->                        
+                 <table>
+                    <thead>
+                            
+                            <tr class="a-colorer">
+                                
+                                <th >ACTIVITE</th>
+                                <th class="act t-1">DATE</th>
+                                <th class="act t-2"></th>
+                                <th class="act t-3">DESCRIPTION</th>
+                                <th class="act t-4"></th>
+                                <th class="act t-5"></th>
+                                <th class="act t-6"></th>
+                                <th class="act t-7"></th>
+                                <th class="act t-8"></th>
+                                <th class="act right t-9">MONTANT EN AR</th>
+                               
+                            </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                   
+                            <td> Nom de l'article</td>
+                            <td class="aj t-1"> 12 </td>
+                            <td class="aj t-2"> </td>
+                            <td class="aj t-3"> Salon canape </td>
+                            <td class="aj t-4"> </td>
+                            <td class="aj t-5"> </td>
+                            <td class="aj t-6"> </td>
+                            <td class="aj t-7"> </td>
+                            <td class="aj t-8"></td>
+                            <td class="aj right t-9">300000 </td>
+                          
+                          </tr>
+                     
+                             
+
+                            
+                    </tbody>
+                 </table>
+
+               </div>
+
+               <div class="pied">
+                    <div class="deco4 a-fond"></div>
+                    <div class="deco5"></div>
+
+                   <div class="message-et-solde">
+                       <div class="pied-facture">
+                           <div class="">
+                              <p><strong> FACTURE : </strong># 1234</p>
+                              <p><strong> DATE : </strong>30/12/93</p>
+                              <p><strong>  ECHEANCE : </strong>15032019</p>
+                              <p><strong> CONDITION : </strong>NET 30</p>   
+                            </div> 
+                           
+                       </div>
+                       <table>
+                                 <tr>
+                                    <td><strong >TOTAL HT</strong></td>
+                                    <td>30000 </td>
+                                 </tr>
+                                 <tr>
+                                    <td><strong >TOTAL TVA</strong></td>
+                                    <td>4000 </td>
+                                 </tr>
+                                
+                                
+                                 
+                                 <tr class="sold-a-payee">
+                                    <td><strong class="a-colorer">TOTAL:</strong></td>
+                                    <td><strong class="a-colorer">3000000 AR</strong> </td>
+                                 </tr>
+                       </table>
+                   </div>
+                       <div class="mention-légale">
+                           <p>Declaration du retard musuelle 10% plus les dette a payer sur votre creeance </p>
+                       </div>
+                       <!-- <p class="bas-pied"> Capitale sociale N° RCS N°Siret </p> -->
+
+               </div>
+
+
+        </div>
+    </div>
+
+    <div class="apercus-theme4  chg-th">                 <!--THEME 4 -->
+        <div class="a-propos ">
+            <div class="deco2 a-fond"><h4 class="h4">FACTURE</h4></div>
+            <div class="apercus-logo">
+               <img src="images/logo.jpg" alt="">
+            </div>
+            
+            <div class="en-tete-3">
+                
+                <h4 style="margin:0px">Nom de l'Entreprise</h4>
+                <p class="">2G 23R Ambohimirary</p>
+                <p class="">1234 Tana</p>
+                <p class="">andritoky@gmail.com</p>
+                <p class="">N°de TVA intercommunotaire RCS</p>
+                <p class="">Paris 103</p>
+            </div>
+       </div>
+        <div class="apercus-block">
+           <div class="en-tete">     <!--en-tete-apercu -->
+             
+               <div class="adresse-facturation">
+                   <strong>Adresse de facturation </strong>
+                   <p>Societe Star</p>
+                   <p>Ivandry 12 Bis</p>
+                   <p>Tana 101 </p>
+                   <p>N° TVA</p>
+                   <p>blalalalbalalbala</p>
+               </div>
+           </div>
+
+           <div class="activité">                 <!--Activité l'apercu 4 -->
+             <div class="fond-tab  a-fond"></div>          <!--fond activité -->                        
+             <table>
+                <thead>
+                        
+                        <tr class="a-colorer">
+                            
+                                <th >ACTIVITE</th>
+                                <th class="act t-1">DATE</th>
+                                <th class="act t-2"></th>
+                                <th class="act t-3">DESCRIPTION</th>
+                                <th class="act t-4"></th>
+                                <th class="act t-5"></th>
+                                <th class="act t-6"></th>
+                                <th class="act t-7"></th>
+                                <th class="act t-8"></th>
+                                <th class="act right t-9">MONTANT EN AR</th>
+                           
+                        </tr>
+                </thead>
+                <tbody>
+                      
+                           
+                            <tr>
+                                   
+                                <td> Nom de l'article</td>
+                                <td class="aj t-1"> 12 </td>
+                                <td class="aj t-2"> </td>
+                                <td class="aj t-3"> Salon canape </td>
+                                <td class="aj t-4"> </td>
+                                <td class="aj t-5"> </td>
+                                <td class="aj t-6"> </td>
+                                <td class="aj t-7"> </td>
+                                <td class="aj t-8"></td>
+                                <td class="aj right t-9">300000 </td>
+                              
+                            </tr>
+                          
+                        
+                       
+                </tbody>
+             </table>
+
+           </div>
+
+           <div class="pied">
+                <div class="deco4 a-fond"></div>
+                <div class="deco5"></div>
+
+               <div class="message-et-solde">
+                   <div class="pied-facture">
+                       <div class="">
+                          <p><strong> FACTURE : </strong># 1234</p>
+                          <p><strong> DATE : </strong>30/12/93</p>
+                          <p><strong>  ECHEANCE : </strong>15032019</p>
+                          <p><strong> CONDITION : </strong>NET 30</p>   
+                        </div> 
+                       
+                   </div>
+                   <table>
+                             <tr>
+                                <td><strong >TOTAL HT</strong></td>
+                                <td>30000 </td>
+                             </tr>
+                             <tr>
+                                <td><strong >TOTAL TVA</strong></td>
+                                <td>4000 </td>
+                             </tr>
+                          
+                             <tr class="sold-a-payee">
+                                <td><strong >TOTAL:</strong></td>
+                                <td><strong >3000000 AR</strong> </td>
+                             </tr>
+                   </table>
+               </div>
+                   <div class="mention-légale">
+                       <p>Declaration du retard musuelle 10% plus les dette a payer sur votre creeance </p>
+                   </div>
+                   <!-- <p class="bas-pied"> Capitale sociale N° RCS N°Siret </p> -->
+
+           </div>
+
+
+    </div>
+</div>
+
+<div class="apercus-theme5  chg-th">                 <!--THEME 5 -->
+    <div class="a-propos ">
+        <div class="deco1 a-fond"></div>
+        <div class="deco2 a-fond">
+            <div class="apercus-logo">
+                <img src="images/logo.jpg" alt="">
+            </div>
+            <h4 class="h4">Facture</h4>
+        </div>
+        
+        
+        
+   </div>
+    <div class="apercus-block">
+       <div class="en-tete">     <!--en-tete-apercu -->
+        <div class="en-tete-3">
+            <h4>Nom de l'entreprise</h4>
+            <p class="">2G 23R Ambohimirary</p>
+            <p class="">1234 Tana</p>
+            <p class="">andritoky@gmail.com</p>
+            <p class="">N°de TVA intercommunotaire RCS</p>
+            <p class="">Paris 103</p>
+        </div>
+           <div class="adresse-facturation">
+               <strong>Adresse de facturation </strong>
+               <p>Societe Star</p>
+               <p>Ivandry 12 Bis</p>
+               <p>Tana 101 </p>
+               <p>N° TVA</p>
+               <p>blalalalbalalbala</p>
+           </div>
+       </div>
+
+       <div class="activité">                 <!--Activité l'apercu 5 -->
+                               
+         <table>
+            <thead>
+                    
+                    <tr class="">
+                        
+                         <tr>
+                                   
+                            <th >ACTIVITE</th>
+                                <th class="act t-1">DATE</th>
+                                <th class="act t-2"></th>
+                                <th class="act t-3">DESCRIPTION</th>
+                                <th class="act t-4"></th>
+                                <th class="act t-5"></th>
+                                <th class="act t-6"></th>
+                                <th class="act t-7"></th>
+                                <th class="act t-8"></th>
+                                <th class="act right t-9">MONTANT EN AR</th>
+                          
+                          </tr>
+                       
+                   
+            </thead>
+            <tbody>
+                    <tr>
+                       
+                        <td> Nom de l'article</td>
+                        <td class="aj t-1"> 12 </td>
+                        <td class="aj t-2"> </td>
+                        <td class="aj t-3"> Salon canape </td>
+                        <td class="aj t-4"> </td>
+                        <td class="aj t-5"> </td>
+                        <td class="aj t-6"> </td>
+                        <td class="aj t-7"> </td>
+                        <td class="aj t-8"></td>
+                        <td class="aj right t-9">300000 </td>
+                      
+                    </tr>
+                 
+
+                    
+            </tbody>
+         </table>
+
+       </div>
+
+       <div class="pied">
+            
+           
+
+           <div class="message-et-solde">
+               <div class="pied-facture">
+                   <div class="">
+                      <p><strong> FACTURE : </strong># 1234</p>
+                      <p><strong> DATE : </strong>30/12/93</p>
+                      <p><strong>  ECHEANCE : </strong>15032019</p>
+                      <p><strong> CONDITION : </strong>NET 30</p>   
+                    </div> 
+                   
+               </div>
+               <table>
+                         <tr>
+                            <td><strong >TOTAL HT</strong></td>
+                            <td>30000 </td>
+                         </tr>
+                         <tr>
+                            <td><strong >TOTAL TVA</strong></td>
+                            <td>4000 </td>
+                         </tr>
+                       
+                         <tr class="sold-a-payee ">
+                            <td><strong class="a-colorer">TOTAL:</strong></td>
+                            <td><strong class="a-colorer">3000000 AR</strong> </td>
+                         </tr>
+               </table>
+           </div>
+               <div class="mention-légale">
+                   <p>Declaration du retard musuelle 10% plus les dette a payer sur votre creeance </p>
+               </div>
+               <!-- <p class="bas-pied"> Capitale sociale N° RCS N°Siret </p> -->
+               
+       </div>
+  
+</div>
+       <div class="deco4 a-fond"></div>
+       <div class="deco5 a-fond"></div>
+</div>
+
+        </div>
+        <div class="sortie-pdf">
+                <div  onclick="HTMLtoPDF()">Download</div>
+                <div>Terminer</div>
+                <!-- these js files are used for making PDF -->
+	            <script src="js/jspdf.js"></script>
+	            <script src="js/jquery-2.1.3.js"></script>
+	            <script src="js/pdfFromHTML.js"></script>
+         </div>
+
+
+        </div>
+
+       
+
+    </div>
+ 
+    
+
+
+  <script src="js/menu/menu.js"> </script>
+  <script src="js/facture/facture.js"> </script>
+  
+ </div>
+
+ 
+
+ 
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+ <style>
+   *{
+     margin: 0px;
+     padding: 0px;
+   }
+   #canvas{
+    position: relative;
+    width:1000px ;
+    margin:50px auto;
+   }
+   canvas{
+     border: 2px solid rgba(51, 51,51,0.4);
+     margin: 0px auto;
+   }
+ </style>
+
+</head>
+
+<body>
+   <form >
+                
+                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="Number" class="form-control lundi"  name="titre" placeholder="lundi"   required/>
+
+                                </div>
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text "><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="Number" class="form-control mardi"  name="description" placeholder="mardi"  required/>
+
+                                </div>
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="Number" class="form-control mercredi"  name="date" placeholder="mercredi"  required/>
+
+                                </div>
+                             
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="Number" class="form-control jeudi"  name="horaire" placeholder="jeudi"  required/>
+
+                                </div>
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="Number" class="form-control vendredi"  name="placedispo" placeholder="vendredi"  required/>
+
+                                </div>
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="Number" class="form-control samedi"  name="placereserve" placeholder="samedi"  required/>
+
+                                </div>
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="Number" class="form-control dimanche"  name="prix" placeholder="dimanche" required/>
+
+                                </div>
+
+                    <div>
+                        <button class="envoyer">AJouter</button><br></br>
+                        
+                    </div>
+                </form>
+     <div id="canvas">
+        <canvas></canvas>
+     </div>
+     
+
+
+  <script type="text/javascript" >
+     let canvas = document.querySelector('canvas');
+     canvas.width = 1000;
+     canvas.height = 500;
+
+     let xGrid = 10;
+     let yGrid = 10;
+     let cellsize = 10;
+
+     let ctx = canvas.getContext('2d');
+  //Recuperer les fichiers du bases de donne
+    fetch('http://localhost:8080/chart/')
+              .then(function (res) {
+                  return res.json()
+              })
+              .then(function (data) {
+                  console.log(data);
+                  data.map(pro=>{
+      
+       let data1 = {
+       Lundi:pro.lundi,
+       Mardi:pro.mardi,
+       Mercredi:pro.mercredi,
+       Jeudi:pro.jeudi,
+       Vendredi:pro.vendredi,
+       Samedi:pro.samedi,
+       Dimanche:pro.dimanche
+
+     }
+     const entries = Object.entries(data1);
+
+
+     function drawGrid(){
+       ctx.beginPath();
+
+       while(xGrid<canvas.height){
+         ctx.moveTo(0,xGrid);
+         ctx.lineTo(canvas.width,xGrid);
+         xGrid +=cellsize;
+       }
+       while(yGrid<canvas.width){
+         ctx.moveTo(yGrid,0);
+         ctx.lineTo(yGrid,canvas.height);
+         yGrid +=cellsize;
+       }
+
+       ctx.strokeStyle = "gray";    //couleur grid
+       ctx.stroke();
+ }
+
+    function blocks(count){
+         return count*10;
+       }
+       
+   function drawAxis(){
+        let yPlot = 40;
+        let pop = 0;
+         ctx.beginPath();
+         ctx.strokeStyle = "black";
+         ctx.moveTo(blocks(5),blocks(5));
+         ctx.lineTo(blocks(5),blocks(40));
+         ctx.lineTo(blocks(80),blocks(40));
+
+         ctx.moveTo(blocks(5),blocks(40));
+ 
+         for(let i= 1 ; i<=10 ; i++ ){
+           ctx.strokeText(pop,blocks(2),blocks(yPlot));
+           yPlot -= 5;
+           pop += 500;
+         }
+         ctx.stroke();
+       }
+
+    function drawChart(){              // trace du courbe
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.moveTo(blocks(5),blocks(40));
+
+        var xPlot = 10;
+        
+        for(const[jour,benefice] of entries){
+          var beneficeInBlocks = benefice/100;
+          ctx.strokeText(jour,blocks(xPlot),blocks(40-beneficeInBlocks-2));  //Affiche les noms du jour dans chart , -2 pour decaler l'ecriture
+          ctx.lineTo(blocks(xPlot),blocks(40-beneficeInBlocks));
+          ctx.arc(blocks(xPlot),blocks(40-beneficeInBlocks),2,0,Math.PI*2,true);
+          xPlot += 10;              // largeur de chaque jour dans chart
+        }
+        ctx.stroke();
+
+    }
+
+
+
+     drawGrid();
+     drawAxis()
+     drawChart()
+          
+
+                  })
+                  
+              }).catch(function (err) {
+                  console.log(err)
+              })
+
+                
+            .catch((err)=>console.log(err))
+//inserer un fichier dans le base de donne
+       var dd=document.querySelector(".envoyer")
+          dd.addEventListener('click',function(e) {
+          e.preventDefault()
+          var lundi=document.querySelector(".lundi").value
+          
+          var mardi=document.querySelector(".mardi").value
+          var mercredi=document.querySelector(".mercredi").value
+          var jeudi=document.querySelector(".jeudi").value
+          var vendredi=document.querySelector(".vendredi").value
+           let samedi=document.querySelector(".samedi").value
+          let dimanche=document.querySelector(".dimanche").value
+             const data = new FormData();
+          data.append("lundi", lundi);
+          data.append("mardi", mardi);
+          data.append("mercredi",mercredi);
+          data.append("jeudi", jeudi);
+          data.append("vendredi", vendredi);
+          data.append("samedi", samedi);
+          data.append("dimanche",dimanche);
+                      fetch('http://localhost:8080/chart', {
+                      method: 'POST',
+                      headers : new Headers(),
+                      body:data
+                  }).then((res) => res.json())
+                  .then((data1) =>  {
+                    console.log(data1)
+                      })
+                  .catch((err)=>console.log(err))
+
+                    
+                },false);
+
+  </script> 
+
+  
+</body>
+</html>

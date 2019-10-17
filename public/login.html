@@ -1,0 +1,154 @@
+<html>
+     <head>
+     <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+    <style>
+body{
+  font-family: 'Open Sans', sans-serif;
+  background:#3498db;
+  margin: 0 auto 0 auto;  
+  width:100%; 
+  text-align:center;
+  margin: 20px 0px 20px 0px;   
+}
+
+p{
+  font-size:12px;
+  text-decoration: none;
+  color:#ffffff;
+}
+
+h1{
+  font-size:1.5em;
+  color:#525252;
+}
+
+.box{
+  background:white;
+  width:300px;
+  border-radius:6px;
+  margin: 0 auto 0 auto;
+  padding:0px 0px 70px 0px;
+  border: #2980b9 4px solid; 
+}
+
+.email{
+  background:#ecf0f1;
+  border: #ccc 1px solid;
+  border-bottom: #ccc 2px solid;
+  padding: 8px;
+  width:250px;
+  color:#AAAAAA;
+  margin-top:10px;
+  font-size:1em;
+  border-radius:4px;
+}
+
+.password{
+  border-radius:4px;
+  background:#ecf0f1;
+  border: #ccc 1px solid;
+  padding: 8px;
+  width:250px;
+  font-size:1em;
+}
+
+.btn{
+  background:#2ecc71;
+  width:125px;
+  padding-top:5px;
+  padding-bottom:5px;
+  color:white;
+  border-radius:4px;
+  border: #27ae60 1px solid;
+  
+  margin-top:20px;
+  margin-bottom:20px;
+  float:left;
+  margin-left:16px;
+  font-weight:800;
+  font-size:0.8em;
+}
+
+.btn:hover{
+  background:#2CC06B; 
+}
+
+#btn2{
+  float:left;
+  background:#3498db;
+  width:125px;  padding-top:5px;
+  padding-bottom:5px;
+  color:white;
+  border-radius:4px;
+  border: #2980b9 1px solid;
+  
+  margin-top:20px;
+  margin-bottom:20px;
+  margin-left:10px;
+  font-weight:800;
+  font-size:0.8em;
+}
+
+#btn2:hover{ 
+background:#3594D2; 
+}
+    </style>
+    
+     </head>
+     <body>
+     
+
+<form >
+<div class="box">
+<h1>Dashboard</h1>
+
+<input type="text" placeholder="username" name="username" class=" username email" />
+<input type="password" placeholder="password" name="password" class=" password email" />
+<button type="submit" id="sign"class="btn">Sign In</button>
+  
+</div> <!-- End Box -->
+  
+</form>
+
+<p>Forgot your password? <u style="color:#f1c40f;">Click Here!</u></p>
+    <script src="socket.js"></script>
+   <!-- <script src="js/login.js" ></script> -->
+     <script src="js/affichage.js" ></script>
+      <script src="js/message.js" ></script>
+     <script >
+        var socket=io.connect()
+        let sign =document.querySelector("#sign")
+        let username=document.querySelector(".username")
+        let password=document.querySelector(".password")
+          sign .addEventListener("click",function(e){
+            e.preventDefault()
+            console.log(username.value )
+             const data = new FormData();
+                  data.append("nom", username.value );
+                  data.append("password", password.value )
+                  console.log(data)
+                   fetch('http://localhost:4000/login', {
+                              method: 'POST',
+                              headers : new Headers(),
+                              body:data
+                          }).then((res) => res.json())
+                          .then((data1) =>  {
+                           localStorage.setItem("user", data1.username);
+                           if(data1!=="cet utilisateur n existe pas" ||data1!=="ereur mot de passe"){
+                            localStorage.setItem("user", data1.nom);
+                            localStorage.setItem("iduserconnecte", data1.iduser);
+                            socket.emit("envoieconnecte", localStorage.getItem("user"))
+                         
+                            window.location="/"
+                           }
+                            console.log(data1)
+                              })
+                          .catch((err)=>console.log(err))
+
+          },false)
+           
+     </script>
+
+
+     </body>
+</html>

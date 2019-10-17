@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Video Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link href="main.css" rel="stylesheet">
+    <link href="css/theme.css" rel="stylesheet">
+     <!-- gere scrool barre -->
+    <link rel="stylesheet" href="scroolbarre/jquery.mCustomScrollbar.min.css" />
+    
+
+</head>
+
+<body onload="enableEditMode();">
+    <div class="container">
+        <div class=" bl-col">
+            
+                <select id="filter" class="">
+                    <option value="none">Normal</option>
+                    <option value="grayscale(100%)">B  W</option>
+                    <option value="sepia(100%)">Old School</option>
+                    <option value="contrast(150%)">Lumination</option>
+                    <option value="blur(20px)">Hidden Mist</option>
+                    <option value="invert(100%)">Dracula</option>
+                    <option value="hue-rotate(180deg">X-men Beast</option>
+                    <option value="saturate(25)">Super Saiyan God</option>
+                </select>
+
+                <div class="float-right mt-3 theme">
+                    <input class="form-check-input" type="checkbox" id="theme">
+                    <label class="form-check-label" for="theme">
+                        Dark Theme
+                    </label>
+                </div>
+            
+            
+        </div>
+        <div class="appel" style="position:absolute;top:400px;
+        left:400px;z-index: 100;background:rgba(0,0,0,0.7);display:none;">
+           
+            <h2 class="personne"></h2> 
+            <input type="submit" id="annulerappel" value="couper" style="width:120px;height:40px;margin-right: 10px;color:white;background:rgba(0,0,0,0.7);border-radius: 5px"/> 
+        </div>
+         <div  class="reponse" style="position:absolute;top:400px;
+        left:400px;z-index: 99;background:rgba(0,0,0,0.7);display:none;">
+            <h2 class="appeleur" ></h2>
+              <input type="submit" id="Repondre" value="Repondre" style="width:120px;height:40px;margin-right: 10px;color:white;background:rgba(0,0,0,0.7);border-radius: 5px"/> 
+               <input type="submit" id="refuser" value="couper" style="width:120px;height:40px;margin-right: 10px;color:white;background:rgba(0,0,0,0.7);border-radius: 5px"/> 
+        </div>
+         <div  class="coupappel" style="position:absolute;top:400px;
+        left:400px;z-index: 99;background:rgba(0,0,0,0.7);display:none;">
+              <input type="submit" id="couper" value="couper" style="width:120px;height:40px;margin-right: 10px;color:white;background:rgba(0,0,0,0.7);border-radius: 5px"/> 
+        </div>
+       <div class="user" style="position:absolute;top:10px;
+        left:100px;z-index: 99;">
+            <audio visibility="hidden"src="valsoya.mp3" controls></audio>
+            <h2 class="usercon"></h2>
+            <button class="deconecte">Deconnecter</button>     
+        </div>
+        <div class="messa" style="position:absolute;top:10px;
+        left:400px;width:30%;background:white;z-index: 3;">
+             <div class="messagerecu" style="position:relative;width:300px;height:500px;margin: 10px auto;
+             overflow-y: scroll;border-bottom:1px solid black;
+            " >
+           
+            </div>
+            <div class="list" style="position:relative;width:300px;height:auto;margin: 10px auto;">
+                <input type="hidden" id="destinataire" placeholder="destinataire" /><br>
+                <textarea type="text" id="mes" placeholder="message" style="width:100px;margin-right: 10px" ></textarea><input type="submit" id="envoimes" value="envoi" style="width:70px;height:40px;margin-right: 10px;color:white;background:rgba(0,0,0,0.7);border-radius: 5px"/> <input type="file" id="photo" placeholder="message" style="position:absolute;opacity:0;width:50px"/><i class="fa fa-picture-o "style="font-size:50px;"></i><br>
+                <br>
+            </div>
+            
+            <div class="list" style="position:relative;width:300px;height:auto;margin: 10px auto;">
+                  <h4 class="use">Discussion :</h4>
+                  <span class="tous">Toutes les messages</span>
+                   <div class="listeconnecte" style="margin-top:10px">
+                  
+                    </div>
+            </div>
+        </div>
+         <div class="conf" style="position:absolute;top:10px;
+        left:400px;width:30%;background:white;z-index: 3;">
+            <div class="list" style="position:relative;width:300px;height:auto;margin: 10px auto;">
+                <input type="text" id="titre" placeholder="titre" /><br>
+                <input type="date" id="date" placeholder="Participant" /> <input type="number" min="0"max="23"id="date" style="width:30px"/><input type="number" id="date"min="0" max="59"style="width:30px"/><br>
+                <input type="text" id="participant" placeholder="Participant" /><br>
+                <ul id="listemembre"></ul>
+                <input type="submit" id="creer" value="Creer une conference" style="width:120px;height:40px;margin-right: 10px;color:white;background:rgba(0,0,0,0.7);border-radius: 5px"/><br>
+            </div>
+         </div>
+        <div class="notif" style="position:absolute;top:10px;
+        left:400px;width:30%;background:white;z-index: 3;">
+            <div class="notification" style="position:relative;width:100px;height:auto;margin: 10px auto;">
+              <ul id="listnotif"></ul>
+            </div>
+        </div>
+       
+       
+        <div class="block-video">
+            <div class="video-locale">
+                <div class="">
+                    <video class="" muted></video>
+            </div>
+        </div>
+        
+       <!--  <div style="position:absolute;top:0px;left:300px;width:200px;">
+                <div id="peerDiv2" class="" style="position:relative;width:100%!important;"></div>
+        </div> -->
+
+
+
+            <div class="video-diffusion">
+                 <div id="peerDiv" class="">     <!-- recois la video creer -->
+                 </div>
+            </div>
+        </div>
+
+    <div class="interface-block">
+
+    <div class="icones">
+            <div class="icone-tableau ico"><i class="fa fa-calendar "></i></div>
+            <div class="icone-discution ico"><i class="fa fa-comments "></i><span class="nombre">0</span></div>
+            <div class="icone-outil ico"><i class="fa fa-plus-circle "></i></div>
+            <div class="icone-outil ajoutconf ico"><i class="fa fa-plus"></i></div>
+             <div class="icone-outil confe ico"><i class="fa fa-bell"></i><span class="nombre2">0</span></div>
+            <!-- <div class="icone-record ico"><i class="fa fa-video-camera "></i></div>
+            
+            <div class="icone-reglage ico"><i class="fa fa-cog "></i></div> -->
+     </div>
+     <div class="icones-tache">
+            <div class="icone-comferance ico ico-r"><i class="fa fa-text-height"></i></div>
+            <div class="icone-wyswing ico ico-r"><i class="fa fa-text-height"></i></div>
+            <div class="icone-emoji ico ico-r"><i class="fa fa-heart"></i></div>
+            <div class="icone-chart ico ico-r"><i class="fa fa-bar-chart "></i></div>
+            <div class="icone-image ico ico-r"><i class="fa fa-picture-o "></i></div>
+            <div class="icone-video ico ico-r"><i class="fa fa-youtube-play "></i></div>
+            <div class="icone-browser ico ico-r"><i class="fa fa-internet-explorer "></i></div>
+            <div class="icone-folder ico ico-r"><i class="fa fa-folder "></i></div>
+            <div class="icone-modele ico ico-r"><i class="fa fa-trello "></i></div>
+            <div class="icone-avancé ico ico-r"><i class="fa fa-plus "></i></div>
+     </div>
+     
+     <div class="tableau">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script><!-- script google chart-->
+        <div class="reglage">
+            <i class="fa fa-caret-left retour-bl" style="font-size:30px;"></i>
+            <div class="reglage-right">
+                    <i class="fa fa-columns milieu"></i>
+                    <i class="fa fa-desktop full"></i>
+            </div>
+            
+        </div>
+        <div id="" class="block-soket">
+            <div id="chart_div"></div>
+            <div id="donutchart"></div>
+            <div id="histo_div"></div>
+            <div class="show"></div>
+
+        </div>
+        <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="scroolbarre/jquery.mCustomScrollbar.concat.min.js" ></script>
+        <script>
+           (function($){
+              $(window).load(function(){
+                 $(".tableau").mCustomScrollbar({
+                     theme:'rounded-dark'
+                 });
+              });
+           })(jQuery);
+        </script> -->
+    </div>
+
+    <div class="outil">
+        <i class="fa fa-caret-left retour-bl-outil" style="font-size:30px;"></i>
+    </div>
+
+    <!-- administrateur -->
+
+    <!-- texte -->
+    <div class="BL-admin text">   
+        <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>
+        <form action="">
+                <label for="">Entrer texte :</label>
+                <input type="text" name="" id="message" placeholder ="  Taper" class=""/><br>
+                <label for=""> Changer couleur :</label>
+                <input type="color" id ="color" class="color"/> <br>
+
+                <label for=""> Backroung opacity :</label><span class="aff-opacity"> 10</span>
+                <input type="range" id ="opacity"  class="range" value="10" min="0" max="10"  onmousemove="rangeSlider(this.value)" onchange="rangeSlider(this.value)"/> <br>
+                <script>
+                    function rangeSlider(value){
+                        document.querySelector('.aff-opacity').innerHTML =  value ;  
+                        }
+                </script>
+                        <select name="font" id="font" class="font">
+                                <option value="sans-serif">Sans-serif</option>
+                                <option value="Open sans">Open sans</option>
+                                <option value="verdana">Verdana</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Cambria">Cambria</option>
+                        </select>
+                
+                <label for=""> Police</label> 
+                <input type="number" id="police" class="police" value="30" min="10" max="300"/><label for=""> pt</label> <br><br>
+                <div class="box-envoyer">
+                        <input type="submit"value="Afficher"  id="send" class="envoyer"/>
+                </div>
+        </form>
+    </div>
+
+     <!-- WYSWING -->
+     <div class="BL-admin wyswing" >   
+        <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>
+        <div class="BL-wyswing">
+            <div class="cmd-wyswing">
+                <button onclick="execCmd('bold');"><i class="fa fa-bold" ></i></button>
+                <button onclick="execCmd('italic');"><i class="fa fa-italic" ></i></button>
+                <button onclick="execCmd('underline');"><i class="fa fa-underline" ></i></button>
+                <button onclick="execCmd('strikethrough');"><i class="fa fa-strikethrough" ></i></button>
+                <button onclick="execCmd('justifyLeft');"><i class="fa fa-align-left" ></i></button>
+                <button onclick="execCmd('justifyCenter');"><i class="fa fa-align-center" ></i></button>
+                <button onclick="execCmd('justifyRight');"><i class="fa fa-align-right" ></i></button>
+                <button onclick="execCmd('JustifyFull');"><i class="fa fa-align-justify" ></i></button>
+                <button onclick="execCmd('cut');"><i class="fa fa-cut" ></i></button>
+                <button onclick="execCmd('copy');"><i class="fa fa-copy" ></i></button>
+                <button onclick="execCmd('indent');"><i class="fa fa-indent" ></i></button>
+                <button onclick="execCmd('outdent');"><i class="fa fa-dedent" ></i></button>
+                <button onclick="execCmd('subscript');"><i class="fa fa-subscript" ></i></button>
+                <button onclick="execCmd('superscript');"><i class="fa fa-superscript" ></i></button>
+                <button onclick="execCmd('undo');"><i class="fa fa-undo" ></i></button>
+                <button onclick="execCmd('redo');"><i class="fa fa-repeat" ></i></button>
+                <button onclick="execCmd('insertUnorderedList');"><i class="fa fa-list" ></i></button>
+                <button onclick="execCmd('insertOrderedList');"><i class="fa fa-list-ol" ></i></button>
+                <button onclick="execCmd('insertParagraph');"><i class="fa fa-paragraph" ></i></button>
+                <button onclick="execCmdWithArg('insertImage',prompt('enter image' , ''));"><i class="fa fa-file-image-o" ></i></button>
+                <button onclick="execCmd('SelectAll');">Select All</button>
+                <button onclick="execCmd('insertHorizontalRule');">HR</button>
+                <button onclick="execCmdWithArg('createLink',prompt('enter  URL' , 'http://'));"><i class="fa fa-link" ></i></button>
+                <button onclick="execCmd('unlink');"><i class="fa fa-unlink" ></i></button>
+                <!-- <button onclick="toggleSource();"><i class="fa fa-code" ></i></button> -->
+                <button onclick="toggleEdit();">Toggle Edit</button>
+                <br>
+                <select onchange="execCmdWithArg('fontName',this.value);">
+                        <option value="Arial">Arial</option>
+                        <option value="Comic Sans MS">Comic Sans MS</option>
+                        <option value="Courier">Courier</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="Time New Roman">Time New Roman</option>
+                        <option value="Verdana">Verdana</option>
+                </select>
+                <select onchange="execCmdWithArg('fontSize',this.value);">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="4">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                       
+                </select>
+                <select onchange="execCmdWithArg('formatBlock',this.value);">
+                        <option value="H1">H1</option>
+                        <option value="H2">H2</option>
+                        <option value="H3">H3</option>
+                        <option value="H4">H4</option>
+                        <option value="H5">H5</option>
+                        <option value="H6">H6</option>
+                    </select>
+                Color :<input type="color" onchange="execCmdWithArg('foreColor',this.value);">
+                Background:<input type="color" onchange="execCmdWithArg('hiliteColor',this.value);">
+                
+                
+            </div>
+            <div class="apercus-wyswing">
+                <iframe name="richeTextField" class="iframe-wyswing"></iframe>
+                <div class="Bl-affwys">
+                    <span class="aff-wyswing2" onclick="envoieaff();">Afficher</span>
+                </div>
+            </div>
+            <div class="af-w">
+                <!-- <button class="aff-wyswing" onclick="toggleSource();">Afficher</button> -->
+                <span class="aff-wyswing" onclick="toggleSource();">Enregistrer</span> 
+                 
+            </div>
+            <script src="js/wyswing.js"></script>
+
+        </div>
+       
+        </div>
+
+
+    <!-- Emoji -->
+    <div class="BL-admin emoji">    
+        <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>
+        <div class="BL-emoji">
+            <p>Emoji</p>
+            <img src="images/emoji/emoji1.png" alt="" class="emo">
+            <img src="images/emoji/emoji2.png" alt="" class="emo">
+            <img src="images/emoji/emoji3.png" alt="" class="emo">
+            <img src="images/emoji/emoji4.png" alt="" class="emo">
+            <img src="images/emoji/emoji5.png" alt="" class="emo">
+            <img src="images/emoji/emoji6.png" alt="" class="emo">
+            <img src="images/emoji/emoji7.png" alt="" class="emo">
+            <img src="images/emoji/emoji8.png" alt="" class="emo">
+            <img src="images/emoji/emoji9.png" alt="" class="emo">
+            <img src="images/emoji/emoji10.png" alt="" class="emo">
+            <img src="images/emoji/emoji11.png" alt="" class="emo">
+            <img src="images/emoji/emoji12.png" alt="" class="emo">
+            <img src="images/emoji/emoji13.png" alt="" class="emo">
+            <img src="images/emoji/emoji14.png" alt="" class="emo">
+            <img src="images/emoji/emoji15.png" alt="" class="emo">
+            <img src="images/emoji/emoji16.png" alt="" class="emo">
+            <img src="images/emoji/emoji17.png" alt="" class="emo">
+            <img src="images/emoji/emoji18.png" alt="" class="emo">
+            <img src="images/emoji/emoji19.png" alt="" class="emo">
+            <img src="images/emoji/emoji20.png" alt="" class="emo">
+            <img src="images/emoji/emoji21.png" alt="" class="emo">
+            <img src="images/emoji/emoji22.png" alt="" class="emo">
+            <img src="images/emoji/emoji23.png" alt="" class="emo">
+            <img src="images/emoji/emoji24.png" alt="" class="emo">
+            <img src="images/emoji/emoji25.png" alt="" class="emo">
+            <img src="images/gift/gif6.gif" alt="" class="emo">
+            <p>Gift</p>
+            
+            <img src="images/gift/gif3.gif" alt="" class="emo">
+            <img src="images/gift/gif4.jpg" alt="" class="emo">
+            
+            <img src="images/gift/gif8.gif" alt="" class="emo">
+            <img src="images/gift/gif9.gif" alt="" class="emo">
+            <img src="images/gift/gif10.gif" alt="" class="emo">
+            <img src="images/gift/gif11.gif" alt="" class="emo">
+            <img src="images/gift/gif12.gif" alt="" class="emo">
+            <img src="images/gift/gif13.gif" alt="" class="emo">
+            <img src="images/gift/gif14.gif" alt="" class="emo">
+            <img src="images/gift/gif15.gif" alt="" class="emo">
+        </div>
+
+    </div>
+
+    <!-- Chart -->
+    <div class="BL-admin chart">
+        
+        <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>
+        <div class="BL-chart">
+            <i class="fa fa-line-chart colorer type" ></i>
+            <i class="fa fa-area-chart type" ></i>
+            <i class="fa fa-pie-chart type" ></i>
+            <i class="fa fa-bar-chart type" ></i>
+            <i class="fa fa-map-marker type" ></i>
+
+            <div class="box-chart line">
+                <p>Chart LINE</p>
+                <span class="colorer2 time">J</span><span class="time">M</span><span class="time">A</span><span class="personnalisé time">Personnalisé</span>
+                <div class="box-formulaire">
+                    <div class="box-J aff-time">
+                        <form >
+                            <input type="text" placeholder="  Lundi" id="LJ" ><input type="text" placeholder="  Mardi" id="LJ"><input type="text" placeholder="  Mercredi" id="LJ"><input type="text" placeholder="  Jeudi" id="LJ"><input type="text" placeholder="  Vendredi"id="LJ"><input type="text" placeholder="  Samedi"id="LJ"><input type="text" placeholder="  Dimanche"id="LJ">
+                            <input type="submit" value="Afficher"  id="sendLine-J" class="envoyer">
+                        </form>
+                    </div>
+                    <div class="box-M aff-time">
+                            <form >
+                                <input type="text" placeholder="  1ere semaine " id="LM"><input type="text" placeholder="  2eme semaine" id="LM"><input type="text" placeholder="  3eme semaine"id="LM"><input type="text" placeholder="  4eme semaine"id="LM"><input type="text" placeholder="  5eme semaine"id="LM">
+                                <input type="submit" value="Afficher" id="sendLine-M" class="envoyer">
+                            </form>
+                    </div>
+                    <div class="box-A aff-time">
+                            <form >
+                                <input type="text" placeholder="  Janvier" id="LA"><input type="text" placeholder="  Férvier"id="LA"><input type="text" placeholder="  Marse"id="LA"><input type="text" placeholder="  Avril"id="LA"><input type="text" placeholder="  Mai" id="LA"><input type="text" placeholder="  Juin" id="LA"><input type="text" placeholder="  Juillet" id="LA"><input type="text" placeholder="  Aout" id="LA"><input type="text" placeholder="  Septembre" id="LA"><input type="text" placeholder="  Octobre" id="LA"><input type="text" placeholder="  Novembre" id="LA"><input type="text" placeholder="  Décembre"id="LA">
+                                <input type="submit" value="Afficher" id="sendLine-A" class="envoyer">
+                            </form>
+                    </div>
+                    <div class="box-A aff-time personalise">
+                            
+                    </div>
+                </div>
+            </div>
+            <div class="box-chart">
+                    <p>Chart AREA</p>
+                    <span class="colorer2 timeA">J</span><span class="timeA">M</span><span class="timeA">A</span><span class="personnalisé timeA">Personnalisé</span>
+                    <div class="box-formulaire">
+                        <div class="box-J aff-timeA">
+                            <form >
+                                <input type="text" placeholder="  Lundi"><input type="text" placeholder="  Mardi"><input type="text" placeholder="  Mercredi"><input type="text" placeholder="  Jeudi"><input type="text" placeholder="  Vendredi"><input type="text" placeholder="  Samedi"><input type="text" placeholder="  Dimanche">
+                                <input type="submit" value="Afficher" id="sendarea-J" class="envoyer">
+                            </form>
+                        </div>
+                        <div class="box-M aff-timeA">
+                                <form >
+                                    <input type="text" placeholder="  1ere semaine "><input type="text" placeholder="  2eme semaine"><input type="text" placeholder="  3eme semaine"><input type="text" placeholder="  4eme semaine"><input type="text" placeholder="  5eme semaine">
+                                    <input type="submit" value="Afficher" id="sendarea-S"class="envoyer">
+                                </form>
+                        </div>
+                        <div class="box-A aff-timeA">
+                                <form >
+                                    <input type="text" placeholder="  Janvier"><input type="text" placeholder="  Férvier"><input type="text" placeholder="  Marse"><input type="text" placeholder="  Avril"><input type="text" placeholder="  Mai"><input type="text" placeholder="  Juin"><input type="text" placeholder="  Juillet"><input type="text" placeholder="  Aout"><input type="text" placeholder="  Septembre"><input type="text" placeholder="  Octobre"><input type="text" placeholder="  Novembre"><input type="text" placeholder="  Décembre">
+                                    <input type="submit" value="Afficher" id="sendarea-A" class="envoyer">
+                                </form>
+                        </div>
+                        <div class="box-A aff-timeA personalise">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="box-chart">
+                        <p>Chart PIE</p>
+                        <span class="colorer2 timeP">J</span><span class="timeP">M</span><span class="timeP">A</span><span class="personnalisé timeP">Personnalisé</span>
+                        <div class="box-formulaire">
+                            <div class="box-J aff-timeP">
+                                <form action="">
+                                    <input type="text" placeholder="  Lundi"><input type="text" placeholder="  Mardi"><input type="text" placeholder="  Mercredi"><input type="text" placeholder="  Jeudi"><input type="text" placeholder="  Vendredi"><input type="text" placeholder="  Samedi"><input type="text" placeholder="  Dimanche">
+                                    <input type="submit" value="Afficher" id="sendpie-J"class="envoyer">
+                                </form>
+                            </div>
+                            <div class="box-M aff-timeP">
+                                    <form action="">
+                                        <input type="text" placeholder="  1ere semaine "><input type="text" placeholder="  2eme semaine"><input type="text" placeholder="  3eme semaine"><input type="text" placeholder="  4eme semaine"><input type="text" placeholder="  5eme semaine">
+                                        <input type="submit" value="Afficher" class="envoyer">
+                                    </form>
+                            </div>
+                            <div class="box-A aff-timeP">
+                                    <form action="">
+                                        <input type="text" placeholder="  Janvier"><input type="text" placeholder="  Férvier"><input type="text" placeholder="  Marse"><input type="text" placeholder="  Avril"><input type="text" placeholder="  Mai"><input type="text" placeholder="  Juin"><input type="text" placeholder="  Juillet"><input type="text" placeholder="  Aout"><input type="text" placeholder="  Septembre"><input type="text" placeholder="  Octobre"><input type="text" placeholder="  Novembre"><input type="text" placeholder="  Décembre">
+                                        <input type="submit" value="Afficher" class="envoyer">
+                                    </form>
+                            </div>
+                            <div class="box-A aff-timeP personalise">
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-chart">
+                            <p>Chart histo</p>
+                            <span class="colorer2 timeB">J</span><span class="timeB">M</span><span class="timeB">A</span><span class="personnalisé timeB">Personnalisé</span>
+                            <div class="box-formulaire">
+                                <div class="box-J aff-timeB">
+                                    <form action="">
+                                        <input type="text" placeholder="  Lundi"><input type="text" placeholder="  Mardi"><input type="text" placeholder="  Mercredi"><input type="text" placeholder="  Jeudi"><input type="text" placeholder="  Vendredi"><input type="text" placeholder="  Samedi"><input type="text" placeholder="  Dimanche">
+                                        <input type="submit" value="Afficher" id="sendhisto-J"class="envoyer">
+                                    </form>
+                                </div>
+                                <div class="box-M aff-timeB">
+                                        <form action="">
+                                            <input type="text" placeholder="  1ere semaine "><input type="text" placeholder="  2eme semaine"><input type="text" placeholder="  3eme semaine"><input type="text" placeholder="  4eme semaine"><input type="text" placeholder="  5eme semaine">
+                                            <input type="submit" value="Afficher" class="envoyer">
+                                        </form>
+                                </div>
+                                <div class="box-A aff-timeB">
+                                        <form action="">
+                                            <input type="text" placeholder="  Janvier"><input type="text" placeholder="  Férvier"><input type="text" placeholder="  Marse"><input type="text" placeholder="  Avril"><input type="text" placeholder="  Mai"><input type="text" placeholder="  Juin"><input type="text" placeholder="  Juillet"><input type="text" placeholder="  Aout"><input type="text" placeholder="  Septembre"><input type="text" placeholder="  Octobre"><input type="text" placeholder="  Novembre"><input type="text" placeholder="  Décembre">
+                                            <input type="submit" value="Afficher" class="envoyer">
+                                        </form>
+                                </div>
+                                <div class="box-A aff-timeB personalise">
+                            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-chart">
+                                <p>Chart MAP</p>
+                                <span class="colorer2 timeM">J</span><span class="timeM">M</span><span class="timeM">A</span><span class="personnalisé timeM">Personnalisé</span>
+                                <div class="box-formulaire">
+                                    <div class="box-J aff-timeM">
+                                        <form action="">
+                                            <input type="text" placeholder="  Lundi"><input type="text" placeholder="  Mardi"><input type="text" placeholder="  Mercredi"><input type="text" placeholder="  Jeudi"><input type="text" placeholder="  Vendredi"><input type="text" placeholder="  Samedi"><input type="text" placeholder="  Dimanche">
+                                            <input type="submit" value="Afficher" class="envoyer">
+                                        </form>
+                                    </div>
+                                    <div class="box-M aff-timeM">
+                                            <form action="">
+                                                <input type="text" placeholder="  1ere semaine "><input type="text" placeholder="  2eme semaine"><input type="text" placeholder="  3eme semaine"><input type="text" placeholder="  4eme semaine"><input type="text" placeholder="  5eme semaine">
+                                                <input type="submit" value="Afficher" class="envoyer">
+                                            </form>
+                                    </div>
+                                    <div class="box-A aff-timeM">
+                                            <form action="">
+                                                <input type="text" placeholder="  Janvier"><input type="text" placeholder="  Férvier"><input type="text" placeholder="  Marse"><input type="text" placeholder="  Avril"><input type="text" placeholder="  Mai"><input type="text" placeholder="  Juin"><input type="text" placeholder="  Juillet"><input type="text" placeholder="  Aout"><input type="text" placeholder="  Septembre"><input type="text" placeholder="  Octobre"><input type="text" placeholder="  Novembre"><input type="text" placeholder="  Décembre">
+                                                <input type="submit" value="Afficher" class="envoyer">
+                                            </form>
+                                    </div>
+                                    <div class="box-A aff-timeM personalise">
+                            
+                                    </div>
+                                </div>
+                            </div>
+        </div>
+    </div>
+    <!-- images -->
+    <div class="BL-admin image">
+        <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>
+        <div class="BL-image">
+            <div class="box-lien">
+                <form >
+                        <label for="">Copier l'url de l'image:</label><br>
+                        <input type="url" placeholder="   http://" class="lien-image">
+                        <div class="box-envoyer"><input type="submit" value="Afficher" class="envoyer-image"></div>
+                        
+                </form>
+            </div>
+            <div class="box-upload">
+                <form  >
+                    <label for="">Importer image:</label><br><br>
+                    <div class="box-file">
+                        <i class="fa fa-plus "></i>
+                        <input  type="file"  id="up-image" >
+                    </div> 
+                    <div class="apercus-image"> Listes des images </div>
+                    <button id="im"> ok </button>
+                </form>   
+                
+            </div>
+            
+        </div>
+    </div>
+   <!--VIDEO -->
+    <div class="BL-admin video">
+        <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>
+        <div class="BL-video">
+                <div class="box-lien">
+                    <form >
+                            <label for="">Copier lien du video :</label><br>
+                            <input type="text" placeholder="  https://www.youtube.com/embed/NijL9sbSws0"class="lien-video">
+                            <div class="aide">
+                                <span class="red aide-click">Aide <i class="fa fa-caret-down" ></i></span><br>
+                                Remplacer (<span class="red">watch?v=</span>)   par  (<span class="bleue">embed/</span>)
+                                <span class="exemple">
+                                        https://www.youtube.com/<span class="red">watch?v=</span>htb5D3d1FfY <br>
+                                        https://www.youtube.com/<span class="bleue">embed/</span>htb5D3d1FfY
+                                </span>
+                             </div>
+                            <div class="box-envoyer"><input type="submit" value="Afficher" class="envoyer-video"></div>
+                            
+                    </form>
+                </div>
+                <div class="box-upload">
+                 
+                        <form  >
+                            <label for="">Importer video:</label><br><br>
+                            <div class="box-file">
+                                <i class="fa fa-plus "></i>
+                                <input  type="file"  id="up-video" >
+                            </div> 
+                            <div class="apercus-video"> Listes des videos </div>
+                            <button id="vid"> ok </button>
+                        </form>   
+                   
+                </div>
+    
+            </div>
+    </div>
+    <div class="BL-admin browser">
+        <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>
+        <div class="BL-browser">
+                <div class="box-lien">
+                    <form >
+                            <label for="">Entrer l'url du page web:</label><br>
+                            <input type="text" placeholder="  https://www."class="lien-browser">
+                            <div class="box-envoyer"><input type="submit" value="Afficher" class="envoyer-browser"></div>
+                            
+                    </form>
+                </div>
+       </div>
+    </div>
+
+    <div class="BL-admin file">
+        <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>
+        <div class="BL-file">
+                <div class="box-upload">
+                        <form >
+                           
+                                <!-- <i class="fa fa-plus "></i> -->
+                                <input  type="file"  id="up-fichier" > 
+                            </div> 
+                            <div class="apercus-fichier"> </div>
+                            <button id="fl"> ok </button>
+                        </form>   
+                        
+                 </div>
+       </div>
+        
+    </div>
+    <div class="BL-admin theme">
+            <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>
+
+            <div class="BL-theme">
+                    <img src="images/theme/theme1.png" alt="" class="choix">
+                    <img src="images/theme/theme2.png" alt="" class="choix">
+                    <img src="images/theme/theme3.png" alt="" class="choix">
+            </div>
+
+            <div class="AD-theme1 admin-tm">
+                    <h2>LISTE</h2>
+                    <span class="tl tr"> Titre : <input type="text" value="TITRE DU LISTE" class="theme1-titre"></span><br>
+                    <span class="tl ls"> Liste : <input type="number" name="" min ="0" max ="20" value="6" class="nb-listes"></span> <span class="ajout-liste ">Ok</span><br><br>
+                    <form action="">
+                            <input type="text" placeholder=" 1" class="ls1 ls2">
+                            <input type="text" placeholder=" 2" class="ls1 ls2">
+                            <input type="text" placeholder=" 3" class="ls1 ls2 ">
+                            <input type="text" placeholder=" 4" class="ls1 ls2 ">
+                            <input type="text" placeholder=" 5" class="ls1 ls2 ">
+                            <input type="text" placeholder=" 6" class="ls1 ls2 ">
+                            <input type="text" placeholder=" 7" class="ls1 ls2 in">
+                            <input type="text" placeholder=" 8" class="ls1 ls2 in">
+                            <input type="text" placeholder=" 9" class="ls1 ls2 in">
+                            <input type="text" placeholder=" 10" class="ls1 ls2 in">
+                            <input type="text" placeholder=" 11" class="ls1 ls2 in">
+                            <input type="text" placeholder=" 12" class="ls1 ls2 in">
+                            <input type="text" placeholder=" 13" class="ls1 ls2 in">
+                            <input type="text" placeholder=" 14" class="ls1 ls2 in">
+                            <input type="text" placeholder=" 15" class="ls1 ls2 in">
+                            <input type="text" placeholder=" 16" class="ls1 ls2 in">
+                            <input type="text" placeholder=" 17" class="ls1 ls2 in">
+                            <input type="text" placeholder=" 18" class="ls1 ls2 in">
+                            <input type="text" placeholder=" 19" class="ls1 ls2 in">
+                            <input type="text" A propos :placeholder=" 20" class="ls1 ls2 in">
+                            </form>
+                    <div class="box-theme-1">
+                        <img src="images/theme/theme1.png" alt=""><br><br><br>
+                        <span class="theme-1">Afficher</span>
+                        
+                   </div>
+
+            </div>
+
+            <div class="AD-theme2 admin-tm">
+                    <h2>box</h2>
+                    <img src="images/theme/theme2.png" alt=""><br><br>
+                    <span class="theme-2">theme2</span>
+            </div>
+
+            <div class="AD-theme3 admin-tm">
+                <h2>CARD</h2>
+                <div class="form">
+                    <input type="text" placeholder=" Lien de l'image :" class="tm3">
+                    <input type="text" placeholder=" Nom :" class="tm3">
+                    <input type="text" placeholder=" Description :" class="tm3">
+                    <textarea name="" id="" cols="30" rows="10"placeholder=" A propos :" class="tm3"></textarea>
+                </div>
+                <img src="images/theme/theme3.png" alt=""><br><br>
+                <span class="theme-3">Afficher</span>
+            </div>
+          
+    </div>
+    <div class="BL-admin avancé">
+            <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>AVANCE
+    </div>
+
+    
+    
+</div>
+</div>
+     
+    <script src="socket.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="simplepeer.min.js"></script>
+    <script src="bundle.js"></script>
+    <script src="js/affichage.js" ></script>
+    <script src="js/chat.js"></script>
+    <script src="js/message.js" ></script>
+     <script src="js/conference.js" ></script>
+     
+    
+ 
+   
+</body>
+
+</html>

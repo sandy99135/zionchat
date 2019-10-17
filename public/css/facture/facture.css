@@ -1,0 +1,1264 @@
+@font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 300; src: url('fonts/open-sans-v16-latin-300.eot'); src: local('Open Sans Light'), local('OpenSans-Light'), url('fonts/open-sans-v16-latin-300.eot?#iefix') format('embedded-opentype'), url('fonts/open-sans-v16-latin-300.woff2') format('woff2'), url('fonts/open-sans-v16-latin-300.woff') format('woff'), url('fonts/open-sans-v16-latin-300.ttf') format('truetype'), url('fonts/open-sans-v16-latin-300.svg#OpenSans') format('svg'); }
+	@font-face { font-family: 'Open Sans'; font-style: normal; font-weight: 400; src: url('fonts/open-sans-v16-latin-regular.eot'); src: local('Open Sans Regular'), local('OpenSans-Regular'), url('fonts/open-sans-v16-latin-regular.eot?#iefix') format('embedded-opentype'), url('fonts/open-sans-v16-latin-regular.woff2') format('woff2'), url('fonts/open-sans-v16-latin-regular.woff') format('woff'), url('fonts/open-sans-v16-latin-regular.ttf') format('truetype'), url('fonts/open-sans-v16-latin-regular.svg#OpenSans') format('svg'); }	
+#container{
+    position: relative;
+    height:1200px ;
+    background-color: rgba(159, 161, 161, 1);
+
+}
+/* zoom parametre */
+.zoom{
+    position: absolute;
+    top:90px;
+    right:50px ;
+    width: 363px;
+    z-index: 1;
+    
+}
+.zoom .affiche-zoom{
+    position: absolute;
+    right:0px ;
+    width: 60px;
+    padding: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    background: #fff;
+}
+.zoom .range{
+    width: 300px;
+    height: 3px;
+    background: #000;
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 2px;
+}
+.zoom .range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+    border: 2px solid black;
+    background:  rgb(255, 255, 255);
+}
+
+
+/* corp facture*/
+#corp-facture{
+    position: relative;
+    width: 100%;
+    height:1050px ;
+    /* padding:50px 0px;  */
+   /* background-color: rgba(159, 161, 161, 0.158); */
+}
+#corp-facture h2{
+    margin-left: 50px;
+}
+.bloc-facture{
+    position: relative;
+    width: 100%;
+    height:100% ;
+    margin: 0px;
+    padding: 0px;
+}
+
+.parametre{
+    position: relative;
+    left:50px ;
+    width: 530px;
+    height:827px ;
+}
+
+.menu-facture{
+    position: relative;
+    width: 100%;
+    height:40px;
+    
+}
+.menu-facture .mn{
+    display: inline-block;
+    width: 150px;
+    height: 36px;
+    text-align: center;
+    color: white;
+    line-height: 36px;
+    border:2px solid rgb(9, 172, 77);
+    background:  rgb(9, 172, 77);
+    transition: 0.3s;
+}
+.menu-facture .mn1{
+    color: rgb(9, 172, 77);
+    background:  rgb(255, 255, 255);
+}
+.menu-facture .mn:hover{
+    color: rgb(9, 172, 77) !important;
+    background:  rgb(255, 255, 255) !important;
+}
+.theme , .contenue ,.email{
+    position: relative;
+    width: 100%;
+    
+}
+.theme , .contenue ,.email{
+    position: relative ;
+    width: 100%;
+    
+}
+
+.theme .modele , .theme .ajout-logo, .theme .couleur ,.theme .police{
+  position: relative;
+  width: 90%;
+   margin:20px 0px; 
+}
+.theme .modele div{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width:115px;
+    height:150px;
+    margin-left:0px; 
+    margin-top:5px;
+    background:  rgb(255, 6, 151);
+    transition: 0.2s;
+  }
+.theme .modele div img{
+    width: 100%;
+    height:100% ;
+  }
+.theme .modele div:hover{
+    transform: scale(1.1);
+    box-shadow: -2px 3px  2px 2px  rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+ .theme .ajout-logo .logo-box{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    margin: 5px;
+    overflow: hidden;
+  }
+.theme .ajout-logo .logo-box img{
+    position: absolute;
+    width: 100%;
+    height:100% ;
+   
+  }
+.theme .ajout-logo .logo-box .plus{
+    position: absolute;
+    width: 100%;
+    height:100% ;
+    text-align: center;
+    vertical-align: middle;
+    background: white;
+    opacity: 0;
+    transition: 0.2s;
+  }
+.theme .ajout-logo .logo-box .plus .fa{
+    line-height:100px;
+    font-size: 30px;
+    vertical-align: middle;
+  }
+.theme .ajout-logo .logo-box input{
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    opacity:0 ;
+    margin:0px; 
+  }
+.theme .ajout-logo .logo-box:hover .plus {
+    opacity: 1;
+  }
+.theme .ajout-logo .affiche-logo{
+    position: relative;
+  }
+.theme .ajout-logo .affiche-logo div{
+    display: inline-block;
+    padding: 8px 18px;
+    margin: 10px 5px;
+    color: white;
+    background: rgba(51, 51,51,1);
+    border:2px solid rgba(51, 51,51,1);
+    transition: 0.2s;
+  }
+.theme .ajout-logo .affiche-logo div:hover{
+    color: rgba(51, 51,51,1);
+    background: rgba(255, 252,255,1);
+  }
+
+ .theme .couleur input,.theme input{
+    display: block;
+    width:50px;
+    height:30px ;
+    line-height: 30px;
+    border: 2px solid rgb(51, 51, 51,1);
+    margin: 5px;
+  }
+.theme .couleur .change-color{
+    position: relative;
+    height:50px ;
+  }
+ .theme .change-logo{
+    position: relative;
+    width:100%;
+  } 
+.theme .font-familly{
+    position: relative;
+    width:90%;
+    height:50px ;
+  }  
+.theme .font-familly .block-font{
+    position: relative;
+    width:100%;
+  } 
+.theme .font-familly select{
+    width:200px ;
+    height:35px ;
+    margin-left: 5px;
+    font-size: 16px;
+    border: 2px solid rgba(51, 51,51);
+    border-radius: 2px;
+  }
+.theme .font-familly select option{
+    height:35px ;
+  }
+.theme .couleur .ok , .theme .change-logo .ok-file ,.theme .font-familly .ok-font{
+    position: absolute;
+    top: 0px;
+    right:0px ;
+    width:50px;
+    height:30px ;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    background: rgb(9, 172, 77);
+    margin: 5px;
+    transition: 0.5s;
+  }
+.theme .couleur .ok:hover , .theme .change-logo .ok-file:hover ,.theme .font-familly .ok-font:hover{
+    color: white;
+    background:  rgb(255, 6, 151);
+}
+
+.contenue .en-tete, .contenue .document{
+    position: relative;
+    width: 90%;
+    padding:20px 0px;
+  }
+  .contenue .en-tete{
+    padding-top: 0px; 
+  }
+.contenue {
+    border-top: 2px solid rgba(51, 51,51,0.1) ;
+    display: none;
+  }
+.contenue .bottom {
+    padding-bottom:25px; 
+    border-bottom: 2px solid rgba(51, 51,51,0.1) ;
+  }
+.menus-contenue{
+    position: relative;
+    width: 100%;
+    height: 40px;
+}
+.menus-contenue h4{
+    display: inline-block;
+    height:100% ;
+    transition: 0.2s;
+}
+.contenue p{
+    /* color: rgb(9, 172, 77); */
+}
+.menus-contenue h4:hover{
+    color: rgb(9, 172, 77) !important;
+}
+.menus-contenue .en-tt{
+    color: rgb(9, 172, 77);
+}
+.menus-contenue .aff-dt ,.menus-contenue .pd{
+    position: absolute;
+    top:0px;
+    right: 0px;
+}
+.contenue .document-affichage{
+    display: none;
+}
+
+
+.document-affichage ,.BLactivité ,.BLpied {
+    position: relative;
+    display: none;
+  }
+
+.contenue .affichage .aff ,.contenue .BLactivité .aff, .contenue .BLactivité .aff-act{
+    position: relative;
+    width: 80%;
+    margin-bottom: 5px;
+    padding-left:40px; 
+    
+  }
+.contenue .BLactivité .aff-act{
+    margin-top:10px;
+    padding: 0px;
+    
+  }
+.contenue .BLactivité .tap{
+    display: none;
+ }
+.contenue .BLactivité .block{
+    display:block;
+ }
+.contenue .affichage .checked, .contenue .BLactivité .checked{
+    position: absolute;
+    left: 0px;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    border:2px solid rgba(51, 51,51,0.1) ;
+  }
+.contenue .BLactivité .col{
+    background: rgb(9, 172, 77);
+    z-index:1;
+  }
+.contenue .BLactivité .z-0{
+    z-index:0;
+  }
+.contenue .BLactivité .col2{
+    background:rgba(51, 51,51,1);
+    
+  }
+.contenue .affichage input , .contenue .BLactivité input {
+    position: relative;
+    width:308px ;
+    height:40px ;
+    font-size: 15px;
+    margin-top: 5px;
+    border-radius: 3px;
+    border:2px solid rgba(51, 51,51,0.5) ;
+  }
+ .contenue .BLactivité input {
+    margin:0px; 
+  }
+.BLpied input ,.BLpied textarea{
+    position: relative;
+    width:303px ;
+    height:100px;
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom:5px;
+    border-radius: 3px;
+    border:2px solid rgba(51, 51,51,0.5) ;
+  }
+  .BLpied input{
+    position: relative;
+    width:308px !important;
+    height:40px !important;
+    font-size: 15px;
+    margin-bottom:5px !important;
+    border-radius: 3px;
+    border:2px solid rgba(51, 51,51,0.5) ;
+  }
+.BLpied .m-légale{
+    position: relative;
+    width:100%;
+  }
+.BLpied .m-légale select{
+    position: absolute;
+    top:27px;
+    left:350px;
+    width:75px;
+    height: 36px;
+    border: 2px solid rgba(51, 51,51);
+    border-radius: 2px;
+  }
+
+
+.contenue .affichage .input-1 , .contenue .BLactivité .input-1{
+    margin-top:20px;
+  }
+.contenue .BLactivité .envoyer ,.contenue .BLactivité .nouveau{
+    color:white;
+    background:  rgba(51, 51,51) ;
+    transition: 0.3s;
+  }
+.contenue .BLactivité .envoyer:hover , .contenue .BLactivité .nouveau:hover{
+    color: rgb(9, 172, 77);
+    background: rgb(255, 255, 255);
+    border:2px solid rgb(9, 172, 77);
+  }
+.contenue form {
+    margin-top: 30px;
+   
+} 
+.contenue form input  {
+    display: block;
+    width:350px ;
+    height:50px ;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    background: white;
+    border-radius: 3px;
+    border: 2px solid  rgba(27, 24, 24, 0.4);
+
+}
+.contenue form label{
+     margin-top: 30px;
+    
+}
+.contenue form .envoyer{
+    color: white;
+    font-size: 16px; 
+    background:rgb(51, 51, 51,1) ;
+    transition: 0.3s;
+}
+.contenue form .envoyer:hover{
+    color: rgb(9, 172, 77);
+    background: rgb(255, 255, 255);
+    border:2px solid rgb(9, 172, 77);
+}
+        /* gere apercus tableau dynamique */
+        
+
+
+/* footer de sortie pdf  */
+
+.sortie-pdf{
+    position: absolute;
+    bottom:54px;
+    right:50px;
+    width:350px;
+    height: 54px;
+    
+}
+.sortie-pdf div{
+    display: inline-block;
+    width: 150px;
+    height: 100%;
+    line-height: 54px;
+    margin-left:10px; 
+    text-align:center;
+    color: white;
+    border:2px solid rgb(9, 172, 77);
+    background: rgb(9, 172, 77);
+    transition: 0.3s;
+}
+.sortie-pdf div:hover{
+    
+    color: rgb(9, 172, 77); 
+    background: rgb(255, 255, 255);
+}
+
+        
+        /* gere apercus generale */
+
+        .fond-zoom-apercus{
+            position: absolute;
+            top: 142px;
+            right:50px;
+            width:750px; 
+            border-radius: 3px;
+            height: 900px;
+            background: rgba(0, 0, 0, 0.637)   ;
+        }
+        .apercus{                          /* //taille A4 */
+            position: absolute;
+            top: 0px;
+            right:50px;
+            width:750px;   
+            padding-bottom: 20px;
+            /* border-radius: 4px; */
+            font-size: 17px;
+             /* border:2px solid rgba(51, 51,51,0.1) ;  */
+            background: rgb(255, 255, 255);
+            box-shadow:-2px 3px 3px rgba(0,0,0,0.2);  
+            overflow: hidden;
+             /* transform: scale(0.6); */
+          }
+          
+.right{
+     text-align: right !important;
+}
+.apercus .apercus-block{
+    position: relative;
+    width: 93%;
+    margin: 0 auto;
+    background: rgba(205, 92, 92, 0.007);
+}
+
+.apercus .en-tete , .apercus .activité , .apercus .pied{
+    transition: 0.3s;
+    
+}
+.apercus .en-tete:hover , .apercus .activité:hover , .apercus .pied:hover{
+    background: rgba(205, 92, 92, 0.1);
+}
+
+.apercus .en-tete{                 /* //taille A4 */                 
+     position: relative;
+     width: 100%;
+     height:330px;
+     padding:20px 0px;
+     border-radius: 3px;
+     border: 1px solid rgba(51, 51,51,0) ;
+}
+.apercus .en-tete .apercus-logo{                          
+    position: absolute;
+    top:20px;
+    right: 0px;
+    width:100px; 
+    height: 100px;
+    border: 2px solid rgba(143, 141, 141, 0.479);
+}
+.apercus .en-tete .apercus-logo img{                          
+    
+    width:100px; 
+    height:auto;
+    
+}
+.apercus .en-tete h4{     
+    font-size: 20px;                     
+    margin: 0px;
+}
+.apercus .en-tete p,.apercus .en-tete span{                          
+    margin: 2px 0px;
+}
+.apercus .en-tete .en-tete-facture{                  /*  en-tete-facture         */
+    position: relative;
+    width:40%;
+    height:90px;
+}
+.apercus .en-tete  .strong-facture{                  /*  COLORER ET MODIFIABLE       */
+    color:rgb(9, 172, 77);
+}
+.apercus .en-tete .strong , .apercus .en-tete .normal{                          
+    position: absolute;
+    top:0px;
+    width: 50%;
+    height: 100px;
+}
+.apercus .en-tete .strong{ 
+    left:0px ;
+    text-align: right;                         
+    
+}
+.apercus .en-tete .normal{                          
+   right:0px ;
+   text-align: left;
+}
+
+.adresse-facturation{
+    position: absolute;
+    top:220px;
+    right:50px ;
+}
+
+
+.apercus .activité {                /*  activité */
+    position: relative;
+    width:100%; 
+    height: 200px;
+    margin-top:20px; 
+    padding: 20px 0px;
+    border-radius: 3px;
+    border: 1px solid rgba(51, 51,51,0) ;
+    overflow: hidden;
+    
+}
+.apercus .activité table {   
+    position: relative;
+    width:100%;
+    text-align: left; 
+}
+.apercus .activité table  {   
+    position: relative;
+    width:100%;
+    text-align: left;
+}
+
+.apercus .activité table tbody {   
+    font-size: 15px;
+}
+
+.apercus .activité table tbody tr {   
+    transition: 0.2s;
+}
+.apercus .activité table tbody tr:hover {   
+    background: rgba(9, 172, 77, 0.644);
+}
+
+.apercus .pied {                /*  apercus pied */
+    position: relative;
+    width:100%; 
+    height: 200px;
+    margin-top:20px; 
+    padding: 20px 0px;
+    border-radius: 3px;
+    border-top: 1px solid rgba(51, 51,51,0.2) ;
+     
+}
+.apercus .message-et-solde{
+    position: relative;
+    height:100px; 
+    /* background: red; */
+}
+.apercus .message{
+    width:50%; 
+    
+}
+.apercus .pied table{                
+    position: absolute;
+    top:0px;
+    right:20px ;
+}
+.apercus .pied table tr td:nth-child(odd){
+    color: rgb(9, 172, 77);
+    padding-right: 40px;
+    font-size: 15px;
+}
+.apercus .pied table tr td:nth-child(even){
+    text-align: right;
+    font-size: 15px;
+}
+.apercus .pied .sold-a-payee {
+    height:50px ;
+    
+}
+.apercus .pied .sold-a-payee td:nth-child(odd){
+    color: black !important;
+}
+.apercus .mention-légale{    /*  textra */
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 13px;
+
+}
+.apercus .bas-pied{
+    display: block;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    text-align: center;
+    font-size: 13px;
+    /* background: red;  */
+}
+
+                
+
+
+
+
+
+/* apecus themme 2 */
+
+.apercus .apercus-theme2{
+    position: absolute;
+    top:0px ;
+    left: 0px;
+    width: 100%;
+    height: 900px;
+    background: rgb(255, 255, 255);
+    /* opacity:0; */
+}
+
+.apercus .apercus-theme2 .a-propos {
+    position: relative;
+    width:96%; 
+    height:auto ;
+    padding: 0px;
+    color: white;
+    background: black;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 4%;
+    
+}
+.apercus .apercus-theme2 .a-colorer{
+    color: rgb(64, 0, 128);
+ }
+ .apercus .apercus-theme2 .a-fond{
+    background: rgb(64, 0, 128);
+ }
+.apercus .apercus-theme2 .a-propos .apercus-logo{
+    position: absolute;
+    top:15px;
+    right:15px ;
+    width:100px; 
+    height:100px ;
+    border:2px solid rgba(134, 133, 133, 0.651);
+    overflow: hidden;
+}
+.apercus .apercus-theme2 .apercus-logo img{
+    width: 100%;
+   height:auto; 
+}
+.apercus .apercus-theme2 .a-propos  h4{
+    width: white;
+    font-size:30px; 
+    margin: 0px;
+}
+.apercus .apercus-theme2 .a-propos p{
+    font-size:15px; 
+    margin: 0px;
+}
+.apercus .apercus-theme2 .activité table thead {   
+    background: rgba(255, 255, 255,1);
+}
+.apercus .apercus-theme2 .en-tete{
+    position: relative;
+    height: 110px !important;
+ }
+.apercus .apercus-theme2 .adresse-facturation{
+   position: absolute;
+   top:20px !important;
+   right:0px !important; 
+}
+.apercus .apercus-theme2 .activité {
+    height:275px;
+    overflow: hidden;
+    margin: 0px;
+ }
+.apercus .apercus-theme2 .activité table  tr , .apercus  .apercus-theme2  .activité table  td{
+    height: 50px; 
+    line-height: 50px; 
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+ }
+
+ .apercus .apercus-theme2 .pied  {
+    margin-top: 0px;
+    border-top:0px solid rgba(255, 255, 255, 0);
+ }
+ .apercus .apercus-theme2 .pied .message-et-solde strong  {
+    color: black;
+ }
+ .apercus .apercus-theme2 .pied .sold-a-payee strong {
+    font-size:20px;
+ }
+
+ 
+
+/* apecus themme 3 */
+
+.apercus .apercus-theme3{
+    position: absolute;
+    top:0px ;
+    left: 0px;
+    width: 100%;
+    height: 900px;
+    background: rgb(255, 255, 255);
+    overflow: hidden;
+   /* opacity:0; */
+}
+
+.apercus .apercus-theme3 .a-propos {
+    position: absolute;
+    top: 0px;
+    width:96%; 
+    height:300px;
+    padding: 0px;
+    color: rgb(0, 0, 0);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 4%;
+    
+}
+.apercus .apercus-theme3 .a-propos .en-tete-3{
+    position: absolute;
+    top: 25px;
+    left:63%;
+}
+.apercus .apercus-theme3 .adresse-facturation{
+    position: absolute;
+    width: 250px !important;
+    font-size: 15px;
+    top:150px !important;
+    left:64% !important;
+ }
+ .apercus .apercus-theme3 .adresse-facturation strong{
+     font-size: 18px !important; 
+  }
+.apercus .apercus-theme3 .deco1, .apercus .apercus-theme3 .deco2, .apercus .apercus-theme3 .deco3{
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width:100px; 
+    height:100px ;
+    z-index:0;
+}
+.apercus .apercus-theme3 .deco1{
+    transform: rotate(45deg);
+    left:-200px; 
+    width:300px; 
+    height:300px ;
+    background: rgb(0, 0, 0);
+}
+.apercus .apercus-theme3 .deco2{
+    transform: rotate(45deg);
+    top:70px;
+    left:150px; 
+    width:160px; 
+    height:150px ;
+    background: rgb(253, 0, 0);
+    opacity:0.8;
+}
+.apercus .apercus-theme3 .deco3{
+    transform: rotate(45deg);
+    top:50px;
+    left:113px; 
+    width:50px; 
+    height:50px ;
+    background: rgba(168, 166, 166, 0.3);
+}
+.apercus .apercus-theme3 .deco4{
+    position: absolute;
+    transform: rotate(45deg);
+    top:70px;
+    right:-75px; 
+    width:70px; 
+    height:70px ;
+    background: rgb(255, 0, 0);
+}
+.apercus .apercus-theme3 .deco5{
+    position: absolute;
+    transform: rotate(45deg);
+    top:160px;
+    right:-100px; 
+    width:140px; 
+    height:140px ;
+    background: rgb(0, 0, 0);
+}
+.apercus .apercus-theme3 .a-colorer{
+    color: rgb(64, 0, 128);
+ }
+ .apercus .apercus-theme2 .a-fond{
+    background: rgb(64, 0, 128);
+ }
+.apercus .apercus-theme3 .a-propos .apercus-logo{
+    position: absolute;
+    top:25px;
+    left:350px ;
+    width:100px; 
+    height:100px ;
+    border:2px solid black;
+    overflow: hidden;
+}
+.apercus .apercus-theme3 .apercus-logo img{
+    width: 100%;
+   height:auto; 
+}
+.apercus .apercus-theme3 .a-propos  .h4{
+    position: relative;
+    color: white;
+    font-size:30px; 
+    margin-top: 120px;
+    z-index:2px;
+    
+}
+.apercus .apercus-theme3 .a-propos p{
+    font-size:15px; 
+    margin: 0px;
+}
+.apercus .apercus-theme3 .activité  {   
+    margin-top:120px !important;
+}
+.apercus .apercus-theme3 .activité table thead {  
+    color:white !important;
+    background: rgba(255, 255, 255, 0) !important;
+}
+.apercus .apercus-theme3 .activité table thead tr{  
+    color:white !important;
+    background: rgba(255, 255, 255, 0) !important;
+}
+.apercus .apercus-theme3 .en-tete{
+    position: relative;
+    height: 110px !important;
+ }
+
+.apercus .apercus-theme3 .activité {
+    height:325px;
+    overflow: hidden;
+    margin: 0px;
+ }
+.apercus .apercus-theme3 .activité table  tr , .apercus  .apercus-theme3  .activité table  td{
+    height: 50px; 
+    line-height: 50px; 
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+ }
+ .apercus .apercus-theme3 .activité  .fond-tab{
+    position: absolute;
+    top:20px;
+    width:100%; 
+    height: 50px; 
+    background: red;
+    opacity:0.8 ;
+ }
+ .apercus .apercus-theme3 .pied  {
+    border-top:0px solid rgba(255, 255, 255, 0);
+    margin-top: 0px;
+ }
+ .apercus .apercus-theme3 .pied .message-et-solde strong  {
+    color: black;
+ }
+ .apercus .apercus-theme3 .pied .sold-a-payee  td{
+    border-top :1px solid black !important;
+ }
+ .apercus .apercus-theme3 .pied .sold-a-payee strong {
+    font-size:18px;
+ }
+ .apercus .apercus-theme3 .pied .message-et-solde .pied-facture  {
+    position: absolute;
+    top:100px;
+ }
+ .apercus .apercus-theme3 .pied .message-et-solde .pied-facture p {
+    margin: 0px;
+    font-size: 15px;
+ }
+ .apercus .apercus-theme3 .pied .mention-légale {
+    position: relative;
+    width: 70%;
+    margin:0px;
+    margin-top:75px !important; 
+    text-align: left;
+
+ }
+
+
+
+ /* apecus themme 4 */
+
+.apercus .apercus-theme4{
+    position: absolute;
+    top:0px ;
+    left: 0px;
+    width: 100%;
+    height: 900px;
+    background: rgb(255, 255, 255);
+    overflow: hidden;
+   /* opacity:0; */
+}
+
+.apercus .apercus-theme4 .a-propos {
+    position: absolute;
+    top: 0px;
+    width:96%; 
+    height:300px;
+    padding: 0px;
+    color: rgb(0, 0, 0);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 4%;
+    
+}
+.apercus .apercus-theme4 .a-propos .en-tete-3{
+    position: absolute;
+    top: 25px;
+    left:63%;
+}
+.apercus .apercus-theme4 .adresse-facturation{
+    position: absolute;
+    width: 250px !important;
+    font-size: 15px;
+    top:150px !important;
+    left:64% !important;
+ }
+ .apercus .apercus-theme4 .adresse-facturation strong{
+     font-size: 18px !important; 
+  }
+ .apercus .apercus-theme4 .deco2{
+    position: absolute;
+    top:30px;
+    left:0px; 
+    width:300px; 
+    height:100px ;
+    text-align: center;
+    background: rgb(253, 0, 0);
+    opacity:0.8;
+    z-index:0;
+}
+.apercus .apercus-theme4 .deco2 .h4{
+    position: relative;
+    color: white;
+    font-size:30px;
+    margin: 0px; 
+    line-height: 100px;
+    
+}
+.apercus .apercus-theme4 .deco4{
+    position: absolute;
+    top:63px;
+    right:-35px; 
+    width:300px; 
+    height:50px ;
+    background: rgb(255, 0, 0);
+}
+
+.apercus .apercus-theme4 .a-colorer{
+    color: rgb(64, 0, 128);
+ }
+ .apercus .apercus-theme4 .a-fond{
+    background: rgb(64, 0, 128);
+ }
+.apercus .apercus-theme4 .a-propos .apercus-logo{
+    position: absolute;
+    top:150px;
+    left:27px ;
+    width:100px; 
+    height:100px ;
+    border:2px solid rgba(129, 129, 129, 0.63);
+    overflow: hidden;
+}
+.apercus .apercus-theme4 .a-propos .apercus-logo img{
+    width: 100%;
+    height: auto;
+}
+
+.apercus .apercus-theme4 .a-propos p{
+    font-size:15px; 
+    margin: 0px;
+}
+.apercus .apercus-theme4 .activité  {   
+    margin-top:120px !important;
+}
+.apercus .apercus-theme4 .activité table thead {  
+    color:white !important;
+    background: rgba(255, 255, 255, 0) !important;
+}
+.apercus .apercus-theme4 .activité table thead tr{  
+    color:white !important;
+    background: rgba(255, 255, 255, 0) !important;
+}
+.apercus .apercus-theme4 .en-tete{
+    position: relative;
+    height: 110px !important;
+ }
+
+.apercus .apercus-theme4 .activité {
+    height:405px;
+    overflow: hidden;
+    margin: 0px;
+ }
+.apercus .apercus-theme4 .activité table  tr , .apercus  .apercus-theme4  .activité table  td{
+    height: 50px; 
+    line-height: 50px; 
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+ }
+ .apercus .apercus-theme4 .activité  .fond-tab{
+    position: absolute;
+    top:20px;
+    width:100%; 
+    height: 50px; 
+    background: rgb(64, 0, 128);
+    opacity:0.8 ;
+ }
+ .apercus .apercus-theme4 .pied  {
+    border-top:0px solid rgba(255, 255, 255, 0);
+    margin-top: 0px;
+ }
+ .apercus .apercus-theme4 .pied .message-et-solde strong  {
+    color: black;
+ }
+
+ .apercus .apercus-theme4 .pied .sold-a-payee strong {
+     color: white;
+    font-size:18px;
+ }
+ .apercus .apercus-theme4 .pied .message-et-solde .pied-facture  {
+    position: absolute;
+    top:5px;
+ }
+ .apercus .apercus-theme4 .pied .message-et-solde .pied-facture p {
+    margin: 0px;
+    font-size: 15px;
+ }
+ .apercus .apercus-theme4 .pied .mention-légale {
+    position: absolute;
+    top: 90px;
+    width: 50%;
+    margin:0px;
+    
+    text-align: left;
+
+ }
+
+
+  /* apecus themme 5 */
+
+.apercus .apercus-theme5{
+    position: absolute;
+    top:0px ;
+    left: 0px;
+    width: 100%;
+    height: 920px;
+    background: rgb(255, 255, 255);
+    
+   /* opacity:0; */
+}
+
+.apercus .apercus-theme5 .a-propos {
+    position: absolute;
+    top: 0px;
+    width:96%; 
+    height:300px;
+    padding: 0px;
+    color: rgb(0, 0, 0);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 4%;
+    
+}
+.apercus .apercus-theme5 .en-tete {
+    position: absolute;
+    top: 150px;
+    left:0px;
+    width: 100%;
+}
+.apercus .apercus-theme5 .en-tete .en-tete-3{
+    position: absolute;
+    width: 250px !important;
+    font-size: 15px;
+    top:0px;
+    left:0 ;
+}
+.apercus .apercus-theme5 .adresse-facturation{
+    position: absolute;
+    width: 250px !important;
+    font-size: 15px;
+    top:0px !important;
+    left:64% !important;
+ }
+ .apercus .apercus-theme5 .adresse-facturation strong{
+     font-size: 18px !important; 
+  }
+  .apercus .apercus-theme5 .deco1{
+    position: absolute;
+    top:70px;
+    left:45%; 
+    width: 70px;
+    height:70px ;
+    transform: rotate(45deg);
+    background:#3aaebd;
+    z-index:0;
+}
+ .apercus .apercus-theme5 .deco2{
+    position: absolute;
+    top:0px;
+    left:0px; 
+    width:100%; 
+    height:130px ;
+    background: #3aaebd;
+    
+}
+.apercus .apercus-theme5 .deco2 .h4{
+    position: relative;
+    color: white;
+    font-size:45px;
+    margin: 0px; 
+    margin-left: 60%;
+    line-height: 130px;
+    
+}
+.apercus .apercus-theme5 .deco4{
+    position: absolute;
+    bottom:0px;
+    right:-35px; 
+    width:130%; 
+    height:40px ;
+    background: #3aaebd;
+}
+.apercus .apercus-theme5 .deco5{
+    position: absolute;
+    bottom:-20px;
+    left:45%; 
+    width: 70px;
+    height:70px ;
+    transform: rotate(45deg);
+    background: #3aaebd;
+    z-index:0;
+}
+.apercus .apercus-theme5 .a-colorer{
+    color: rgb(64, 0, 128);
+ }
+ .apercus .apercus-theme4 .a-fond{
+    background: rgb(64, 0, 128);
+ }
+.apercus .apercus-theme5 .a-propos .apercus-logo{
+    position: absolute;
+    top:15px;
+    left:50px ;
+    width:100px; 
+    height:100px ;
+    border:2px solid rgba(71, 70, 70, 0.685);
+    overflow: hidden;
+}
+.apercus .apercus-theme5 .a-propos .apercus-logo img{
+     width: 100%;
+    height:auto; 
+}
+
+.apercus .apercus-theme5 .a-propos p{
+    font-size:15px; 
+    margin: 0px;
+}
+.apercus .apercus-theme5 .activité  {   
+    margin-top:120px !important;
+}
+.apercus .apercus-theme5 .activité table thead {  
+    color:white !important;
+    background: rgba(255, 255, 255, 0) !important;
+}
+.apercus .apercus-theme5 .activité table thead tr{  
+    color:white !important;
+    background: rgba(255, 255, 255, 0) !important;
+}
+.apercus .apercus-theme5 .en-tete{
+    position: relative;
+    height: 110px !important;
+ }
+
+.apercus .apercus-theme5 .activité {
+    height:420px;
+    overflow: hidden;
+    margin: 0px;
+ }
+.apercus .apercus-theme5 .activité table  tr , .apercus  .apercus-theme5  .activité table  td{
+    height: 50px; 
+    line-height: 50px; 
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+ }
+ .apercus .apercus-theme5 .activité  thead tr th{
+    color: rgb(0, 0, 0) !important;
+ }
+ .apercus .apercus-theme5 .pied  {
+    border-top:0px solid rgba(255, 255, 255, 0);
+    margin-top: 0px;
+ }
+ .apercus .apercus-theme5 .pied .message-et-solde strong  {
+    color: black;
+ }
+
+ .apercus .apercus-theme5 .pied .sold-a-payee strong {
+     color: rgb(3, 0, 0);
+    font-size:18px;
+ }
+ .apercus .apercus-theme5 .pied .message-et-solde .pied-facture  {
+    position: absolute;
+    top:5px;
+ }
+ .apercus .apercus-theme5 .pied .message-et-solde .pied-facture p {
+    margin: 0px;
+    font-size: 15px;
+ }
+ .apercus .apercus-theme5 .pied .mention-légale {
+    position: absolute;
+    top: 90px;
+    width: 45%;
+    margin:0px;
+    
+    text-align: left;
+
+ }
+
+
+ 
+ 
