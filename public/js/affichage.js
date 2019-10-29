@@ -1,8 +1,7 @@
 
- 
- 
- var socket=io.connect()	
-        var message = document.getElementById("message"),
+
+ var socket=io.connect();	
+        var message = document.getElementById("txt-message"),
             color = document.getElementById("color"),
             font = document.getElementById("font"),
             opacity = document.getElementById("opacity"),
@@ -111,23 +110,118 @@
          
       })
 
-        // gere WYSIWING
-        // var wys = document.querySelector('.aff-wyswing');
-        // var wyswingHTML = richeTextField.document.getElementsByTagName('body')[0].textContent;
-        // var val =  document.querySelector('.textVal');
-
-    
-         
+        // gere WYSIWING affiche ifframe editable
+        // gere WYSIWING soket affichage (sans liste)
         socket.on("wysHTML",function(data) {
             var affWys = document.createElement('div');
                 affWys.className = 'affWys show';
+                affWys.id = 'exportContent';
                 affWys.innerHTML = ''+data+'';
-                affWys.style.background = 'white';
-               
+                affWys.style.background = 'rgba(255, 255, 255, 0.95)';
+                affWys.style.animation = " slide 0.2s ";
+
+            var exportdoc = document.createElement('button');  
+                exportdoc.innerHTML = '<i class="fa fa-download" ></i>';
+                exportdoc.className = 'exportdoc'
+                exportdoc.addEventListener('click',function() {
+                       // function 
+                        var preHTML = " <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head> <meta charset='utf-8'><title>Export to doc</title></head><body> ";
+                        var postHtml = "</body></html>";
+                        var html = preHTML+this.parentNode.innerHTML+postHtml;
+                     
+                        var blob = new Blob (['\ufeff',html],{
+                            type:'application/msword'
+                        });
+                        // specifier link url
+                        var url = 'data:application/vnd.ms-word;charset=utf-8,'+ encodeURIComponent(html);
+                        // specifier nom du file
+                        filename = ''
+                        filename = filename?filename+'.doc':'document.doc';
+                        // creer dowload link element  affWys
+                        var downloadLink = document.createElement('a');
+                     
+                        document.querySelector('.block-soket').appendChild(downloadLink);
+                     
+                         if(navigator.msSaveOrOpenBlob){
+                             navigator.msSaveOrOpenBlob(blob,filename)
+                         }else{
+                             downloadLink.href = url; // creer link to file
+                             downloadLink.download = filename; // sitting  nom du file
+                             downloadLink.click();
+                         }
+                       document.querySelector('.block-soket').removeChild(downloadLink);
+                  
+                  },true)
+                  // impression soket (editeur)
+                  var impressionWys = document.createElement('button');
+                      impressionWys.innerHTML = '<i class="fa fa-print" ></i>';
+                      impressionWys.className = 'impression-Wys'; 
+
+                      
+                    impressionWys.addEventListener('click',function() {
+                        // var printContents = document.getElementById('exportContent').innerHTML;   
+                        // var originalContents = document.body.innerHTML;      
+                        //     document.body.innerHTML = printContents;     
+                        //     window.print();     
+                        //     document.body.innerHTML = originalContents;
+                        window.print();
+                    },true)
+                
+                affWys.insertBefore(exportdoc,affWys.firstChild);
+                affWys.insertBefore(impressionWys,affWys.firstChild);
                 show.insertBefore(affWys,show.firstChild) ;
           })
 
-        // gere image
+
+         // gere WYSIWING affiche LISTE sur clique (soket emite dans wysiwing.js)
+                socket.on("wysHTMLliste",function(data) {
+                    var affWys2 = document.createElement('div');
+                        affWys2.className = 'affWys2 show';
+                        affWys2.id = 'exportContent2';
+                        affWys2.innerHTML = ''+data+'';
+                        affWys2.style.background = 'rgba(255, 255, 255, 0.95)';
+                        affWys2.style.animation = " slide 0.2s ";
+
+            var exportdoc2 = document.createElement('button');  
+                exportdoc2.innerHTML = '<i class="fa fa-download" ></i>';
+                exportdoc2.className = 'exportdoc2'
+                exportdoc2.addEventListener('click',function() {
+                    // function Export2DocSoket(element, filename = ''){ 
+                        var preHTML = " <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head> <meta charset='utf-8'><title>Export to doc</title></head><body> ";
+                        var postHtml = "</body></html>";
+                        var html = preHTML+this.parentNode.innerHTML+postHtml;
+                     
+                        var blob = new Blob (['\ufeff',html],{
+                            type:'application/msword'
+                        });
+                        // specifier link url
+                        var url = 'data:application/vnd.ms-word;charset=utf-8,'+ encodeURIComponent(html);
+                        // specifier nom du file
+                        filename = ''
+                        filename = filename?filename+'.doc':'document.doc';
+                        // creer dowload link element  affWys
+                        var downloadLink = document.createElement('a');
+                     
+                        document.querySelector('.block-soket').appendChild(downloadLink);
+                     
+                         if(navigator.msSaveOrOpenBlob){
+                             navigator.msSaveOrOpenBlob(blob,filename)
+                         }else{
+                             downloadLink.href = url; // creer link to file
+                             downloadLink.download = filename; // sitting  nom du file
+                             downloadLink.click();
+                         }
+                       document.querySelector('.block-soket').removeChild(downloadLink);
+                    //  }
+                    //  Export2DocSoket();
+                  },true)
+                 
+                     affWys2.insertBefore(exportdoc2,affWys2.firstChild);
+                     show.insertBefore(affWys2,show.firstChild) 
+                })
+
+
+         // gere image
 
         sendimage.addEventListener('click',function(e) {
             e.preventDefault() 
@@ -145,7 +239,7 @@
             var upImage = document.querySelector("#up-image");
             var apercus = document.querySelector(".apercus-image");
             var upload = document.querySelector("#im");
-            console.log(upImage.files);
+            // console.log(upImage.files);
 
 
             fetch("http://localhost:4000/photo")
@@ -166,7 +260,7 @@
                         socket.emit("envoieimageup",lienimg)
                       },true)
 
-                    apercus.appendChild(img);
+                    apercus.insertBefore(img,apercus.firstChild);
                     
                 });
                 
@@ -203,8 +297,7 @@
                                     socket.emit("envoieimageup",lienimg)
                                   },true)
             
-                                apercus.appendChild(img)
-                            
+                                apercus.insertBefore(img,apercus.firstChild);
                             });
                             
                         });
@@ -249,7 +342,7 @@
             var upVideo = document.querySelector("#up-video");
             var apercusvd = document.querySelector(".apercus-video");
             var uploadvd = document.querySelector("#vid");
-            console.log(upVideo.files);
+            // console.log(upVideo.files);
 
 
             fetch("http://localhost:4000/video")
@@ -267,8 +360,8 @@
                         var lienvd = this.src;
                         socket.emit("envoievideoup",lienvd)
                       },true)
-
-                    apercusvd.appendChild(vd);
+                      
+                    apercusvd.insertBefore(vd,apercusvd.firstChild);
                     
                 });
                 
@@ -305,7 +398,7 @@
                                     socket.emit("envoievideoup",lienvd)
                                   },true)
             
-                                apercusvd.appendChild(vd)
+                                  apercusvd.insertBefore(vd,apercusvd.firstChild);
                             
                             });
                             
@@ -323,111 +416,75 @@
                 videoUP.style.width = "100%";
                 videoUP.style.height = "400px";
                 show.insertBefore(videoUP,show.firstChild) ;
+                console.log(data);
           })
 
             // gerer base de donné upload  fichier
 
-            var upFichier = document.querySelector("#up-fichier");
-            var apercusfl = document.querySelector(".apercus-fichier");
-            var namefl = document.querySelector("#name");
-            var uploadfl = document.querySelector("#fl");
-            console.log(upFichier.files);
+            // var upFichier = document.querySelector("#up-fichier");
+            // var apercusfl = document.querySelector(".apercus-fichier");
+            // var namefl = document.querySelector("#name");
+            // var uploadfl = document.querySelector("#fl");
+            // console.log(upFichier.files);
 
 
-            fetch("http://localhost:4000/fichier")
-                .then(data => {
-                return data.json();
-                })
-                .then(json1 => {
+            // fetch("http://localhost:4000/video")
+            //     .then(data => {
+            //     return data.json();
+            //     })
+            //     .then(json1 => {
 
-                console.log(json1)
-                json1.map(data => {
-                    let fl = document.createElement("div");
-                        fl.id ='upfl';
-                        fl.innerHTML = data.fichier;
-                    // var route = "http://localhost:4000/public/"+data.fichier;
-                        apercusfl.appendChild(fl);
-                          fl.addEventListener('click',function(e) {
-                                e.preventDefault() 
-
-                                fetch("http://localhost:4000/fichier/"+data._id)
-                                    .then(data => {
-                                    return data.json();
-                                    })
-                                    .then(json1 => {
-                                     socket.emit("envoieidfichier",data._id)
-                                 });
-                               socket.emit("envoiefichier",data.fichier)
-                            },true)
+            //     console.log(json1)
+            //     json1.map(data => {
+            //         let fl = document.createElement("div");
+            //             fl.id ='upfl';
+            //             fl.innerHTML = upFichier.files[0].name;
+            //         var route = "http://localhost:4000/public/"+data.fichier;
                     
-                });
-                
-             });
-                uploadfl.addEventListener("click", (e) => {
-                    e.preventDefault();
-                
-                    const data = new FormData();
-                    data.append("fichier",upFichier.files[0])
-                    fetch('http://localhost:4000/uploadfichier', {
-                        method: 'POST',
-                        body: data,
-                    }).then((response) => {
-                        response.json().then((body) => {
-                         apercusfl.innerHTML=""
-                        fetch("http://localhost:4000/fichier")
-                        .then(data => {
-                            return data.json();
-                        })
-                        .then(json1 => {
+            //         apercusfl.appendChild(fl);
                     
-                            console.log(json1)
-                            json1.map(data => {
-                            let fl = document.createElement("div");
-                                fl.id ='upfl';
-                                fl.innerHTML = data.fichier
-                                // var route = "http://localhost:4000/public/"+data.fichier;
-                                apercusfl.appendChild(fl)
-                                fl.addEventListener('click',function(e) {
-                                e.preventDefault() 
+            //     });
+                
+            //  });
+                // uploadfl.addEventListener("click", (e) => {
+                //     e.preventDefault();
+                
+                //     const data = new FormData();
+                //        namefl.value = upFichier.files[0].name; 
+                    // let fl = document.createElement("div");
+                    //     fl.id ='upfl';
+                    //     fl.innerHTML = upFichier.files[0].name;
+                    //     console.log(upFichier.files[0].name);
+                    // data.append("fichier",upFichier.files[0])
+                    // fetch('http://localhost:4000/uploadfichier', {
+                    //     method: 'POST',
+                    //     body: data,
+                    // }).then((response) => {
+                    //     response.json().then((body) => {
+                    //     fetch("http://localhost:4000/fichier")
+                    //     .then(data => {
+                    //         return data.json();
+                    //     })
+                    //     .then(json1 => {
+                    
+                    //         console.log(json1)
+                    //         apercusfl.innerHTML=""
+                    //         json1.map(data => {
+                    //             namefl.value = upFichier.files[0].name;
+                            // let fl = document.createElement("div");
+                            //     fl.id ='upfl';
+                            //     fl.innerHTML = upFichier.files[0].name;
+                            //     var route = "http://localhost:4000/public/"+data.fichier;
+                            //     apercusfl.appendChild(fl)
+                            
+                            // });
+                            
+            //             });
+            //             });
+                
+            //     });
+            // },false);
 
-                                fetch("http://localhost:4000/fichier/"+data._id)
-                                    .then(data => {
-                                    return data.json();
-                                    })
-                                    .then(json1 => {
-                                     socket.emit("envoieidfichier",data._id)
-                                 });
-                               socket.emit("envoiefichier",data.fichier)
-                            },true)
-                            
-                            });
-                            
-                        });
-                        });
-                
-                });
-            },false);
-        //socket fichier
-        socket.on("fichier",function(data) {
-           let fl2 = document.createElement("div");
-                                fl2.id ='upfl2';
-                                fl2.innerHTML = data
-                fl2.className ='show';
-                fl2.style.animation = " slide 0.2s ";
-                fl2.style.width = "100%";
-                socket.on("idfichier",function(id) {
-                    fl2.addEventListener('click',function(e) {
-                                e.preventDefault() 
-                               window.location="http://localhost:4000/fichierupload/"+id
-                            },true)
-                 })
-                show.insertBefore(fl2,show.firstChild) ;
-                
-                 
-          })
-      
-      
-      
         // gere browser
             sendbrowser.addEventListener('click',function(e) {
                e.preventDefault() 
@@ -765,10 +822,14 @@
                 },true)
          
                 socket.on("chartAJ",function(data) {
-                    var chartAJ = document.querySelector('#chart_div');
-                    chartAJ.style.height= "500px";
-                    chartAJ.style.marginBottom= "30px";
-                    chartAJ.style.animation = " slide 0.2s ";
+                    var chartAJ = document.createElement('div');
+                        chartAJ.className = "show g-chart chartAJ";
+                        chartAJ.style.height= "500px";
+                        chartAJ.style.marginBottom= "30px";
+                        chartAJ.style.animation = " slide 0.2s ";
+                        
+
+                    show.insertBefore( chartAJ,show.firstChild);
 
                     google.charts.load('current', {'packages':['corechart']});
                     google.charts.setOnLoadCallback(drawChart);
@@ -789,7 +850,7 @@
                         backgroundColor: 'none'
                         };
 
-                        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+                        var chart = new google.visualization.AreaChart(chartAJ);
                         chart.draw(data, options);
                     }
                 })
@@ -802,10 +863,13 @@
                 },true)
          
                 socket.on("chartPJ",function(data) {
-                    var chartPJ = document.querySelector('#donutchart');
-                    chartPJ.style.height= "450px";
-                    chartPJ.style.marginBotton= "30px";
-                    chartPJ.style.animation = " slide 0.2s ";
+                    var chartPJ = document.createElement('div');
+                        chartPJ.className = "show g-chart chartPJ";
+                        chartPJ.style.height= "450px";
+                        chartPJ.style.marginBotton= "30px";
+                        chartPJ.style.animation = " slide 0.2s ";
+
+                    show.insertBefore( chartPJ,show.firstChild);
 
                     google.charts.load("current", {packages:["corechart"]});
                     google.charts.setOnLoadCallback(drawChart);
@@ -825,7 +889,7 @@
                         backgroundColor: 'none'
                         };
 
-                        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+                        var chart = new google.visualization.PieChart(chartPJ);
                         chart.draw(data, options);
                     }
                 })
@@ -838,10 +902,13 @@
                 },true)
          
                 socket.on("chartHJ",function(data) {
-                    var chartHJ = document.querySelector('#histo_div');
-                    chartHJ.style.height= "500px";
-                    chartHJ.style.marginBotton= "30px";
-                    chartHJ.style.animation = " slide 0.2s ";
+                    var chartHJ = document.createElement('div');
+                        chartHJ.className = "show g-chart chartHJ";
+                        chartHJ.style.height= "500px";
+                        chartHJ.style.marginBotton= "30px";
+                        chartHJ.style.animation = " slide 0.2s ";
+
+                    show.insertBefore( chartHJ,show.firstChild);
 
                     google.charts.load("current", {packages:["corechart"]});
                     google.charts.setOnLoadCallback(drawChart);
@@ -883,11 +950,29 @@
                         backgroundColor: 'none'
                         };
 
-                        var chart = new google.visualization.Histogram(document.getElementById('histo_div'));
+                        var chart = new google.visualization.Histogram(chartHJ);
                         chart.draw(data, options);
                     }
                 })
 
+
+
+                // GERER Fichier
+
+                var affFichierPDF = document.querySelector('.aff-pdf');
+
+                affFichierPDF.addEventListener('click',function(e) {
+                    e.preventDefault() 
+                    socket.emit("envoiePDF")
+                 },true)
+                socket.on("fichierPDF",function(data) { 
+                    var viewPDF = document.createElement('object');
+                        viewPDF.data="uploadfichier/test.pdf";
+                        viewPDF.style.width="100%";
+                        viewPDF.style.height="900px";
+                        viewPDF.style.animation = " slide 0.2s ";
+                    show.insertBefore(viewPDF,show.firstChild) ;
+                 })
 
 
                 // GERER THEMER
@@ -1025,7 +1110,7 @@
                    socket.on("theme3",function(data) {
                     var theme3 = document.createElement('div');
                        theme3.className ='theme3 show';
-                       theme2.style.width = "100%";
+                       theme3.style.width = "100%";
                     //    theme2.style.animation = " slide 0.2s ";
 
                     var box1 = document.createElement('div');
@@ -1041,7 +1126,285 @@
                     show.insertBefore(theme3,show.firstChild) ;
                    })
 
+                    //   gere theme 4
+                    var theme4 = document.querySelector('.theme-4');
+                    var tm4 = document.querySelectorAll('.tm4');
 
+                    theme4.addEventListener('click',function() {
+                        var tabtm4 =[];
+                        for(var l4 = 0; l4< tm4.length ;l4++) { 
+                            tabtm4.push(tm4[l4].value)
+                        }
+                        socket.emit("envoietheme4",tabtm4)
+                    },true)
+
+                    socket.on("theme4",function(data) {
+                    var theme4 = document.createElement('div');
+                        theme4.className ='theme4 show';
+                        theme4.innerHTML += ''+data[1]+'';
+
+                    var titre4 = document.createElement('h3');
+                        titre4.innerHTML = ''+data[0]+'';
+                    
+
+
+                    theme4.appendChild(titre4);
+                    show.insertBefore(theme4,show.firstChild) ;
+                    })
+
+                    //   gere theme 5 chart line interval
+                    var theme5 = document.querySelector('.theme-5');
+
+                    theme5.addEventListener('click',function() {
+                        socket.emit("envoietheme5")
+                    },true)
+
+                    socket.on("theme5",function(data) {
+
+                        var theme5 = document.createElement('div');
+                            theme5.className = "show g-chart theme5";
+                            theme5.style.height= "500px";
+                            theme5.style.marginBotton= "30px";
+                            theme5.style.animation = " slide 0.2s ";
+
+                        show.insertBefore( theme5,show.firstChild);
+
+                        google.charts.load('current', {'packages':['corechart']});
+                        google.charts.setOnLoadCallback(drawChart);
+                  
+                        function drawChart() {
+                          var data = google.visualization.arrayToDataTable([
+                            ['Year', 'Sales', 'Expenses'],
+                            ['2004',  1000,      400],
+                            ['2005',  1170,      460],
+                            ['2006',  660,       1120],
+                            ['2007',  1030,      540]
+                          ]);
+                  
+                          var options = {
+                            title: 'Company Performance',
+                            curveType: 'function',
+                            legend: { position: 'bottom' }
+                          };
+                  
+                          var chart = new google.visualization.LineChart(theme5);
+                  
+                          chart.draw(data, options);
+                        }
+                    })
+
+                     //   gere theme 6 Tableau
+                     var theme6 = document.querySelector('.theme-6');
+
+                     theme6.addEventListener('click',function() {
+                         socket.emit("envoietheme6")
+                     },true)
+ 
+                     socket.on("theme6",function(data) {
+ 
+                         var theme6 = document.createElement('div');
+                             theme6.className = "show g-chart theme6";
+                             theme6.style.height= "500px";
+                             theme6.style.marginBotton= "30px";
+                             theme6.style.animation = " slide 0.2s ";
+ 
+                         show.insertBefore( theme6,show.firstChild);
+ 
+                         google.charts.load('current', {'packages':['table']});
+                         google.charts.setOnLoadCallback(drawTable);
+                   
+                         function drawTable() {
+                           var data = new google.visualization.DataTable();
+                           data.addColumn('string', 'Name');
+                           data.addColumn('number', 'Salary');
+                           data.addColumn('boolean', 'Full Time Employee');
+                           data.addRows([
+                             ['Mike',  {v: 10000, f: '$10,000'}, true],
+                             ['Jim',   {v:8000,   f: '$8,000'},  false],
+                             ['Alice', {v: 12500, f: '$12,500'}, true],
+                             ['Bob',   {v: 7000,  f: '$7,000'},  true]
+                           ]);
+                   
+                           var table = new google.visualization.Table(theme6);
+                   
+                           table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+                         }
+                     })
+
+                     //   gere theme 7 waterfal
+                     var theme7 = document.querySelector('.theme-7');
+
+                     theme7.addEventListener('click',function() {
+                         socket.emit("envoietheme7")
+                     },true)
+ 
+                     socket.on("theme7",function(data) {
+ 
+                         var theme7 = document.createElement('div');
+                             theme7.className = "show g-chart theme7";
+                             theme7.style.height= "500px";
+                             theme7.style.marginBotton= "30px";
+                             theme7.style.animation = " slide 0.2s ";
+ 
+                         show.insertBefore( theme7,show.firstChild);
+ 
+                            google.charts.load('current', {'packages':['corechart']});
+                            google.charts.setOnLoadCallback(drawChart);
+                            function drawChart() {
+                                var data = google.visualization.arrayToDataTable([
+                                ['Mon', 28, 28, 38, 38],
+                                ['Tue', 38, 38, 55, 55],
+                                ['Wed', 55, 55, 77, 77],
+                                ['Thu', 77, 77, 66, 66],
+                                ['Fri', 66, 66, 22, 22]
+                                // Treat the first row as data.
+                                ], true);
+
+                                var options = {
+                                legend: 'none',
+                                bar: { groupWidth: '100%' }, // Remove space between bars.
+                                candlestick: {
+                                    fallingColor: { strokeWidth: 0, fill: '#a52714' }, // red
+                                    risingColor: { strokeWidth: 0, fill: '#0f9d58' }   // green
+                                }
+                                };
+
+                                var chart = new google.visualization.CandlestickChart(theme7);
+                                chart.draw(data, options);
+                            }
+                     })
+
+                       
+                      //   gere theme 8 Geo
+                      var theme8 = document.querySelector('.theme-8');
+
+                      theme8.addEventListener('click',function() {
+                          socket.emit("envoietheme8")
+                      },true)
+  
+                      socket.on("theme8",function(data) {
+  
+                          var theme8 = document.createElement('div');
+                              theme8.className = "show g-chart theme8";
+                              theme8.style.height= "500px";
+                              theme8.style.marginBotton= "30px";
+                              theme8.style.animation = " slide 0.2s ";
+  
+                          show.insertBefore( theme8,show.firstChild);
+  
+                          google.charts.load('current', {
+                            'packages':['geochart'],
+                            
+                            'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+                          });
+                          google.charts.setOnLoadCallback(drawRegionsMap);
+                    
+                          function drawRegionsMap() {
+                            var data = google.visualization.arrayToDataTable([
+                              ['Country',   'Latitude'],
+                              ['Algeria', 36], ['Angola', -8], ['Benin', 6], ['Botswana', -24],
+                              ['Burkina Faso', 12], ['Burundi', -3], ['Cameroon', 3],
+                              ['Canary Islands', 28], ['Cape Verde', 15],
+                              ['Central African Republic', 4], ['Ceuta', 35], ['Chad', 12],
+                              ['Comoros', -12], ['Cote d\'Ivoire', 6],
+                              ['Democratic Republic of the Congo', -3], ['Djibouti', 12],
+                              ['Egypt', 26], ['Equatorial Guinea', 3], ['Eritrea', 15],
+                              ['Ethiopia', 9], ['Gabon', 0], ['Gambia', 13], ['Ghana', 5],
+                              ['Guinea', 10], ['Guinea-Bissau', 12], ['Kenya', -1],
+                              ['Lesotho', -29], ['Liberia', 6], ['Libya', 32], ['Madagascar', null],
+                              ['Madeira', 33], ['Malawi', -14], ['Mali', 12], ['Mauritania', 18],
+                              ['Mauritius', -20], ['Mayotte', -13], ['Melilla', 35],
+                              ['Morocco', 32], ['Mozambique', -25], ['Namibia', -22],
+                              ['Niger', 14], ['Nigeria', 8], ['Republic of the Congo', -1],
+                              ['Réunion', -21], ['Rwanda', -2], ['Saint Helena', -16],
+                              ['São Tomé and Principe', 0], ['Senegal', 15],
+                              ['Seychelles', -5], ['Sierra Leone', 8], ['Somalia', 2],
+                              ['Sudan', 15], ['South Africa', -30], ['South Sudan', 5],
+                              ['Swaziland', -26], ['Tanzania', -6], ['Togo', 6], ['Tunisia', 34],
+                              ['Uganda', 1], ['Western Sahara', 25], ['Zambia', -15],
+                              ['Zimbabwe', -18]
+                            ]);
+                    
+                            var options = {
+                              region: '002', // Africa
+                              colorAxis: {colors: ['#00853f', 'black', '#e31b23']},
+                              backgroundColor: '#81d4fa',
+                              datalessRegionColor: '#f8bbd0',
+                              defaultColor: '#f5f5f5',
+                            };
+                    
+                            var chart = new google.visualization.GeoChart(theme8);
+                            chart.draw(data, options);
+                          };
+                      })
+
+
+                      //   gere theme 9 Organigramme
+                      var theme9 = document.querySelector('.theme-9');
+
+                      theme9.addEventListener('click',function() {
+                          socket.emit("envoietheme9")
+                      },true)
+  
+                      socket.on("theme9",function() {
+  
+                          var theme9 = document.createElement('div');
+                              theme9.className = "show g-chart theme9";
+                              theme9.style.animation = " slide 0.2s ";
+                             
+                          var tme9 = document.createElement('iframe');
+                              tme9.src = "theme/tableau/table.html";
+                              tme9.style.width= "100%";
+                              tme9.style.height= "1600px";
+                              tme9.style.marginBotton= "30px";
+                              
+  
+                         theme9.appendChild(tme9);
+                         show.insertBefore( theme9,show.firstChild);
+  
+                          
+                      })
+
+                      //   gere theme 10 Formulaire
+                      var theme10 = document.querySelector('.theme-10');
+
+                      theme10.addEventListener('click',function() {
+                          socket.emit("envoietheme10")
+                      },true)
+  
+                      socket.on("theme10",function() {
+  
+                          var theme10 = document.createElement('div');
+                              theme10.className = "show g-chart theme10";
+                              theme10.style.animation = " slide 0.2s ";
+                              theme10.style.background = " white ";
+                             
+                          var tme10 = document.createElement('iframe');
+                              tme10.src = "theme/formulaire/index.html";
+                              tme10.style.width= "100%";
+                              tme10.style.height= "600px";
+                              tme10.style.marginBotton= "30px";
+                              
+  
+                         theme10.appendChild(tme10);
+                         show.insertBefore( theme10,show.firstChild);
+  
+                          
+                      })
+
+                     
+
+                   
+                   //   gere Affichage GALLERIE
+
+                   socket.on("gal",function(data) {
+                      var gal = document.createElement('img'); 
+                          gal.src = data;
+                          gal.className = "aff-gallerie show"
+                          gal.style.width = "100%";
+                     show.insertBefore(gal,show.firstChild) ;    
+
+                    })
 
 
                    

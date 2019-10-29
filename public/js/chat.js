@@ -2,9 +2,13 @@
         outil = document.querySelector('.outil'), 
         icones = document.querySelector('.icones'),
         BLadmin = document.querySelectorAll('.BL-admin'),
+        InterfaceBL = document.querySelectorAll('.INTERFACE-BL'),
+        icoInterfaceBL = document.querySelectorAll('.int-ico'),
 
         iconeTableau = document.querySelector('.icone-tableau'),
         iconeOutil = document.querySelector('.icone-outil'),
+        iconePLusOutil = document.querySelector('.ico-plus-outil'),
+        iconeXOutil = document.querySelector('.ico-X-outil'),
         iconeTache = document.querySelector('.icones-tache'),
         iconeRight = document.querySelectorAll('.ico-r'),
 
@@ -13,35 +17,48 @@
         reglageRight = document.querySelector('.reglage-right'),
         milieu = document.querySelector('.milieu'),
         full = document.querySelector('.full'),  
-        retourBLoutil = document.querySelector('.retour-bl-outil'),
-        retourBLeft = document.querySelectorAll('.retour-bl'),
+        retourBl = document.querySelectorAll('.retour-int-bl'),
         retourBLAdmin = document.querySelectorAll('.retour-right'); 
        
 
- tab = function(){ 
-
-       iconeTableau.addEventListener('click',function() {
-        icones.style.opacity = "0";
-        tableau.style.transform = "translateX(0%)";
-       },true) 
-      // gere outil
-       
-       iconeOutil.addEventListener('click',function() {
-        icones.style.opacity = "0";
-        outil.style.transform = "translateX(0%)";
-        var facture = document.createElement('iframe');
-            facture.src = "facture/facture.html";
-            facture.frameborder ="0";
-            facture.style.width = "100%";
-            facture.style.height = "100%";
-        outil.appendChild(facture);    
-       },true) 
-       retourBLoutil.addEventListener('click',function() {
-        icones.style.opacity = "1";
-        outil.style.transform = "translateX(-100%)";
-       },true) 
+ chat = function(){ 
       
+    //  Gere affichage Table message et les autre BL INTERFACE 
+    var tabico = [];
+    var nombre=document.querySelector(".nombre")
+    for(var r = 0; r < icoInterfaceBL.length ;r++) { 
+        tabico.push(icoInterfaceBL[r]);
+      }
+      tabico.map((call,index)=>{
+      call.addEventListener('click',function() {
+        ebl = index;
+        nombre.innerHTML=0
+        icones.style.display = "none";
+        for(var b = 0; b <  InterfaceBL.length ;b++) { 
+            InterfaceBL[ebl].style.transform = "translateX(0%)";
+          }
 
+       },true)
+    }) 
+
+    //  Gere les retour BL INTERFACE 
+    var tabretour = [];
+    for(var i = 0; i < retourBl.length ;i++) { 
+        tabretour.push(retourBl[i]);
+      }
+      tabretour.map((call,index)=>{
+      call.addEventListener('click',function() {
+        rbl = index;
+        icones.style.display = "block";
+        for(var b = 0; b <  InterfaceBL.length ;b++) { 
+            InterfaceBL[rbl].style.transform = "translateX(-100%)";
+          }
+
+       },true)
+    }) 
+
+
+    
 
        //    reglage taille tableau
        full.addEventListener('click',function() {
@@ -53,18 +70,22 @@
         reglageRight.style.background ="rgba(0, 0, 0, 0.349)"
        },true)
 
-       for(var i = 0; i <  retourBLeft.length ;i++) {
-        retourBLeft[i].addEventListener('click',function() {
-            tableau.style.width = "50%";   
-            tableau.style.transform = "translateX(-100%)";
-            
-            icones.style.opacity = "1";
-            reglageRight.style.background ="rgba(0, 0, 0, 0.349)"
-           },true)
-       }  
-      
+  
+        //   reglage affichage ICONE Tache 
 
-        //    reglage ICONE ADMINISTRATEUR
+            iconePLusOutil.addEventListener('click',function() {
+                iconeTache.style.transform = "translateY(0%)" ;
+                iconeXOutil.style.zIndex = "1";
+            },true)
+
+            iconeXOutil.addEventListener('click',function() {
+                iconeTache.style.transform = "translateY(100%)" ;
+                this.style.zIndex = "0";
+            },true)
+            
+       
+
+        //    reglage ICONE ADMINISTRATEUR box-shadow: 
 
         var tabiconeRight = [];
         for(var r = 0; r < iconeRight.length ;r++) { 
@@ -75,16 +96,22 @@
             e = index;
             iconeTache.style.display ="none";
             for(var b = 0; b < BLadmin.length ;b++) { 
+                document.querySelector('.commande-lors-apl').style.display = "none";// commande d'appele
                 BLadmin[e].style.transform = "translateX(0%)";
+                BLadmin[e].style.boxShadow = "-10px 10px 10px rgba(0, 0, 0, 0.199)";
               }
-
+            iconeXOutil.style.display = "none";
+            iconeTache.style.display = "none" ;
            },true)
         }) 
         // RETOUR BL admin)
         for(var rb = 0; rb < retourBLAdmin.length ;rb++) { 
             retourBLAdmin[rb].addEventListener('click',function() {
+                document.querySelector('.commande-lors-apl').style.display = "block";
                 this.parentNode.style.transform = "translateX(100%)";
+                this.parentNode.style.boxShadow = "0px 0px 0px rgba(0, 0, 0, 0)";
                 iconeTache.style.display ="block";
+                iconeXOutil.style.display = "block";
              },true)
           }
        // affiche opacity BL text
@@ -113,8 +140,8 @@
             }
        },true)
        }) 
-       // Gere J M A dans chart
-           // Gere J M A dans chart LINE
+       // Gere J M A dans chart admin
+           // Gere J M A dans chart LINE admin
             var time2 = time = document.querySelectorAll('.time');
             
             var affTime = document.querySelectorAll('.aff-time');
@@ -135,7 +162,7 @@
                  }
             },true)
             }) 
-            // Gere J M A dans chart AREA
+            // Gere J M A dans chart AREA admin
             var timeA2 = timeA = document.querySelectorAll('.timeA');
             var affTimeA = document.querySelectorAll('.aff-timeA');
             
@@ -156,7 +183,7 @@
                 }
             },true)
             }) 
-            // Gere J M A dans chart PIE
+            // Gere J M A dans chart PIE admin
             var timeP2 = timeP = document.querySelectorAll('.timeP');
             var affTimeP = document.querySelectorAll('.aff-timeP');
             
@@ -177,7 +204,7 @@
                 }
             },true)
             }) 
-            // Gere J M A dans chart BAR
+            // Gere J M A dans chart BAR admin
             var timeB2 = timeB = document.querySelectorAll('.timeB');
             var affTimeB = document.querySelectorAll('.aff-timeB');
             
@@ -198,7 +225,7 @@
                 }
             },true)
             }) 
-              // Gere J M A dans chart MAP
+              // Gere J M A dans chart MAP admin
               var timeM2 = timeM = document.querySelectorAll('.timeM');
               var affTimeM = document.querySelectorAll('.aff-timeM');
               
@@ -241,7 +268,7 @@
                     tabChoix.map((call3,index3)=>{
                     call3.addEventListener('click',function() {
                         e = index3;
-                        for(var b3 = 0; b3 < BLadmin.length ;b3++) { 
+                        for(var b3 = 0; b3 < BLChoix.length ;b3++) { 
                             BLChoix[b3].style.display = 'none';
                             BLChoix[e].style.display = 'block';
                         }
@@ -249,6 +276,20 @@
                     },true)
                     }) 
 
+
+    //  FACTURATION iframe-facture    
+
+    var BLfacture = document.querySelector('.facture');
+    var iframeFacture = document.querySelector('.iframe-facture');
+    var icoFacture = document.querySelector('.icone-facture');
+
+    icoFacture.addEventListener('click',function() {
+        iframeFacture.src = "facture/facture.html" ;
+   },true)
+
+
+
+    
              
  
             
@@ -263,6 +304,6 @@
 
 
  };
- tab();
+chat();
 
 

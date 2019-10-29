@@ -106,7 +106,7 @@ background:#3594D2;
 
 <form >
 <div class="box">
-<h1>Entrer votre identifiant</h1>
+<h1>Entrer votre agent identifiant</h1>
 
 <input type="text" placeholder="username" name="username" class=" username email" />
 <input type="password" placeholder="password" name="password" class=" password email" />
@@ -133,7 +133,7 @@ background:#3594D2;
                   data.append("nom", username.value );
                   data.append("password", password.value )
                   console.log(data)
-                   fetch('http://localhost:4000/login', {
+                   fetch('http://localhost:4000/loginagent', {
                               method: 'POST',
                               headers : new Headers(),
                               body:data
@@ -145,7 +145,7 @@ background:#3594D2;
                             localStorage.setItem("iduserconnecte", data1.iduser);
                             socket.emit("envoieconnecte", localStorage.getItem("user"))
                          
-                            window.location="/"
+                            window.location="/agent.html"
                            }
                             console.log(data1)
                               })

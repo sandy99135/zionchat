@@ -6,7 +6,7 @@
     <title>Video Chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/font-awesome.min.css" />
-    <link href="css/main.css" rel="stylesheet">
+    <link href="css/agentmain.css" rel="stylesheet">
     <link href="css/theme.css" rel="stylesheet">
     <link href="css/message.css" rel="stylesheet">
      <!-- gere scrool barre -->
@@ -15,7 +15,7 @@
 
 </head>
 
-<body>
+<body >
     <div class="container">
         <div class=" bl-col">
             
@@ -39,11 +39,10 @@
                
         </div>
 
-         <!-- Utilisateur-->
-        <div class="utilisateur"style="position:absolute;top:10px;letf:10px;background:white;width:100px;height:20px;transition:0.5s; overflow: hidden;z-index: 3">
+       <div class="agent"style="position:absolute;top:10px;letf:10px;background:white;width:100px;height:20px;transition:0.5s; overflow: hidden;z-index: 3">
           <span class="retour-app-bl retour-int-bl"><a class="nom-connecte"></a><i class="fa fa-caret-right etendre" style="margin-left: 30px;cursor:pointer;"></i></span>
           <div class="liste-connecter">
-             <h5>Liste des agents disponibles :</h5> 
+             <h5>Liste des clients connectes :</h5> 
           </div>
           <div class="deconnecter">
             <span class="deconnecter"style="margin-left: 180px; cursor:pointer">Deconnecter</span> 
@@ -58,8 +57,13 @@
                     <video class="" muted></video>
                 </div>
             </div>
+<!-- 
+            <div class="client2">
+                <div id="peerDiv2" class="" width="100%">    
+                </div>
+            </div> -->
 
-            <!-- Video diffusion-->
+
             <div class="video-diffusion">
                  <div id="peerDiv" class="">     <!-- recois la video creer -->
                  </div>
@@ -92,16 +96,18 @@
             
     </div>   
         <!-- </div> -->
-       
-   <!--  <script src="js/wyswing.js"></script> -->
+ 
+          
+    <!-- <script src="js/wyswing.js"></script> -->
     <script src="socket.js"></script>
+    <script src="js/agent.js" ></script>
     <!-- <script src="/socket.io/socket.io.js"></script> -->
     
     <script src="bundle.js"></script>
-    <!-- <script src="js/affichage.js" ></script>
-    <script src="js/chat.js"></script> -->
-    <script src="js/user.js"></script>
-    <!-- <script src="js/avance.js"></script>
+   <!--  <script src="js/affichage.js" ></script>
+    <script src="js/chat.js"></script>
+   
+    <script src="js/avance.js"></script>
     <script src="js/appel.js" ></script>
     <script src="js/message.js" ></script> -->
     <script src="js/dom-to-image.min.js"></script>

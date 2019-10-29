@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
@@ -31,5 +31,8 @@
     "simple-datetime-formater": "^1.0.8",
     "simple-peer": "^9.6.0",
     "socket.io": "^2.2.0"
-  }
+  },
+"engines": {
+    "node": "v8.11.4"
+ }
 }

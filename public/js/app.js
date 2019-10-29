@@ -17,13 +17,9 @@ const cookieParser = require('cookie-parser');
 const io = require("socket.io")(http);
 const Chat = require("./models/Chat");
 const User = require("./models/user");
-const Agent = require("./models/agent");
-const Disponible = require("./models/disponible");
-const wysiwing = require("./models/listewysiwing");
-const Photo = require("./models/photoChat");
+const Conference = require("./models/conference");
 const PhotoChat = require("./models/chatphoto");
 const Video = require("./models/video");
-const Gallerie = require("./models/gallerie");
 const Fichier = require("./models/fichier");
 
 const Connecte = require("./models/connecte");
@@ -50,27 +46,19 @@ app.use(express.static(__dirname + "/public"));
 
 
 
-//login client
+//database connection
 
 app.get("/login",function(req,res){
   res.sendFile(__dirname + "/public/login.html")
 })
 
-//login agent
-
-app.get("/loginagent",function(req,res){
-  res.sendFile(__dirname + "/public/login.html")
-})
-
-
-
 
 // affichage block soket
 
 let clients = 0
-
-//login pour les clients
-  app.post('/login', (req, res, next) => {
+       app.post('/login', (req, res, next) => {
+   
+    
      User.findOne({nom:req.body.nom}).then(user=>{
           if(!user){
             res.send("cet utilisateur nexiste pas")
@@ -116,89 +104,33 @@ let clients = 0
      })
          
       })
-
-  //login pour les agents
-  app.post('/loginagent', (req, res, next) => {
-     Agent.findOne({nom:req.body.nom}).then(user=>{
-          if(!user){
-            res.send("cet utilisateur nexiste pas")
-          }else{
-             if(user.password==req.body.password){
-             
-             Disponible.find().then(connecte=>{
-                   var id;
-               if(connecte.length==0){
-                 id=0
-               }
-               else{
-                 id=connecte[connecte.length-1]._id+1
-               }
-               const con=new  Disponible({
-                _id:id,
-                iduser:user._id,
-                nom:user.nom,
-                password:user.password
-               })
-               Disponible.findOne({nom:con.nom}).then(use=>{
-                if(!use){
-                  clients++;
-                    con.save().then(utilisateur=> res.send(utilisateur))
-                    
-                  }else{
-                    console.log(use)
-                    res.send(use)
-                  }
-                
-                   
-               })
-             
-             })
-             
-              
-             }
-             else{
-               res.send("ereur mot de passe")
-             }
-   
-          }
-     })
-         
-      })
              
 
-    function SendOffer(offer) {
-      console.log(offer)
-      this.broadcast.emit("BackOffer", offer)
-    }
-    function SendAnswer(data) {
-      console.log(data)
-      this.broadcast.emit("BackAnswer", data)
-    }
-                     
-    app.get("/connect",(req, res, next) => {
-      Connecte.find().then(connecte=>{
-        res.send(connecte)
-      })
-    })
-     app.get("/disponible",(req, res, next) => {
-      Disponible.find().then(connecte=>{
-        res.send(connecte)
-      })
-    })
+                      function SendOffer(offer) {
+                        console.log(offer)
+                          this.broadcast.emit("BackOffer", offer)
+                      }
+                      //  function SendOffer2(offer) {
+                      //   console.log(offer)
+                      //     this.broadcast.emit("BackOffer2", offer)
+                      // }
+                      function SendAnswer(data) {
+                         console.log(data)
+                          this.broadcast.emit("BackAnswer", data)
+                      }
+                      // function SendAnswer2(data) {
+                      //    console.log(data)
+                      //     this.broadcast.emit("BackAnswer2", data)
+                      // }
+      app.get("/connect",(req, res, next) => {
+               Connecte.find().then(connecte=>{
+                    res.send(connecte)
+               })
+              })
   
 
-    app.get("/deconnect/:_id",(req,res)=>{
-      Connecte.findByIdAndRemove(req.params._id).then(connecte=>{
-        clients --
-        if(clients<0){
-          clients=0
-        }
-        res.send(connecte)
-      })
-            console.log(clients)
-    })
-          app.get("/deconnectagent/:_id",(req,res)=>{
-             Disponible.findByIdAndRemove(req.params._id).then(connecte=>{
+         app.get("/deconnect/:_id",(req,res)=>{
+             Connecte.findByIdAndRemove(req.params._id).then(connecte=>{
                      clients --
                      if(clients<0){
                       clients=0
@@ -215,178 +147,104 @@ io.on('connection', function (socket) {
                       socket.on('Answer', SendAnswer)
                       // socket.on('Answer2', SendAnswer2)
          
-    // gere BL Text
     socket.on('envoitext',(data) =>{
-      io.sockets.emit("text",{message:data})
-  })
-  socket.on('envoicolor',(data) =>{
-      io.sockets.emit("color",{color:data})
-  })
-  socket.on('envoifont',(data) =>{
-      io.sockets.emit("font",{font:data})
-  })
-  socket.on('envoiopacity',(data) =>{
-      console.log(data)
-      io.sockets.emit("opacity",{opacity:data})
-  })  
-  socket.on('envoipolice',(data) =>{
-      console.log(data)
-      io.sockets.emit("police",{police:data})
-  })    
-  
-
-
-  // gere WYSIWING
-  socket.on('envoiewys',(data) =>{
-      io.sockets.emit("wysHTML",data)
-  })   
-  // gere WYSIWING  aff liste
-  socket.on('envoiewysiListe',(data) =>{
-      console.log(data)
-      io.sockets.emit("wysHTMLliste",data)
-  })  
-   //gere emoji
-   socket.on('envoiemoji',(data) =>{
-       console.log(data)
-       io.sockets.emit("emoji",data)
-   }) 
-
-  //gere chart Line Jour
-  socket.on('envoiechartLJ',(data) =>{
-      console.log(data)
-      io.sockets.emit("chartLJ",data)
-  })
-  //gere chart Line Semaine
-  socket.on('envoiechartLM',(data) =>{
-      console.log(data)
-      io.sockets.emit("chartLM",data)
-  })
-  //gere chart Line Annee
-  socket.on('envoiechartLA',(data) =>{
-      console.log(data)
-      io.sockets.emit("chartLA",data)
-  })
-  //gere chart AREA Jour
-  socket.on('envoiechartAJ',(data) =>{
-      console.log(data)
-      io.sockets.emit("chartAJ")
-  })
-  //gere chart PIE Jour
-  socket.on('envoiechartPJ',(data) =>{
-      console.log(data)
-      io.sockets.emit("chartPJ")
-  })
-   //gere chart HISTO Jour
-   socket.on('envoiechartHJ',(data) =>{
-      console.log(data)
-      io.sockets.emit("chartHJ")
-  })
-
-   //gere l'envoi d'image en ligne
-   socket.on('envoieimage',(data) =>{
-      console.log(data)
-      io.sockets.emit("image",{lienimage:data})
-  })
-  //gere l'envoi d'image upload
-  socket.on('envoieimageup',(data) =>{
-    console.log(data)
-    io.sockets.emit("imageup",data)
-})
-   //gere l'envoi de video en ligne
-   socket.on('envoievideo',(data) =>{
-      console.log(data)
-      io.sockets.emit("video",{lienvideo:data})
-  })
-   //gere l'envoi d'video upload
-   socket.on('envoievideoup',(data) =>{
-      console.log(data)
-      io.sockets.emit("videoup",data)
-  })
- //gere l'envoi de browser
-   socket.on('envoiebrowser',(data) =>{
-     console.log(data)
-     io.sockets.emit("browser",{lienbrowser:data})
-   })
-
-   //gere l'envoi fichier PDF
-   socket.on('envoiePDF',(data) =>{
-      console.log(data)
-      io.sockets.emit("fichierPDF",data)
+        console.log(data)
+        io.sockets.emit("text",{message:data})
     })
+    socket.on('envoicolor',(data) =>{
+        console.log(data)
+        io.sockets.emit("color",{color:data})
+    })
+    socket.on('envoifont',(data) =>{
+        console.log(data)
+        io.sockets.emit("font",{font:data})
+    })
+    socket.on('envoiopacity',(data) =>{
+        console.log(data)
+        io.sockets.emit("opacity",{opacity:data})
+    })  
+    socket.on('envoipolice',(data) =>{
+        console.log(data)
+        io.sockets.emit("police",{police:data})
+    })    
+    
 
 
-   //gere l'envoi THEME
+    // gere WYSIWING
+    socket.on('envoiewys',(data) =>{
+        console.log(data)
+        io.sockets.emit("wysHTML",data)
+    })   
 
-   //gere l'envoi theme1
-   socket.on('envoietheme1',(data) =>{
+     //gere emoji
+     socket.on('envoiemoji',(data) =>{
+         console.log(data)
+         io.sockets.emit("emoji",data)
+     }) 
+
+    //gere chart Line Jour
+    socket.on('envoiechartLJ',(data) =>{
+        console.log(data)
+        io.sockets.emit("chartLJ",data)
+    })
+    //gere chart Line Semaine
+    socket.on('envoiechartLM',(data) =>{
+        console.log(data)
+        io.sockets.emit("chartLM",data)
+    })
+    //gere chart Line Annee
+    socket.on('envoiechartLA',(data) =>{
+        console.log(data)
+        io.sockets.emit("chartLA",data)
+    })
+    //gere chart AREA Jour
+    socket.on('envoiechartAJ',(data) =>{
+        console.log(data)
+        io.sockets.emit("chartAJ")
+    })
+    //gere chart PIE Jour
+    socket.on('envoiechartPJ',(data) =>{
+        console.log(data)
+        io.sockets.emit("chartPJ")
+    })
+     //gere chart HISTO Jour
+     socket.on('envoiechartHJ',(data) =>{
+        console.log(data)
+        io.sockets.emit("chartHJ")
+    })
+ 
+     //gere l'envoi d'image
+     socket.on('envoieimage',(data) =>{
+        console.log(data)
+        io.sockets.emit("image",{lienimage:data})
+    })
+    //gere l'envoi d'image upload
+    socket.on('envoieimageup',(data) =>{
       console.log(data)
-      io.sockets.emit("theme1",data)
-    })
-    //gere l'envoi theme1 nb list
-   socket.on('envoietheme1nb',(data) =>{
-      console.log(data)
-      io.sockets.emit("nb",data)
-    })
-     //gere l'envoi theme1 titre
-   socket.on('envoietheme1titre',(data) =>{
-      console.log(data)
-      io.sockets.emit("titreth1",data)
-    })
-
-    //gere l'envoi theme2
-   socket.on('envoietheme2',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme2")
-    })
-
-    //gere l'envoi theme3
-   socket.on('envoietheme3',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme3",data)
-    })
-
-    //gere l'envoi theme4
-    socket.on('envoietheme4',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme4",data)
-    })
-    //gere l'envoi theme4
-    socket.on('envoietheme5',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme5")
-    })
-    socket.on('envoietheme6',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme6")
-    })
-
-    socket.on('envoietheme7',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme7")
-    })
-
-    socket.on('envoietheme8',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme8")
-    })
-
-    socket.on('envoietheme9',(data) =>{
-      io.sockets.emit("theme9")
-    })
-
-    socket.on('envoietheme10',(data) =>{
-      io.sockets.emit("theme10")
-    })
-
-   //gere l'envoi Gallerie
-   socket.on('envoieGallerie',(data) =>{
-    io.sockets.emit("gal",data)
+      io.sockets.emit("imageup",data)
   })
-
-
+     //gere l'envoi de video
+     socket.on('envoievideo',(data) =>{
+        console.log(data)
+        io.sockets.emit("video",{lienvideo:data})
+    })
+     //gere l'envoi d'image upload
+     socket.on('envoievideoup',(data) =>{
+        console.log(data)
+        io.sockets.emit("videoup",data)
+    })
+     //gere l'envoi fichier upload
+     socket.on('envoiefichier',(data) =>{
+        console.log(data)
+        io.sockets.emit("fichier",data)
+    })
+      socket.on('envoieidfichier',(data1) =>{
+        console.log(data1)
+        io.sockets.emit("idfichier",data1)
+    })
    // gere les utilisateurs connecte
    socket.on('envoieconnecte',(data1) =>{
-        console.log(data1)
+        console.log("entree: ",data1)
         io.sockets.emit("connecte",data1)
     })
    //gere la deconnection
@@ -394,26 +252,12 @@ io.on('connection', function (socket) {
         console.log(data1)
         io.sockets.emit("deconnecte",data1)
     })
-      //gere evoie message
+    //gere evoie message
     
-      socket.on('envoiereceivermessage',(data1) =>{
+    socket.on('envoiereceivermessage',(data1) =>{
         console.log(data1)
         io.sockets.emit("receivermessage",data1)
     })
-
-    socket.on('envoieurmessage',(data1) =>{
-      console.log("sender",data1)
-      io.sockets.emit("envoieur:",data1)
-  }) 
-    socket.on('messagelocal',(data1) =>{
-      console.log(data1)
-      io.sockets.emit("message",data1)
-  })
-  socket.on('photolocal',(data1) =>{
-    console.log(data1)
-    io.sockets.emit("local",data1)
-  })
-  
       //gere evoie notification
     socket.on('envoieconf',(data1) =>{
         console.log(data1)
@@ -448,7 +292,7 @@ io.on('connection', function (socket) {
     })
        socket.on('acceptappeler',(data1) =>{
         clients=2
-        console.log("accepter",data1)
+        console.log(clients)
         io.sockets.emit("appe",data1)
     })
         socket.on('couperappel',(data1) =>{
@@ -466,7 +310,7 @@ io.on('connection', function (socket) {
         io.sockets.emit("stream",data1)
     })
        socket.on("NewClient", function () {
-                                        if (clients >0) {
+                                        // if (clients >0) {
                                             // if (clients ==1) {
                                                 this.emit('CreatePeer')
                                                 
@@ -475,7 +319,7 @@ io.on('connection', function (socket) {
                                             //     this.emit('CreatePeer2')
                                                 
                                             // }
-                                        }
+                                        // }
                                        
                                             
                                     })
@@ -522,106 +366,49 @@ io.on('connection', function (socket) {
 
 
 
-// gere wysiwing liste
-app.post('/wysiwing', (req, res, next) => {
-    
-  wysiwing.find().then(cht=>{
-     var id;
-       if(cht.length==0){
-         id=0
-       }
-       else{
-         id=cht[cht.length-1]._id+1
-       }
-       console.log(req.files);
- 
-
-
-       let chatMessage = new wysiwing({ 
-     _id:id,
-     wysiwing:req.body. wysiwing,
-     image:req.body. image
-   });
-   console.log(chatMessage)
-   chatMessage.save().then(re=> res.send(re));
-     })
-
-})
-app.get('/wysiwing', (req, res, next) => {
-  
-  wysiwing.find().then(cht=>{
-     res.send(cht)
-     })
-
-})
-//  recuperer un liste
-app.get('/wysiwing/:_id', (req, res, next) => {
-  
-  wysiwing.findById(req.params._id).then(cht=>{
-     res.send(cht)
-     })
-
-})
 
 //uploade image 
- 
-  //uploade image 
   app.post('/upload', (req, res, next) => {
     
-    Photo.find().then(cht=>{
-       var id;
-         if(cht.length==0){
-           id=0
-         }
-         else{
-           id=cht[cht.length-1]._id+1
-         }
-         console.log(req.files);
-   let imageFile = req.files.image;
+     Conference.find().then(cht=>{
+        var id;
+          if(cht.length==0){
+            id=0
+          }
+          else{
+            id=cht[cht.length-1]._id+1
+          }
+          console.log(req.files);
+    let imageFile = req.files.image;
 
-   imageFile.mv(`${__dirname}/public/upload/${id}.jpg`, function(err) {
-     if (err) {
-       return res.status(500).send(err);
-     }
- });
-         let chatMessage = new Photo({ 
-       _id:id,
-      image:id+".jpg"
-     });
-     console.log(chatMessage)
-     chatMessage.save().then(re=> res.send(re));
-       })
+    imageFile.mv(`${__dirname}/public/upload/${id}.jpg`, function(err) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+  });
+          let chatMessage = new Conference({ 
+        _id:id,
+       image:id+".jpg"
+      });
+      console.log(chatMessage)
+      chatMessage.save().then(re=> res.send(re));
+        })
 
- })
+  })
+  
 
 //  construction route src localhost img 
-Photo.find().then(produit=>{
-       for(let i=0;i<produit.length;i++){
-         app.get("/public/"+produit[i].image,(req,res)=>{
-             var fs = require("fs")
-            console.log( "./public/"+produit[i].image);
-            
-            var image= fs.readFileSync("./public/upload/"+produit[i].image)
-            res.send(image)
-         })
-       }
-   })
-//  recuperer tous les images   
- app.get("/photo",(req,res)=>{
-           Photo.find().then(image=>{
-            res.send(image)
-         }) 
-       Photo.find().then(produit=>{
-       for(let i=0;i<produit.length;i++){
-         app.get("/public/"+produit[i].image,(req,res)=>{
-            var fs = require("fs")
-            var image= fs.readFileSync("./public/upload/"+produit[i].image)
-            res.send(image)
-         })
-       }
-   })        
-}) 
-
+ Conference.find().then(produit=>{
+        for(let i=0;i<produit.length;i++){
+          app.get("/public/"+produit[i].image,(req,res)=>{
+              var fs = require("fs")
+             console.log( "./public/"+produit[i].image);
+             
+             var image= fs.readFileSync("./public/upload/"+produit[i].image)
+             res.send(image)
+          })
+        }
+    })
  app.post('/uploadphotochat/:_id', (req, res, next) => {
     
        User.findOne({_id:req.params._id}).then(sende=>{
@@ -650,7 +437,9 @@ Photo.find().then(produit=>{
                           receiver:req.body.receiver,
                           image:id+".jpg"
                         })
+                        if( req.body.receiver){
                           chat.save().then(mess=>res.send(mess))
+                        }
                              })
                          
                        })
@@ -714,8 +503,6 @@ Video.find().then(produit=>{
        }
    })        
 }) 
-
-
 
 //uploade Fichier
 
@@ -838,62 +625,6 @@ Fichier.find().then(produit=>{
         
 }) 
 
-
-
-// RETOUCHE D'image
-app.post('/retouche', (req, res, next) => {
-    
-    
-  let imageFile = req.files.image;
-console.log(imageFile)
-  imageFile.mv(`${__dirname}/public/retouche/0.jpg`, function(err) {
-    if (err) {
-       console.log(err);
-      return res.status(500).send(err);
-    }
-});
-const photo=new Photo({
-    image:"http://localhost:4000/retouche"
-})
-
-res.send(photo)
-      
-})
-app.get('/retouche', (req, res, next) => {
-   var fs= require("fs")
-   var image=fs.readFileSync("./public/retouche/0.jpg")
-   res.send(image)
- })
-
-// gere Gallerie
-app.post('/gallerie', (req, res, next) => {
-   
- Gallerie.find().then(cht=>{
-    var id;
-      if(cht.length==0){
-        id=0
-      }
-      else{
-        id=cht[cht.length-1]._id+1
-      }
-      console.log(req.files);
-
-
-
-      let gallerie = new Gallerie({ 
-    _id:id,
-    
-    image:req.body. image
-  });
-  gallerie.save().then(re=> res.send(re));
-    })
-
-})
-app.get("/gallerie",function(req,res){
-  Gallerie.find().then(function(photo){
-    res.send(photo);
-  })
-})
 
 http.listen(port, () => {
   console.log("Running on Port: " + port);

@@ -7552,8 +7552,8 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
 
          
             socket.on("appe",function(response){
-                            CreateDiv()
-
+              console.log(response)
+              CreateDiv()
             let video = document.createElement('video')
             video.id = 'peerVideo'
             video.srcObject = stream
@@ -7561,8 +7561,28 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             document.querySelector('#peerDiv').appendChild(video)
             video.play()
             //wait for 1 sec
-            setTimeout(() => SendFilter(currentFilter), 1000)
-            document.querySelector(".coupappel").style.display="block"  
+            // setTimeout(() => SendFilter(currentFilter), 1000)
+            let couperappel = document.createElement("button")
+                couperappel.innerHTML = '<i class="fa fa-phone "></i>'
+                couperappel.className = "stop-apel"
+                
+                  
+                 document.querySelector(".commande-lors-apl").appendChild(couperappel)
+                 document.querySelector(".commande-lors-apl").style.display = "block"
+
+                //  solution a un ptt problem
+                 var stopAPbout =  document.querySelectorAll(".stop-apel")
+                 for(var i = 0; i <stopAPbout.length ;i++) { 
+                  stopAPbout[0].style.display= "none";
+                }
+                 
+                couperappel.addEventListener("click",function(e){
+                  e.preventDefault()
+                  socket.emit("couperappel",reponse)
+                  document.querySelector(".commande-lors-apl").style.display = "none";    
+               },false) 
+
+
             video.addEventListener('click', () => {
                 if (video.volume != 0)
                     video.volume = 0
@@ -7643,8 +7663,16 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
        
 
         function RemovePeer() {
-            document.getElementById("peerVideo").remove();
-            document.getElementById("muteText").remove();
+          let videopeer= document.querySelectorAll("#peerVideo");
+          let mute=document.querySelectorAll("#muteText");
+          for(var i=0;i<videopeer.length;i++){
+            for(var j=0;j<mute.length;j++){
+              videopeer[i].remove()
+              mute[j].remove()
+            }
+          }
+            // document.getElementById("peerVideo").remove();
+            // document.getElementById("muteText").remove();
           
         }
          socket.on("coupe",function(response){

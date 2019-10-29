@@ -1,0 +1,89 @@
+*,*::before,*::after
+{
+    box-sizing: border-box;
+}
+
+body
+{
+    font-family: sans-serif;
+}
+
+table
+{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td
+{
+    padding: 1Opx;
+    text-align: left;
+    border: solid 1px #ccc;
+}
+
+th
+{
+    background-color: #000;
+    color: #fff;
+}
+
+tr:nth-child(odd)
+{
+    background-color: #eee;
+}
+
+@media only screen and (max-width:700px)
+{
+    .table-responsive table,
+    .table-responsive thead,
+    .table-responsive tbody,
+    .table-responsive th,
+    .table-responsive tr,
+    .table-responsive td
+    {
+        display: block;
+    }
+
+    .table-responsive thead 
+    {
+        display: none;
+    }
+
+    .table-responsive td
+    {
+        padding-left: 170px;
+        position: relative;
+        margin-top: -1px; 
+        background: #fff;
+    }
+
+    .table-responsive td:nth-child(odd)
+    {
+        background-color: #eee;
+    }
+
+    .table-responsive td:before
+    {
+        content: attr(data-label);
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 160px;
+        bottom: 0px;
+        background-color: #000;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    .table-responsive tr 
+    {
+        margin-bottom: 1rem;
+        transition: 0.2s;
+    }
+    .table-responsive tr:hover 
+    {
+        background: rgb(170, 166, 166);
+    }
+}

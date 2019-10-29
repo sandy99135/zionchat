@@ -4,6 +4,7 @@ const connectdb = require("./../dbconnect");
 const Chat = require("./../models/Chat");
 const User = require("./../models/user");
 const Connecte = require("./../models/connecte");
+const Agent = require("./../models/agent");
 const app = express.Router();
 const cors = require('cors');
 const path = require('path');
@@ -41,8 +42,11 @@ app.use(express.static(__dirname + "/public"))
  app.get('/register', (req, res, next) => {
     res.redirect("/register.html")
   })
+ app.get('/agentregister', (req, res, next) => {
+    res.redirect("/agentregister.html")
+  })
 
-   app.post('/register', (req, res, next) => {
+ app.post('/register', (req, res, next) => {
     
     User.find().then(cht=>{
         var id;
@@ -69,6 +73,36 @@ app.use(express.static(__dirname + "/public"))
       })
 
   })
+
+  //  register pour les agents
+   app.post('/agentregister', (req, res, next) => {
+    
+    Agent.find().then(cht=>{
+        var id;
+          if(cht.length==0){
+            id=0
+          }
+          else{
+            id=cht[cht.length-1]._id+1
+          }
+     Agent.findOne({nom:req.body.nom}).then(user=>{
+          if(user){
+            res.send("cet utilisateur existe deja essayer un autre")
+          }else{
+             let chatMessage = new Agent({ 
+        _id:id,
+       nom: req.body.nom ,
+        password: req.body.password,
+      });
+      console.log(chatMessage)
+      chatMessage.save().then(re=> res.send(re));
+          }
+     })
+         
+      })
+
+  })
+
    let clients=0
    
    
@@ -90,7 +124,7 @@ app.use(express.static(__dirname + "/public"))
                           receiver:req.body.receiver,
                           message:req.body.message
                         })
-                        if(req.body.message && req.body.receiver){
+                        if(req.body.message ){
                           chat.save().then(mess=>res.send(mess))
                         }
                              })
