@@ -28,7 +28,7 @@ const Fichier = require("./models/fichier");
 
 const Connecte = require("./models/connecte");
 const connect = require("./dbconnect");
-const port = process.env.port||4000;
+const port = process.env.PORT||4000;
 var mess="";
 var snd=""
 //bodyparser middleware
@@ -48,6 +48,10 @@ app.use("/", chatRouter);
 //set the express.static middleware
 app.use(express.static(__dirname + "/public"));
 
+//
+app.get("/",function(req,res){
+  res.sendFile(__dirname + "/public/index.html")
+})
 
 
 //login client
