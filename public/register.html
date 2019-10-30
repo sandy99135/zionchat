@@ -123,7 +123,7 @@ background:#3594D2;
           data.append("nom", username.value );
           data.append("password", password.value )
           console.log(data)
-           fetch('http://localhost:4000/register', {
+           fetch('https://zioncall.herokuapp.com/register', {
                       method: 'POST',
                       headers : new Headers(),
                       body:data
