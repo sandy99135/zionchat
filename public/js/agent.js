@@ -37,7 +37,7 @@ etendre.addEventListener("click",function(e){
 //gere la deconnection
 deconnecter.addEventListener("click",function(e){
 	e.preventDefault()
-	fetch("http://localhost:4000/deconnectagent/"+localStorage.getItem("iduserconnecte")).then(function(reponse){
+	fetch("https://zioncall.herokuapp.com/"+localStorage.getItem("iduserconnecte")).then(function(reponse){
 	return reponse.json()
 }).then(function(disponible){
 	localStorage.removeItem("user")
@@ -49,7 +49,7 @@ deconnecter.addEventListener("click",function(e){
 	
 })
 //liste des agents disponible
-fetch("http://localhost:4000/connect").then(function(reponse){
+fetch("https://zioncall.herokuapp.com/connect").then(function(reponse){
 	return reponse.json()
 }).then(function(disponible){
 	console.log(disponible)
