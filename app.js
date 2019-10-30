@@ -223,9 +223,9 @@ io.on('connection', function (socket) {
     socket.on('envoitext',(data) =>{
       io.sockets.emit("text",{message:data})
   })
-  socket.on('envoicolor',(data) =>{
-      io.sockets.emit("color",{color:data})
-  })
+  //socket.on('envoicolor',(data) =>{
+    //  io.sockets.emit("color",{color:data})
+ // })
   socket.on('envoifont',(data) =>{
       io.sockets.emit("font",{font:data})
   })
