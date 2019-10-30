@@ -28,7 +28,7 @@ const Fichier = require("./models/fichier");
 
 const Connecte = require("./models/connecte");
 const connect = require("./dbconnect");
-const port = 4000;
+const port = process.env.port||4000;
 var mess="";
 var snd=""
 //bodyparser middleware
