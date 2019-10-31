@@ -226,9 +226,9 @@ io.on('connection', function (socket) {
   //socket.on('envoicolor',(data) =>{
     //  io.sockets.emit("color",{color:data})
  // })
-  socket.on('envoifont',(data) =>{
-      io.sockets.emit("font",{font:data})
-  })
+  //socket.on('envoifont',(data) =>{
+   //   io.sockets.emit("font",{font:data})
+ // })
   socket.on('envoiopacity',(data) =>{
       console.log(data)
       io.sockets.emit("opacity",{opacity:data})
