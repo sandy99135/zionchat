@@ -110,11 +110,38 @@ fetch("https://zioncall.herokuapp.com/disponible").then(function(reponse){
 				mute[j].remove()  
 			}
 		  }
-	   socket.on("coupe",function(response){
+ //recevoir un appel
+ socket.on("appel",function(response){
+	if(response==localStorage.getItem("user")){
+		reponse.style.display="block"
+		socket.on("appeleur",function(ape){
+		appeleur.innerHTML=ape
+		repondre.addEventListener('click',function(e) {
+		e.preventDefault()
+		//accepter l' appel
+		socket.emit("acceptappeler",ape)
+		 //Couper un appel
+		 couperappel.addEventListener("click",function(e){
+			 e.preventDefault()
+			 RemovePeer()
+			 socket.emit("couperappel",ape)
+			 document.querySelector(".commande-lors-apl").style.display = "none";    
+		 },false) 
+				 }) 
+		refuser.addEventListener("click",function(e){
+		e.preventDefault()
+		reponse.style.display="none"
+		socket.emit("refuserappel",ape)
+	  },false)
+		  })
+
+	   }
+	})
+socket.on("coupe",function(response){
 						  
-							   if(response==localStorage.getItem("user")){
-								RemovePeer()
-								document.querySelector(".commande-lors-apl").style.display="none"
-							   }  
+	if(response==localStorage.getItem("user")){
+		RemovePeer()
+		document.querySelector(".commande-lors-apl").style.display="none"
+		}  
   
-					})
+	})
