@@ -12,6 +12,7 @@ let repondre=document.querySelector("#Repondre")
 let connecté= document.querySelector(".liste-connecter")
 let refuser=document.querySelector("#refuser")
 let annulerappel=document.querySelector("#annulerappel")
+var couperappel =  document.querySelector(".stop-apel")
 var etendu=true;
 nomconnecte.innerHTML=localStorage.getItem("user")
 //option pour l utilisateur
@@ -37,7 +38,7 @@ etendre.addEventListener("click",function(e){
 //gere la deconnection
 deconnecter.addEventListener("click",function(e){
 	e.preventDefault()
-	fetch("https://zioncall.herokuapp.com/"+localStorage.getItem("iduserconnecte")).then(function(reponse){
+	fetch("https://zioncall.herokuapp.com/deconnect/"+localStorage.getItem("iduserconnecte")).then(function(reponse){
 	return reponse.json()
 }).then(function(disponible){
 	localStorage.removeItem("user")
@@ -72,7 +73,12 @@ fetch("https://zioncall.herokuapp.com/disponible").then(function(reponse){
                    personne.innerHTML="Appel vers " +data.nom
                    socket.emit("requeteappel",data.nom)
                    socket.emit("requeteappeler",localStorage.getItem("user"))
-                  
+                   couperappel.addEventListener("click",function(e){
+					e.preventDefault()
+					RemovePeer()
+					socket.emit("couperappel",data.nom)
+					document.querySelector(".commande-lors-apl").style.display = "none";    
+				},false)
                  })
 		// Annuler l' appel
                  annulerappel.addEventListener("click",function(e){
@@ -93,4 +99,22 @@ fetch("https://zioncall.herokuapp.com/disponible").then(function(reponse){
             }
          })
   
-    
+		//couper le video
+		 function RemovePeer() {
+			let videopeer= document.querySelectorAll("#peerVideo");
+			let mute=document.querySelectorAll("#muteText"); 
+			for(var i=0;i<videopeer.length;i++){
+				videopeer[i].remove()
+			  }
+			  for(var j=0;j<mute.length;j++){
+				mute[j].remove()  
+			}
+		  }
+	   socket.on("coupe",function(response){
+						  
+							   if(response==localStorage.getItem("user")){
+								RemovePeer()
+								document.querySelector(".commande-lors-apl").style.display="none"
+							   }  
+  
+					})
