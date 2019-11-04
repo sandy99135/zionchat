@@ -39,7 +39,7 @@ etendre.addEventListener("click",function(e){
 //gere la deconnection
 deconnecter.addEventListener("click",function(e){
 	e.preventDefault()
-	fetch("https://zioncall.herokuapp.com/deconnectagent/"+localStorage.getItem("iduserconnecte")).then(function(reponse){
+	fetch(""https://zioncall.herokuapp.com/deconnectagent/"+localStorage.getItem("iduserconnecte")).then(function(reponse){
 	return reponse.json()
 }).then(function(disponible){
 	localStorage.removeItem("user")
@@ -58,14 +58,36 @@ fetch("https://zioncall.herokuapp.com/connect").then(function(reponse){
 	disponible.map(function(data){
 		var listAgent= document.createElement("div");
 		var nomAgent= document.createElement("span");
-		var appelerAgent= document.createElement("i");
+		var appelerClient= document.createElement("i");
 		listAgent.style.borderBottom="1px solid silver"
 		nomAgent.innerHTML=data.nom
 		listAgent.appendChild(nomAgent)
-		appelerAgent.className="fa fa-phone"
-		appelerAgent.style.color="green"
-		appelerAgent.style.marginLeft="200px"
-		listAgent.appendChild(appelerAgent)
+		appelerClient.className="fa fa-phone"
+		appelerClient.style.color="green"
+		appelerClient.style.cursor="pointer"
+		appelerClient.style.marginLeft="200px"
+		//appeler un agent 
+		appelerClient.addEventListener('click',function(e) {
+			e.preventDefault()
+			appel.style.display="block"
+			personne.innerHTML="Appel vers " +data.nom
+			socket.emit("requeteappel",data.nom)
+			socket.emit("requeteappeler",localStorage.getItem("user"))
+			couperappel.addEventListener("click",function(e){
+			 e.preventDefault()
+			 RemovePeer()
+			 socket.emit("couperappel",data.nom)
+			 document.querySelector(".commande-lors-apl").style.display = "none";    
+		 },false)
+		  })
+		  // Annuler l' appel
+		  annulerappel.addEventListener("click",function(e){
+			e.preventDefault()
+			appel.style.display="none"
+			socket.emit("annulerappel",data.nom)
+			},false) 
+
+		listAgent.appendChild(appelerClient)
 		listConnecte.appendChild(listAgent)
 
 	})
@@ -104,6 +126,13 @@ fetch("https://zioncall.herokuapp.com/connect").then(function(reponse){
          reponse.style.display="none"
          
        }
+	 })
+
+	 // Refuser appel  
+	 socket.on("refuser",function(refus){
+		if(refus===localStorage.getItem("user")){
+		 appel.style.display="none"
+		}
 	 })
 	 
 	//couper le video et le son 
