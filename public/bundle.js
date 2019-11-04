@@ -7557,6 +7557,14 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             video.setAttribute('class', 'embed-responsive-item')
             document.querySelector('#peerDiv').appendChild(video)
             video.play()
+            let videopeer= document.querySelectorAll("#peerVideo");
+            let mute=document.querySelectorAll("#muteText"); 
+            for(var i=0;i<videopeer.length-1;i++){
+            videopeer[i].remove()
+            }
+            for(var j=0;j<mute.length-1;j++){
+            mute[j].remove()  
+          }
             //wait for 1 sec
             // setTimeout(() => SendFilter(currentFilter), 1000)
             // let couperappel = document.querySelectorAll(".stop-apel")
