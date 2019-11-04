@@ -12,6 +12,8 @@ let repondre=document.querySelector("#Repondre")
 let connecté= document.querySelector(".liste-connecter")
 let refuser=document.querySelector("#refuser")
 let annulerappel=document.querySelector("#annulerappel")
+var couperappel =  document.querySelector(".stop-apel")
+let commandeappel= document.querySelector(".commande-lors-apl")
 var etendu=true;
 nomconnecte.innerHTML=localStorage.getItem("user")
 //option pour l utilisateur
@@ -37,7 +39,7 @@ etendre.addEventListener("click",function(e){
 //gere la deconnection
 deconnecter.addEventListener("click",function(e){
 	e.preventDefault()
-	fetch("https://zioncall.herokuapp.com/"+localStorage.getItem("iduserconnecte")).then(function(reponse){
+	fetch("https://zioncall.herokuapp.com/deconnectagent/"+localStorage.getItem("iduserconnecte")).then(function(reponse){
 	return reponse.json()
 }).then(function(disponible){
 	localStorage.removeItem("user")
@@ -78,11 +80,15 @@ fetch("https://zioncall.herokuapp.com/connect").then(function(reponse){
            repondre.addEventListener('click',function(e) {
            e.preventDefault()
            //accepter l' appel
-           socket.emit("acceptappeler",ape)
-           //couper l' appel
-        //   
-            
-              }) 
+		   socket.emit("acceptappeler",ape)
+            //Couper un appel
+			couperappel.addEventListener("click",function(e){
+				e.preventDefault()
+				RemovePeer()
+				socket.emit("couperappel",ape)
+				document.querySelector(".commande-lors-apl").style.display = "none";    
+			},false) 
+					}) 
            refuser.addEventListener("click",function(e){
            e.preventDefault()
            reponse.style.display="none"
@@ -98,7 +104,27 @@ fetch("https://zioncall.herokuapp.com/connect").then(function(reponse){
          reponse.style.display="none"
          
        }
-     })
+	 })
+	 
+	//couper le video et le son 
+ 	function RemovePeer() {
+          let videopeer= document.querySelectorAll("#peerVideo");
+		  let mute=document.querySelectorAll("#muteText"); 
+		  for(var i=0;i<videopeer.length;i++){
+			videopeer[i].remove()
+		  }
+		  for(var j=0;j<mute.length;j++){
+			mute[j].remove()  
+		}
+       	
+        }
+     socket.on("coupe",function(response){
+                        
+                             if(response==localStorage.getItem("user")){
+                              RemovePeer()
+							  document.querySelector(".commande-lors-apl").style.display="none"
+							 }  
 
+                  })
 
  
