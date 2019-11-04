@@ -7548,9 +7548,6 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             event.preventDefault
         })
   function CreateVideo(stream) {
-
-
-         
             socket.on("appe",function(response){
               console.log(response)
               CreateDiv()
@@ -7562,25 +7559,26 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             video.play()
             //wait for 1 sec
             // setTimeout(() => SendFilter(currentFilter), 1000)
-            let couperappel = document.createElement("button")
-                couperappel.innerHTML = '<i class="fa fa-phone "></i>'
-                couperappel.className = "stop-apel"
+            // let couperappel = document.querySelectorAll(".stop-apel")
+            //     couperappel.innerHTML = '<i class="fa fa-phone "></i>'
+            //     couperappel.className = "stop-apel"
                 
                   
-                 document.querySelector(".commande-lors-apl").appendChild(couperappel)
+            //      document.querySelector(".commande-lors-apl").appendChild(couperappel)
                  document.querySelector(".commande-lors-apl").style.display = "block"
 
                 //  solution a un ptt problem
-                 var stopAPbout =  document.querySelectorAll(".stop-apel")
-                 for(var i = 0; i <stopAPbout.length ;i++) { 
-                  stopAPbout[0].style.display= "none";
-                }
+                //  var couperappel =  document.querySelectorAll(".stop-apel")
+                //  for(var i = 0; i <couperappel.length ;i++) { 
+                //   // stopAPbout[0].style.display= "none";
+                //   couperappel[i].addEventListener("click",function(e){
+                //     e.preventDefault()
+                //     socket.emit("couperappel",reponse)
+                //     document.querySelector(".commande-lors-apl").style.display = "none";    
+                //  },false) 
+                // }
                  
-                couperappel.addEventListener("click",function(e){
-                  e.preventDefault()
-                  socket.emit("couperappel",reponse)
-                  document.querySelector(".commande-lors-apl").style.display = "none";    
-               },false) 
+                
 
 
             video.addEventListener('click', () => {
@@ -7662,28 +7660,28 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
         }
        
 
-        function RemovePeer() {
-          let videopeer= document.querySelectorAll("#peerVideo");
-          let mute=document.querySelectorAll("#muteText");
-          for(var i=0;i<videopeer.length;i++){
-            for(var j=0;j<mute.length;j++){
-              videopeer[i].remove()
-              mute[j].remove()
-            }
-          }
-            // document.getElementById("peerVideo").remove();
-            // document.getElementById("muteText").remove();
+        // function RemovePeer() {
+        //   let videopeer= document.querySelectorAll("#peerVideo");
+        //   let mute=document.querySelectorAll("#muteText");
+        //   for(var i=0;i<videopeer.length;i++){
+        //     for(var j=0;j<mute.length;j++){
+        //       videopeer[i].remove()
+        //       mute[j].remove()
+        //     }
+        //   }
+        //     // document.getElementById("peerVideo").remove();
+        //     // document.getElementById("muteText").remove();
           
-        }
-         socket.on("coupe",function(response){
+        // }
+        //  socket.on("coupe",function(response){
                         
-                             //if(response==localStorage.getItem("user")){
-                              RemovePeer()
-                              document.querySelector(".coupappel").style.display="none"  
+        //                      //if(response==localStorage.getItem("user")){
+        //                       RemovePeer()
+        //                       document.querySelector(".coupappel").style.display="none"  
 
-                  //}
+        //           //}
                           
-                            })
+        //                     })
         socket.on('BackOffer', FrontAnswer)
         // socket.on('BackOffer2', FrontAnswer2)
         socket.on('BackAnswer', SignalAnswer)
