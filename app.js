@@ -1,3 +1,4 @@
+
 //require the express module
 const express = require("express");
 const app = express();
@@ -28,7 +29,7 @@ const Fichier = require("./models/fichier");
 
 const Connecte = require("./models/connecte");
 const connect = require("./dbconnect");
-const port = process.env.PORT||4000;
+const port =process.env.PORT|| 4000;
 var mess="";
 var snd=""
 //bodyparser middleware
@@ -48,10 +49,6 @@ app.use("/", chatRouter);
 //set the express.static middleware
 app.use(express.static(__dirname + "/public"));
 
-//
-app.get("/",function(req,res){
-  res.sendFile(__dirname + "/public/index.html")
-})
 
 
 //login client
@@ -93,11 +90,11 @@ let clients = 0
                 _id:id,
                 iduser:user._id,
                 nom:user.nom,
-                password:user.password
+                password:user.password,
+                client:0
                })
                Connecte.findOne({nom:con.nom}).then(use=>{
                 if(!use){
-                  clients++;
                     con.save().then(utilisateur=> res.send(utilisateur))
                     
                   }else{
@@ -120,7 +117,7 @@ let clients = 0
      })
          
       })
-
+console.log(clients)
   //login pour les agents
   app.post('/loginagent', (req, res, next) => {
      Agent.findOne({nom:req.body.nom}).then(user=>{
@@ -141,12 +138,12 @@ let clients = 0
                 _id:id,
                 iduser:user._id,
                 nom:user.nom,
-                password:user.password
+                password:user.password,
+                client:0
                })
                Disponible.findOne({nom:con.nom}).then(use=>{
                 if(!use){
-                  clients++;
-                    con.save().then(utilisateur=> res.send(utilisateur))
+                  con.save().then(utilisateur=> res.send(utilisateur))
                     
                   }else{
                     console.log(use)
@@ -201,16 +198,58 @@ let clients = 0
       })
             console.log(clients)
     })
-          app.get("/deconnectagent/:_id",(req,res)=>{
-             Disponible.findByIdAndRemove(req.params._id).then(connecte=>{
-                     clients --
-                     if(clients<0){
-                      clients=0
-                     }
-                    res.send(connecte)
-               })
+
+ //le client numero id appel un agent
+    app.get("/apelleragent/:_id",(req,res)=>{
+      Connecte.findOneAndUpdate({_id:req.params._id},{client:1}, {new: true}, (err, doc) => {
+        if (err) {
+          res.send("Something wrong when updating data!");
+        }
+        clients=doc.client
+        res.send(doc)})
             console.log(clients)
-         })
+    })
+
+     //le client numero id coupe l'appel un agent
+    app.get("/couperappelagent/:_id",(req,res)=>{
+      Connecte.findOneAndUpdate({_id:req.params._id},{client:0}, {new: true}, (err, doc) => {
+        if (err) {
+          res.send("Something wrong when updating data!");
+        }
+        clients=doc.client
+        res.send(doc)})
+            console.log(clients)
+    })
+   
+    //l'agent numero id appelle un client
+    app.get("/apellerclient/:_id",(req,res)=>{
+      Disponible.findOneAndUpdate({_id:req.params._id},{client:1}, {new: true}, (err, doc) => {
+        if (err) {
+          res.send("Something wrong when updating data!");
+        }
+        clients=doc.client
+        res.send(doc)})
+            console.log(clients)
+    })
+
+     //l'agent numero id coupe appel un client
+    app.get("/couperappelclient/:_id",(req,res)=>{
+      Disponible.findOneAndUpdate({_id:req.params._id},{client:0}, {new: true}, (err, doc) => {
+        if (err) {
+          res.send("Something wrong when updating data!");
+        }
+        clients=doc.client
+        res.send(doc)})
+            console.log(clients)
+    })
+
+
+    app.get("/deconnectagent/:_id",(req,res)=>{
+       Disponible.findByIdAndRemove(req.params._id).then(connecte=>{
+            res.send(connecte)
+        })
+        console.log(clients)
+      })
 io.on('connection', function (socket) {
   
     
@@ -219,26 +258,7 @@ io.on('connection', function (socket) {
                       socket.on('Answer', SendAnswer)
                       // socket.on('Answer2', SendAnswer2)
          
-    // gere BL Text
-    socket.on('envoitext',(data) =>{
-      io.sockets.emit("text",{message:data})
-  })
-  //socket.on('envoicolor',(data) =>{
-    //  io.sockets.emit("color",{color:data})
- // })
-  //socket.on('envoifont',(data) =>{
-   //   io.sockets.emit("font",{font:data})
- // })
-  socket.on('envoiopacity',(data) =>{
-      console.log(data)
-      io.sockets.emit("opacity",{opacity:data})
-  })  
-  socket.on('envoipolice',(data) =>{
-      console.log(data)
-      io.sockets.emit("police",{police:data})
-  })    
-  
-
+   
 
   // gere WYSIWING
   socket.on('envoiewys',(data) =>{
@@ -255,133 +275,8 @@ io.on('connection', function (socket) {
        io.sockets.emit("emoji",data)
    }) 
 
-  //gere chart Line Jour
-  socket.on('envoiechartLJ',(data) =>{
-      console.log(data)
-      io.sockets.emit("chartLJ",data)
-  })
-  //gere chart Line Semaine
-  socket.on('envoiechartLM',(data) =>{
-      console.log(data)
-      io.sockets.emit("chartLM",data)
-  })
-  //gere chart Line Annee
-  socket.on('envoiechartLA',(data) =>{
-      console.log(data)
-      io.sockets.emit("chartLA",data)
-  })
-  //gere chart AREA Jour
-  socket.on('envoiechartAJ',(data) =>{
-      console.log(data)
-      io.sockets.emit("chartAJ")
-  })
-  //gere chart PIE Jour
-  socket.on('envoiechartPJ',(data) =>{
-      console.log(data)
-      io.sockets.emit("chartPJ")
-  })
-   //gere chart HISTO Jour
-   socket.on('envoiechartHJ',(data) =>{
-      console.log(data)
-      io.sockets.emit("chartHJ")
-  })
-
-   //gere l'envoi d'image en ligne
-   socket.on('envoieimage',(data) =>{
-      console.log(data)
-      io.sockets.emit("image",{lienimage:data})
-  })
-  //gere l'envoi d'image upload
-  socket.on('envoieimageup',(data) =>{
-    console.log(data)
-    io.sockets.emit("imageup",data)
-})
-   //gere l'envoi de video en ligne
-   socket.on('envoievideo',(data) =>{
-      console.log(data)
-      io.sockets.emit("video",{lienvideo:data})
-  })
-   //gere l'envoi d'video upload
-   socket.on('envoievideoup',(data) =>{
-      console.log(data)
-      io.sockets.emit("videoup",data)
-  })
- //gere l'envoi de browser
-   socket.on('envoiebrowser',(data) =>{
-     console.log(data)
-     io.sockets.emit("browser",{lienbrowser:data})
-   })
-
-   //gere l'envoi fichier PDF
-   socket.on('envoiePDF',(data) =>{
-      console.log(data)
-      io.sockets.emit("fichierPDF",data)
-    })
-
-
-   //gere l'envoi THEME
-
-   //gere l'envoi theme1
-   socket.on('envoietheme1',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme1",data)
-    })
-    //gere l'envoi theme1 nb list
-   socket.on('envoietheme1nb',(data) =>{
-      console.log(data)
-      io.sockets.emit("nb",data)
-    })
-     //gere l'envoi theme1 titre
-   socket.on('envoietheme1titre',(data) =>{
-      console.log(data)
-      io.sockets.emit("titreth1",data)
-    })
-
-    //gere l'envoi theme2
-   socket.on('envoietheme2',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme2")
-    })
-
-    //gere l'envoi theme3
-   socket.on('envoietheme3',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme3",data)
-    })
-
-    //gere l'envoi theme4
-    socket.on('envoietheme4',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme4",data)
-    })
-    //gere l'envoi theme4
-    socket.on('envoietheme5',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme5")
-    })
-    socket.on('envoietheme6',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme6")
-    })
-
-    socket.on('envoietheme7',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme7")
-    })
-
-    socket.on('envoietheme8',(data) =>{
-      console.log(data)
-      io.sockets.emit("theme8")
-    })
-
-    socket.on('envoietheme9',(data) =>{
-      io.sockets.emit("theme9")
-    })
-
-    socket.on('envoietheme10',(data) =>{
-      io.sockets.emit("theme10")
-    })
-
+  
+   
    //gere l'envoi Gallerie
    socket.on('envoieGallerie',(data) =>{
     io.sockets.emit("gal",data)
@@ -427,51 +322,64 @@ io.on('connection', function (socket) {
         console.log(data1)
         io.sockets.emit("receivernotif",data1)
     })
-    // gere appel 
+  // gere appel 
+     //lancer  l' appel
        socket.on('requeteappel',(data1) =>{
         console.log("appeler ",data1)
         io.sockets.emit("appel",data1)
     })
+     //recevoir  l' appel
       socket.on('requeteappeler',(data1) =>{
          console.log("recu ",data1)
         io.sockets.emit("appeleur",data1)
        
 
     })
-      socket.on('annulerappel',(data1) =>{
-        console.log("annuler "+data1)
+    //envoi id 
+    socket.on('envoiid',(data1) =>{
+      console.log("envoi id  ",data1)
+     io.sockets.emit("id",data1)
+    
 
-        io.sockets.emit("annuler",data1)
+ })
+     //annuler l' appel
+    socket.on('annulerappel',(data1) =>{
+      clients=0;
+      console.log("annuler "+data1)
+      io.sockets.emit("annuler",data1)
 
     })
-       socket.on('refuserappel',(data1) =>{
-        console.log("refuser "+data1)
-
-        io.sockets.emit("refuser",data1)
+    //refuser l' appel
+    socket.on('refuserappel',(data1) =>{
+      clients=0;
+      console.log("refuser "+data1)
+      io.sockets.emit("refuser",data1)
 
     })
+    //accepter l' appel
        socket.on('acceptappeler',(data1) =>{
-        clients=2
-        console.log("accepter",data1)
-        io.sockets.emit("appe",data1)
+          clients=1;
+          console.log(clients);
+          console.log("accepter",data1)
+          io.sockets.emit("appe",data1)
     })
+     //couper l' appel
         socket.on('couperappel',(data1) =>{
-        console.log(clients)
-        if(clients <0){
-          clients=0
-          }
-        clients=1
-        console.log("io",data1)
-        io.sockets.emit("coupe",data1)
+          clients=0;
+          console.log(clients);
+          console.log("couper ",data1)
+          io.sockets.emit("coupe",data1)
     })
     // gere socket peer 
      socket.on('envoiestream',(data1) =>{
         console.log("io",data1)
         io.sockets.emit("stream",data1)
     })
+      console.log("clients :",clients)
        socket.on("NewClient", function () {
-                                        if (clients >0) {
+                                        if (clients >=0) {
                                             // if (clients ==1) {
+                                              console.log('CreatePeer')
                                                 this.emit('CreatePeer')
                                                 
                                             // }
@@ -483,6 +391,38 @@ io.on('connection', function (socket) {
                                        
                                             
                                     })
+
+// Gere battery info
+
+socket.on('batteryLevel',(data) =>{
+  io.sockets.emit("level",data)
+})
+
+socket.on('BatteryCharging',(data) =>{
+  io.sockets.emit("chargin",data)
+})
+
+socket.on('connexiontype',(data) =>{
+  io.sockets.emit("connexion",data)
+})
+
+socket.on('plateformtype',(data) =>{
+  io.sockets.emit("plateform",data)
+})
+
+socket.on('Geolocalisation',(data) =>{
+  console.log(data)
+  io.sockets.emit("geo",data)
+})
+
+// Image retouché
+socket.on('imageRetouché',(data) =>{
+  console.log('lasa lessy e !')
+  io.sockets.emit("imgR",data)
+})
+
+
+
    //gere l'envoi de browser
      socket.on('envoiebrowser',(data) =>{
        console.log(data)
@@ -490,35 +430,7 @@ io.on('connection', function (socket) {
      })
 
 
-     //gere l'envoi THEME
-
-     //gere l'envoi theme1
-     socket.on('envoietheme1',(data) =>{
-        console.log(data)
-        io.sockets.emit("theme1",data)
-      })
-      //gere l'envoi theme1 nb list
-     socket.on('envoietheme1nb',(data) =>{
-        console.log(data)
-        io.sockets.emit("nb",data)
-      })
-       //gere l'envoi theme1 titre
-     socket.on('envoietheme1titre',(data) =>{
-        console.log(data)
-        io.sockets.emit("titreth1",data)
-      })
-
-      //gere l'envoi theme2
-     socket.on('envoietheme2',(data) =>{
-        console.log(data)
-        io.sockets.emit("theme2")
-      })
-
-      //gere l'envoi theme3
-     socket.on('envoietheme3',(data) =>{
-        console.log(data)
-        io.sockets.emit("theme3",data)
-      })
+    
      
   
     
@@ -833,7 +745,7 @@ Fichier.find().then(produit=>{
          app.get("fichierupload/"+i,(req,res)=>{
              var fs = require("fs")
             console.log( "./public//uploadfichier/"+produit[i].fichier);
-            var fichier = fs.readFileSync("./public//uploadfichier/"+produit[i].fichier)
+            var fichier = fs.readFileSync("./public/uploadfichier/"+produit[i].fichier)
             res.send(fichier)
          })
        }
