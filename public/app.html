@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Zion app</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="app/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="app/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="app/css/affichage/main.css" />
+    <link rel="stylesheet" href="app/css/zone.css" />
+    
+
+   
+    
+</head>
+<body onload="enableEditMode();">
+    <div class="contenaire">
+
+        <header>
+            <div class="info-client">
+                    <span><i class="fa fa-phone "></i></span>
+                    <span><i class="fa fa-user "></i></span>
+                    <span>Client Name</span>
+                    <span>In call</span>
+                    <span>02:40</span>
+            </div>
+            
+            <button>Disponible</button>
+            <button class ="bouton-liste"><i class="fa fa-list "></i></button>
+        </header>
+
+          <!-- Utilisateur-->
+          <div class="utilisateur">
+          
+            <div class="ut-tete">
+                 <span class="ut-user"><i class="fa fa-user "></i></span>
+                 <span class="nom-connecte"></span> 
+                 <div class="b-but">
+                         <span class="deconnecter but"><i class="fa fa-power-off "></i> </span> 
+                         <span class="but retour-utilisateur"><i class="fa fa-times "></i>  </span>
+                 </div>
+                  
+             </div>
+ 
+           <div class="liste-connecter">
+              <h3>Client  disponibles :</h3> 
+           </div>
+           
+         </div>
+
+    <!--requete appel -->
+    <div class="requete">
+        <div  class="reponse " >
+            <span class="img-user"><i class="fa fa-user "></i></span>
+                
+                <h2 class="appeleur" >TOKY</h2>
+                <button  id="Repondre"><i class="fa fa-phone "></i> </button>
+                <button  id="refuser"><i class="fa fa-phone refuser"></i> </button>
+                  
+        </div>
+
+        <div class="appel d-appeleur" >
+            <span class="img-user"><i class="fa fa-user "></i></span>
+            <h3 class="personne">Appeler vers TOKY</h3> 
+            <button  id="annulerappel"><i class="fa fa-phone "></i> </button>
+        </div>
+    </div>
+        
+
+         <!-- PICTURE picture -->
+
+
+        <div class="sub-contenaire">
+
+            <div class="cont-live">
+                <div class="outil-live">
+                    <span class=""> <input type="color" class="color color-picker" value="#171717" /></span> 
+                    <span class="no-draw circle bt"><i class="fa fa-circle-thin "></i></span>
+                           <!-- <span class="box-stroke-weight"> <input type="number" class=" stroke-weight" min ="1" max="100" value="3" /></span>  -->
+                    <span class="pencil bt"><i class="fa fa-pencil "></i></span>
+                    <!-- <span><i class="fa fa-eraser "></i></span> -->
+                    <span class="no-draw text bt"><i class="fa fa-bold" ></i> </span>
+                    <span class="no-draw marker bt"><i class="fa fa-map-marker" ></i></span>
+                    <span class="no-draw filtre bt"><i class="fa fa-adjust" ></i> </span>
+                    <span class="no-draw picture bt"><i class="fa fa-picture-o" ></i> </span>
+                    <span class="no-draw bt"><i class="fa fa-mouse-pointer" ></i></span>
+                    <br>
+                    <span class="clear"><i class="fa fa-refresh" ></i> </span>
+                    reset
+                    <span class="save-retouche"><i class="fa fa-check" ></i> </span>
+                    save
+                  
+                </div>
+                     
+                
+
+                <div class="sub-cont-live">
+                    <div class="block-video">
+
+                            <div class="block-video-live">
+                                <div class="Box-cont-live">
+                                    <div class="cont-video">
+             
+                                            <!-- <div class="video-fond"><img src="images/comference.png" alt=""> </div> -->
+                                
+                                            <div class="video-locale">
+                                                <div class="">
+                                                    <video class="" muted></video>
+                                                </div>
+                                            </div>
+                                            <div class="video-diffusion">
+                                                 <div id="peerDiv" class="">     <!-- recois la video creer -->
+                                                 </div>
+                                            </div>
+                                    </div>
+                                    <div class="retouche-zone"> <!-- tous les retouche --> 
+                                        <div class="box-img-aRetouché"></div>
+                                        <canvas class="canvas-zone"></canvas>
+                                        <div class="to-stop-drawing"> </div>
+                                    </div>
+                                    <button class="remove-retouche"><i class="fa fa-times" ></i></button> <!-- remove img retouche --> 
+                                </div>
+
+                                <div class="box-take"><!-- apercus capture photo simple --> 
+                                    <canvas class="take-photo"></canvas>
+                                </div>
+
+                                <div class="take-retouche"><!-- captureretouche --> 
+                                    <div class="box-take-retouche">
+                                        
+                                        <div class="box-apercus"></div>
+                                        <span class="envoyer-image">Envoyer</span>
+                                        <span>Gallerie</span>
+                                        <span class="down-retouche"><i class="fa fa-download" ></i></span>
+                                        <span class="retour-take">Retour</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="live-full"><img src="app/images/full.png" ></div>
+                            </div>
+
+                            <div class="video-option">
+                                  <div class="screen-option">
+                                      <div class="zoom">
+                                          <div class="box-zoom">
+                                                <span>Zoom</span>
+                                                <input type="range" min="0" max="100" value="0" class="range-zoom">
+                                                <span class="zoom-plus"><i class="fa fa-search-plus" ></i></span>
+                                          </div>
+                                          
+                                            
+                                      </div>
+                                       <div class="locale-screen">
+                                            <span class="local">Local</span>
+                                            <div class="locale-screen-size">
+                                                <div style="margin-right:30px;">
+                                                        <span><i class="fa fa-minus-square-o" ></i></span>
+                                                        <span><i class="fa fa-plus-square-o" ></i></span>
+                                                </div>
+                                                <span class="local-full"><img src="app/images/full.png" ></span>
+                                            </div>
+                                            
+                                       </div>
+                                  </div>
+                                  <div class="device-info"> 
+                                      <div class="device">
+                                           <div class="sub-div">Device</div> 
+                                           <div class="sub-div2">
+                                               <span class="plateform txt"> Android </span>
+                                               <span><i class="fa fa-tablet" ></i></span>
+                                           </div> 
+                                      </div>
+                                      <div class="network">
+                                           <div class="sub-div">Network</div>
+                                           <div class="sub-div2">
+                                                <span class="connexion-type txt">4G</span>
+                                                <span><i class="fa fa-wifi" ></i></span>
+                                           </div> 
+                                      </div>
+                                      <div class="batterie">
+                                           <div class="sub-div">Battery</div> 
+                                           <div class="sub-div2">
+                                                <span class=" charging ">  </span>
+                                                <span class="battery-level txt ">  </span>
+                                                <span><i class="fa fa-battery-half" ></i></span>
+                                           </div> 
+                                       </div>
+                                  </div>
+                                  <div class="video-manipulation">
+                                      <div class="video-reglage">
+                                            <span class="mute"><i class="fa fa-microphone-slash" ></i></span>
+                                            <span><i class="fa fa-volume-up" ></i></span>
+                                            <span><i class="fa fa-video-camera" ></i></span>
+                                            <span class="take-it"><i class="fa fa-camera" ></i></span>
+                                            <span class="pause"><i class="fa fa-pause" ></i></span>
+                                            <span class="play"><i class="fa fa-play" ></i></span>
+                                            <span><i class="fa fa-television" ></i></span>
+                                            <span class="record"><i class="fa fa-circle" ></i></span>
+                                            <span><i class="fa fa-lightbulb-o" ></i></span>
+                                            <span><i class="fa fa-crosshairs" ></i></span>
+                                            <span class="stop-appel"><i class="fa fa-phone " ></i></span>
+                                      </div>
+                                      <div class="video-affichage">
+                                            <!-- <span class="button-aff"><i class="fa fa-text-height"></i></span>
+                                            <span class="button-aff"><i class="fa fa-bar-chart "></i></span>
+                                            <span class="button-aff"><i class="fa fa-picture-o "></i></span> -->
+                                            
+                                      </div>
+                                      
+                                  </div>
+                            </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <!-- geo  -->
+            <div class="cont-info">
+                <div class="bl-info">
+                    <!-- gallerie et fiche client  -->
+                    <div class="box-gallerie">
+                             <button> <!-- <i class="fa fa-picture-o "></i>--> Gallerie </button> 
+                            <!-- <button><i class="fa fa-comment-o"></i> </button> -->
+                            <button><!-- <i class="fa fa-text-height"></i>--> Block note</button>
+                            <button><!--<i class="fa fa-list-alt"></i> --> Fiche</button>
+                            <button><!--<i class="fa fa-file-text"></i>--> Facturation</button>
+                            <button> doc</button>
+                            <!-- <button><i class="fa fa-bar-chart "></i></button> -->
+                    </div>
+                    <div class="box-geo">
+                        <div class="geo-en-tete">
+                            <span>Geolocalisation interactif</span>
+                            <span class="geo-option">
+                                    <div class="full-geo"><button class="compresse-geo"><i class="fa fa-compress"></i></button><button class="expand-geo"><i class="fa fa-expand"></i></button></div>
+                            </span>
+                        </div>
+                        <div class="affiche-geo">
+                            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcF0-d9KmfvAd21CvQGohjtzzkw14xtzA&callback=initMap"type="text/javascript"></script>
+                            <img src="app/images/map.jpg" alt="" srcset="">
+                            <div class="map"></div>
+                        </div>
+                        <div class="geo-adress">
+                            <span> Rue Ambohibao - Antananarivo</span>
+                            <div class="geo-option">
+                                <button><i class="fa fa-camera" ></i></button>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-capture-apercus">
+
+                    </div>
+
+                    
+                </div>
+            </div>
+
+
+            <!-- Box outil CIRCLE -PENCIL - TEXTE - FILTRE - MARKER -->
+
+            <!-- CIRCLE -->
+
+            <div class="bl-circle bl"> 
+                <div class="box-circle">
+                        <div class="titre-outil">CIRCLE  <button class="remove-bl-circle remove"><i class="fa fa-refresh "></i> </button> <button class="retour-bl-circle"><i class="fa fa-times "></i> </button></div>
+                        <div class="rg-circle">
+                            <label for="" class="block">Size :</label> <br>
+                            <span class="txt-circle-value val" >100px</span>
+                            <input type="range" min="0" max="400" value="100" class="txt-range-circle range">
+                        </div>
+                </div>
+            </div>
+
+
+             <!-- PENCIL -->
+
+             <div class="bl-pencil bl"> 
+                <div class="box-pencil">
+                        <div class="titre-outil">PENCIL <button class="remove-bl-pencil remove"><i class="fa fa-refresh "></i> </button> <button class="retour-bl-pencil"><i class="fa fa-times "></i> </button></div>
+                        <div class="rg-pencil">
+                            <label for="" class="block">Size :</label> <br>
+                            <span class="txt-pencil-value val" >3px</span>
+                            <input type="range" min="1" max="100" value="3" class="txt-range-pencil range stroke-weight">
+                        </div>
+                </div>
+            </div>
+
+            <!-- TEXT -->
+
+            <div class="bl-text bl">    
+                <div class="box-text">
+
+                <div class="titre-outil">TEXT <button class="remove-bl-text remove"><i class="fa fa-refresh "></i> </button> <button class="retour-bl-text"><i class="fa fa-times "></i> </button></div>
+                <div class="text-tete">
+                        <button class="ajout-txt" onclick="ajoutText();">Ajouter text</button> 
+                        <button class="txt-save">Save</button>
+                        
+                </div>
+
+                <div class="reglage-text-zn rg">
+                        <span >
+                              <button class="t-bold"><i class="fa fa-bold" ></i></button>
+                              <button class="t-italic"><i class="fa fa-italic" ></i></button>
+                              <button class="t-underline"><i class="fa fa-underline" ></i></button>
+                        </span>
+                        <span>
+                              <button class="a-left"><i class="fa fa-align-left" ></i></button>
+                              <button class="a-center"><i class="fa fa-align-center" ></i></button>
+                              <button class="a-right"><i class="fa fa-align-right" ></i></button>
+                        </span>
+                        <div class="text-font">
+                            
+                                <option value="sans-serif" style="font-family :sans-serif; " class="txt-ft">Sans-serif</option>
+                                <option value="Open sans" style="font-family :Open sans; "class="txt-ft">Open sans</option>
+                                <option value="verdana" style="font-family :verdana; "class="txt-ft">Verdana</option>
+                                <option value="Impact" style="font-family :Impact;" class="txt-ft">Impact</option>
+                                <option value="Arial" style="font-family :Arial; "class="txt-ft">Arial</option>
+                                <option value="Comic Sans MS" style="font-family :Comic Sans MS;" class="txt-ft">Comic Sans MS</option>
+                                <option value="Courier" style="font-family :Courier;" class="txt-ft">Courier</option>
+                                <option value="Georgia" style="font-family :Georgia;" class="txt-ft">Georgia</option>
+                                <option value="Tahoma" style="font-family :Tahoma;" class="txt-ft">Tahoma</option>
+                                <option value="Times New Roman" style="font-family :Times New Roman;" class="txt-ft">Times New Roman</option>
+                                <option value="Georgia" style="font-family :Georgia;" class="txt-ft">Georgia</option>
+                                <option value="Cambria" style="font-family :Cambria;" class="txt-ft">Cambria</option>
+                                
+                        
+                      
+                        </div>
+                        
+                    </div>
+                
+              
+               
+                <div>
+                     <label for="" class="block">Size :</label>
+                    <span class="txt-police-value val" >20pt</span>
+                    <input type="range" min="0" max="100" value="20" class="txt-range-police range">
+                </div>
+                <div>
+                    <label for="" class="block">opacity :</label>
+                    <span class="txt-transp-value val" >10</span>
+                    <input type="range" min="0" max="10" value="10" class="txt-range-transp range">
+                </div>
+                 <div>
+                        <label for=""class="block">Rotation :</label> 
+                        <span class="txt-rotation-value val">0</span> 
+                        <input type="range" min="0" max="360" value="0" class="txt-range-rotation range"> 
+                </div>
+                <div>
+                        <label for="">Color :</label>
+                        <input type="color" class="txt-color" style="margin-bottom:10px;" > <br>
+                </div>
+
+                <button class="txt-reglageReset">Reset</button>
+                <button class="txt-reglageSup"><i class="fa fa-trash-o" ></i></button>
+               
+              </div>
+            </div>
+
+
+            <!-- MARKER -->
+
+            <div class="bl-marker bl">
+                <div class="box-marker">
+
+                <div class="titre-outil t-o-stk">MARKER <button class="remove-bl-marker remove"><i class="fa fa-refresh "></i> </button> <button class="retour-bl-marker"><i class="fa fa-times "></i> </button></div> 
+         
+                   <div class ="box-icone av-box">
+                        <span class="ic"><i class="fa fa-map-marker" ></i></span> <span class="ic" ><i class="fa fa-arrow-left" ></i></span>
+                        <span class="ic" ><i class="fa fa-arrow-right" ></i></span> <span class="ic"><i class="fa fa-arrow-up" ></i></span> <span class="ic"><i class="fa fa-arrow-down" ></i></span>
+                        <span class="ic"><i class="fa fa-share" ></i></span> <span class="ic"><i class="fa fa-plus" ></i></span> <span class="ic"><i class="fa fa-minus" ></i></span>
+                        <span class="ic"><i class="fa fa-user" ></i></span> <span class="ic"><i class="fa fa-repeat" ></i></span>
+                        <span class="ic"><i class="fa fa-check" ></i></span> <span class="ic"><i class="fa fa-refresh" ></i></span>
+                        <span class="ic"><i class="fa fa-times" ></i></span> 
+                        <span class="ic"><i class="fa fa-glass" ></i></span> <span class="ic"><i class="fa fa-home" ></i></span>  
+                        <span class="ic"><i class="fa fa-music" ></i></span> <span class="ic"><i class="fa fa-file-o" ></i></span>
+                        <span class="ic"><i class="fa fa-search" ></i></span> <span class="ic"><i class="fa fa-clock-o" ></i></span>
+                        <span class="ic"><i class="fa fa-envelope-o" ></i></span> <span class="ic"><i class="fa fa-road" ></i></span>
+                        <span class="ic"><i class="fa fa-heart" ></i></span> <span class="ic"><i class="fa fa-download" ></i></span>
+                        <span class="ic"><i class="fa fa-star" ></i></span> <span class="ic"><i class="fa fa-star-o" ></i></span>
+                        <span class="ic"><i class="fa fa-arrow-circle-o-up" ></i></span> <span class="ic"><i class="fa fa-arrow-circle-o-down" ></i></span>
+                         <span class="ic"><i class="fa fa-inbox" ></i></span>
+                        <span class="ic"><i class="fa fa-film" ></i></span> <span class="ic"><i class="fa fa-play-circle-o" ></i></span>
+                        <span class="ic"> <i class="fa fa-th-large" ></i></span> <span class="ic"><i class="fa fa-list-alt" ></i></span>
+                        <span class="ic"><i class="fa fa-search-plus" ></i></span> <span class="ic"><i class="fa fa-lock" ></i></span>
+                        <span class="ic"><i class="fa fa-search-minus" ></i></span> <span class="ic"><i class="fa fa-flag" ></i></span>
+                        <span class="ic"><i class="fa fa-power-off" ></i></span> <span class="ic"><i class="fa fa-headphones" ></i></span>
+                        <span class="ic"><i class="fa fa-signal" ></i></span> <span class="ic"><i class="fa fa-volume-off" ></i></span>
+                        <span class="ic"><i class="fa fa-volume-down" ></i></span> <span class="ic"><i class="fa fa-volume-up" ></i></span>
+                        <span class="ic"><i class="fa fa-trash-o" ></i></span> <span class="ic"><i class="fa fa-cog" ></i></span>
+                        <span class="ic"><i class="fa fa-qrcode" ></i></span> <span class="ic"><i class="fa fa-barcode" ></i></span> <span class="ic"><i class="fa fa-tag" ></i></span>
+                        <span class="ic"><i class="fa fa-book" ></i></span> <span class="ic"><i class="fa fa-bookmark" ></i></span> <span class="ic"><i class="fa fa-camera" ></i></span>
+                        <span class="ic"><i class="fa fa-tint" ></i></span>
+                        <span class="ic"><i class="fa fa-video-camera" ></i></span> <span class="ic"><i class="fa fa-picture-o" ></i></span> 
+                        <span class="ic"><i class="fa fa-exclamation-circle" ></i></span> <span class="ic"><i class="fa fa-gift" ></i></span> <span class="ic"><i class="fa fa-fire" ></i></span>
+                        <span class="ic"><i class="fa fa-exclamation-triangle" ></i></span> <span class="ic"><i class="fa fa-plane" ></i></span> <span class="ic"><i class="fa fa-calendar" ></i></span>
+                        <span class="ic"><i class="fa fa-comment" ></i></span> <span class="ic"><i class="fa fa-shopping-cart" ></i></span> <span class="ic"><i class="fa fa-folder" ></i></span>
+                        <span class="ic"><i class="fa fa-bar-chart" ></i></span> <span class="ic"><i class="fa fa-twitter" ></i></span> <span class="ic"><i class="fa fa-facebook" ></i></span>
+                        <span class="ic"><i class="fa fa-key" ></i></span> <span class="ic"><i class="fa fa-thumbs-o-up" ></i></span>
+                </div>
+
+                <div class="reglage-sticker-zn">
+                    
+                            <label for="">Color :</label>
+                            <input type="color"  class="marker-color">
+                    
+                    <div>
+                            <label for=""class="block">Taille :</label> 
+                            <span class="marker-taille-value val">10</span> 
+                            <input type="range" min="0" max="100" value="10" class="marker-range-taille range"> 
+                     </div>
+                   <div>
+                        <label for="" class="block">Transparence :</label>
+                        <span class="marker-transp-value val" >10</span>
+                        <input type="range" min="0" max="10" value="10" class="marker-range-transpa range">
+                    </div>
+                    
+                    
+                    <div>
+                            <button class="marker-reglageReset">Reset</button>
+                            <button class="marker-reglageSup"><i class="fa fa-trash-o" ></i></button>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <!-- FILTRE -->
+
+            <div class=" bl-filtre bl">
+                <div class="box-filtre">
+                <div class="titre-outil">FILTRE <button class="remove-bl-filtre remove"><i class="fa fa-refresh "></i> </button> <button class="retour-bl-filtre"><i class="fa fa-times "></i> </button> </div>
+                <div class="sliders" id="sliders">
+                        <div class="singleSlider">
+                            <label for="slider1">Brightness</label>
+                            <div class="val" id="bright">100%</div>
+                            <input class="slider" id="slider1" type="range" min="0" max="500" value="100">
+                        </div>
+                        <div class="singleSlider">
+                            <label for="slider2">Contrast</label>
+                            <div class="val" id="contrast">100%</div>
+                            <input class="slider" id="slider2" type="range" min="0" max="500" value="100">
+                         </div>
+                        <div class="singleSlider">
+                            <label for="slider3">Saturate</label>
+                            <div class="val" id="saturate">100%</div>
+                            <input class="slider" id="slider3" type="range" min="0" max="500" value="100">
+                        </div>
+                        <div class="singleSlider">
+                            <label for="slider4">Grayscale</label>
+                            <div class="val" id="gray">0%</div>
+                            <input class="slider" id="slider4" type="range" min="0" max="100" value="0">
+                        </div>
+                        <div class="singleSlider">
+                             <label for="slider5">Invert</label>
+                            <div class="val" id="invert">0%</div>
+                            <input class="slider" id="slider5" type="range" min="0" max="100" value="0">
+                        </div>
+                        <div class="singleSlider">
+                            <label for="slider6">Hue rotate</label>
+                            <div class="val" id="hue">0%</div>
+                            <input class="slider" id="slider6" type="range" min="0" max="360" value="0">
+                        </div>
+                        <div class="singleSlider">
+                            <label for="slider7">Blur</label> <br>
+                            <div class="val" id="blur">0px</div>
+                            <input class="slider" id="slider7" type="range" min="0" max="20" value="0">
+                        </div>
+                        <div class="singleSlider">
+                            <label for="slider8">Opacity</label>
+                            <div class="val" id="s-opacity">100%</div>
+                            <input class="slider" id="slider8" type="range" min="0" max="100" value="0">
+                        </div>
+                        <div class="singleSlider">
+                            <label for="slider9">Sepia</label>
+                            <div class="val" id="sepia">0%</div>
+                            <input class="slider" id="slider9" type="range" min="0" max="100" value="0">
+                        </div>
+
+                        <!-- <button id="filtre-resetAll">reset</button> -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- PICTURE picture -->
+            <div class="bl-picture bl"> 
+                <div class="box-picture">
+                        <div class="titre-outil">IMAGE <button class="remove-bl-picture remove"><i class="fa fa-refresh "></i> </button> <button class="retour-bl-picture"><i class="fa fa-times "></i> </button></div>
+                        
+                        <div class="thumb-picture">
+                            <div class="">PARCOURIR <i class="fa fa-plus "></i> <input type="file"  class="file-picture"> </div>
+                            <div class="">GALLERIE <i class="fa fa-picture-o "></i></div>
+                            <div class="">LIEN <i class="fa fa-link "></i></div>
+                        </div>
+                </div>
+            </div>
+
+
+
+            
+
+           
+                <!-- WYSWING -->
+                <div class="BL-admin wyswing" >   
+                        <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>
+                        <div class="open-wys-liste">Liste  récent </div>
+                        <div class="BL-wyswing">
+                            <div class="cmd-wyswing">
+                                <button class ="btw" onclick="execCmd('bold');"><i class="fa fa-bold" ></i></button>
+                                <button class ="btw" onclick="execCmd('italic');"><i class="fa fa-italic" ></i></button>
+                                <button class ="btw" onclick="execCmd('underline');"><i class="fa fa-underline" ></i></button>
+                                <button class ="btw" onclick="execCmd('strikethrough');"><i class="fa fa-strikethrough" ></i></button>
+                                <button class ="btw" onclick="execCmd('justifyLeft');"><i class="fa fa-align-left" ></i></button>
+                                <button class ="btw" onclick="execCmd('justifyCenter');"><i class="fa fa-align-center" ></i></button>
+                                <button class ="btw" onclick="execCmd('justifyRight');"><i class="fa fa-align-right" ></i></button>
+                                <button class ="btw" onclick="execCmd('JustifyFull');"><i class="fa fa-align-justify" ></i></button>
+                                <button class ="btw" onclick="execCmd('cut');"><i class="fa fa-cut" ></i></button>
+                                <button class ="btw" onclick="execCmd('copy');"><i class="fa fa-copy" ></i></button>
+                                <button class ="btw" onclick="execCmd('indent');"><i class="fa fa-indent" ></i></button>
+                                <button class ="btw" onclick="execCmd('outdent');"><i class="fa fa-dedent" ></i></button>
+                                <button class ="btw" onclick="execCmd('subscript');"><i class="fa fa-subscript" ></i></button>
+                                <button class ="btw" onclick="execCmd('superscript');"><i class="fa fa-superscript" ></i></button>
+                                <button class ="btw" onclick="execCmd('undo');"><i class="fa fa-undo" ></i></button>
+                                <button class ="btw" onclick="execCmd('redo');"><i class="fa fa-repeat" ></i></button>
+                                <button class ="btw" onclick="execCmd('insertUnorderedList');"><i class="fa fa-list" ></i></button>
+                                <button class ="btw" onclick="execCmd('insertOrderedList');"><i class="fa fa-list-ol" ></i></button>
+                                <button class ="btw" onclick="execCmd('insertParagraph');"><i class="fa fa-paragraph" ></i></button>
+                                <button class ="btw" onclick="execCmd('SelectAll');">Select All</button>
+                                <button class ="btw" onclick="execCmd('insertHorizontalRule');">HR</button>
+                                <button class ="btw" onclick="execCmdWithArg('createLink',prompt('enter  URL' , 'http://'));"><i class="fa fa-link" ></i></button>
+                                <button class ="btw" onclick="execCmd('unlink');"><i class="fa fa-unlink" ></i></button>
+                                <!-- <button onclick="toggleSource();"><i class="fa fa-code" ></i></button> -->
+                                <!-- <button class ="btw" onclick="toggleEdit();">Toggle Edit</button> -->
+                                <br>
+                                <select onchange="execCmdWithArg('fontName',this.value);">
+                                        <option value="Arial">Arial</option>
+                                        <option value="Comic Sans MS">Comic Sans MS</option>
+                                        <option value="Courier">Courier</option>
+                                        <option value="Georgia">Georgia</option>
+                                        <option value="Tahoma">Tahoma</option>
+                                        <option value="Time New Roman">Time New Roman</option>
+                                        <option value="Verdana">Verdana</option>
+                                </select>
+                                <select onchange="execCmdWithArg('fontSize',this.value);">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="4">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                    
+                                </select>
+                                <select onchange="execCmdWithArg('formatBlock',this.value);">
+                                        <option value="H1">H1</option>
+                                        <option value="H2">H2</option>
+                                        <option value="H3">H3</option>
+                                        <option value="H4">H4</option>
+                                        <option value="H5">H5</option>
+                                        <option value="H6">H6</option>
+                                    </select>
+                                Color :<input type="color" onchange="execCmdWithArg('foreColor',this.value);">
+                                Background:<input type="color" onchange="execCmdWithArg('hiliteColor',this.value);">
+                                
+                                
+                            </div>
+                            
+                            <div class="apercus-wyswing" id="apercus-wyswing">
+                                <iframe name="richeTextField" class="iframe-wyswing"></iframe>
+                                <div class="Bl-affwys">  <!-- affichage admin -->
+                                    
+                                </div>
+                            </div>
+                            <div class="af-w">
+                                <!-- <button class="aff-wyswing" onclick="toggleSource();">Afficher</button> -->
+                                <span class="aff-wyswing" onclick="toggleSource();">Enregistrer</span> 
+                                <span class=" save2" onclick="toggleSource2();">Enregistrer</span> 
+                                <span class="ajout-wys-liste" onclick="">Ajout a la liste</span>
+                                <!-- <span class="imprime-wyswing" onClick="imprimer('apercus-wyswing');">imprimer</span> -->
+                                <span class="imprime-wyswing" onClick="window.print();">imprimer</span>
+                                <span class="export-wyswing" onclick="Export2Doc('apercus-wyswing');">Exporter</span>
+                                <span class="aff-wyswing2" onclick="envoieaff();">Afficher</span>
+                                
+                            </div>
+                            
+                        </div>
+                        <div class="wysi-liste">
+                            <div class="retour-wysi-liste">Retour <i class="fa fa-long-arrow-right" ></i> </div>
+                            <div class="les-wysi">
+                                <span></span>
+                            </div>
+                            
+                            
+                        </div>
+                        
+                    
+                        </div>
+                
+                
+                   
+         
+                    <!-- Chart -->
+                    <div class="BL-admin chart">
+                        
+                        <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>
+                        <div class="BL-chart">
+                            <i class="fa fa-line-chart colorer type" ></i>
+                            <i class="fa fa-area-chart type" ></i>
+                            <i class="fa fa-pie-chart type" ></i>
+                            <i class="fa fa-bar-chart type" ></i>
+                            <i class="fa fa-map-marker type" ></i>
+                
+                            <div class="box-chart line">
+                                <p>Chart LINE</p>
+                                <span class="colorer2 time">J</span><span class="time">M</span><span class="time">A</span><span class="personnalisé time">Personnalisé</span>
+                                <div class="box-formulaire">
+                                    <div class="box-J aff-time">
+                                        <form >
+                                            <input type="text" placeholder="  Lundi" id="LJ" ><input type="text" placeholder="  Mardi" id="LJ"><input type="text" placeholder="  Mercredi" id="LJ"><input type="text" placeholder="  Jeudi" id="LJ"><input type="text" placeholder="  Vendredi"id="LJ"><input type="text" placeholder="  Samedi"id="LJ"><input type="text" placeholder="  Dimanche"id="LJ">
+                                            <input type="submit" value="Afficher"  id="sendLine-J" class="envoyer">
+                                        </form>
+                                    </div>
+                                    <div class="box-M aff-time">
+                                            <form >
+                                                <input type="text" placeholder="  1ere semaine " id="LM"><input type="text" placeholder="  2eme semaine" id="LM"><input type="text" placeholder="  3eme semaine"id="LM"><input type="text" placeholder="  4eme semaine"id="LM"><input type="text" placeholder="  5eme semaine"id="LM">
+                                                <input type="submit" value="Afficher" id="sendLine-M" class="envoyer">
+                                            </form>
+                                    </div>
+                                    <div class="box-A aff-time">
+                                            <form >
+                                                <input type="text" placeholder="  Janvier" id="LA"><input type="text" placeholder="  Férvier"id="LA"><input type="text" placeholder="  Marse"id="LA"><input type="text" placeholder="  Avril"id="LA"><input type="text" placeholder="  Mai" id="LA"><input type="text" placeholder="  Juin" id="LA"><input type="text" placeholder="  Juillet" id="LA"><input type="text" placeholder="  Aout" id="LA"><input type="text" placeholder="  Septembre" id="LA"><input type="text" placeholder="  Octobre" id="LA"><input type="text" placeholder="  Novembre" id="LA"><input type="text" placeholder="  Décembre"id="LA">
+                                                <input type="submit" value="Afficher" id="sendLine-A" class="envoyer">
+                                            </form>
+                                    </div>
+                                    <div class="box-A aff-time personalise">
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-chart">
+                                    <p>Chart AREA</p>
+                                    <span class="colorer2 timeA">J</span><span class="timeA">M</span><span class="timeA">A</span><span class="personnalisé timeA">Personnalisé</span>
+                                    <div class="box-formulaire">
+                                        <div class="box-J aff-timeA">
+                                            <form >
+                                                <input type="text" placeholder="  Lundi"><input type="text" placeholder="  Mardi"><input type="text" placeholder="  Mercredi"><input type="text" placeholder="  Jeudi"><input type="text" placeholder="  Vendredi"><input type="text" placeholder="  Samedi"><input type="text" placeholder="  Dimanche">
+                                                <input type="submit" value="Afficher" id="sendarea-J" class="envoyer">
+                                            </form>
+                                        </div>
+                                        <div class="box-M aff-timeA">
+                                                <form >
+                                                    <input type="text" placeholder="  1ere semaine "><input type="text" placeholder="  2eme semaine"><input type="text" placeholder="  3eme semaine"><input type="text" placeholder="  4eme semaine"><input type="text" placeholder="  5eme semaine">
+                                                    <input type="submit" value="Afficher" id="sendarea-S"class="envoyer">
+                                                </form>
+                                        </div>
+                                        <div class="box-A aff-timeA">
+                                                <form >
+                                                    <input type="text" placeholder="  Janvier"><input type="text" placeholder="  Férvier"><input type="text" placeholder="  Marse"><input type="text" placeholder="  Avril"><input type="text" placeholder="  Mai"><input type="text" placeholder="  Juin"><input type="text" placeholder="  Juillet"><input type="text" placeholder="  Aout"><input type="text" placeholder="  Septembre"><input type="text" placeholder="  Octobre"><input type="text" placeholder="  Novembre"><input type="text" placeholder="  Décembre">
+                                                    <input type="submit" value="Afficher" id="sendarea-A" class="envoyer">
+                                                </form>
+                                        </div>
+                                        <div class="box-A aff-timeA personalise">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-chart">
+                                        <p>Chart PIE</p>
+                                        <span class="colorer2 timeP">J</span><span class="timeP">M</span><span class="timeP">A</span><span class="personnalisé timeP">Personnalisé</span>
+                                        <div class="box-formulaire">
+                                            <div class="box-J aff-timeP">
+                                                <form action="">
+                                                    <input type="text" placeholder="  Lundi"><input type="text" placeholder="  Mardi"><input type="text" placeholder="  Mercredi"><input type="text" placeholder="  Jeudi"><input type="text" placeholder="  Vendredi"><input type="text" placeholder="  Samedi"><input type="text" placeholder="  Dimanche">
+                                                    <input type="submit" value="Afficher" id="sendpie-J"class="envoyer">
+                                                </form>
+                                            </div>
+                                            <div class="box-M aff-timeP">
+                                                    <form action="">
+                                                        <input type="text" placeholder="  1ere semaine "><input type="text" placeholder="  2eme semaine"><input type="text" placeholder="  3eme semaine"><input type="text" placeholder="  4eme semaine"><input type="text" placeholder="  5eme semaine">
+                                                        <input type="submit" value="Afficher" class="envoyer">
+                                                    </form>
+                                            </div>
+                                            <div class="box-A aff-timeP">
+                                                    <form action="">
+                                                        <input type="text" placeholder="  Janvier"><input type="text" placeholder="  Férvier"><input type="text" placeholder="  Marse"><input type="text" placeholder="  Avril"><input type="text" placeholder="  Mai"><input type="text" placeholder="  Juin"><input type="text" placeholder="  Juillet"><input type="text" placeholder="  Aout"><input type="text" placeholder="  Septembre"><input type="text" placeholder="  Octobre"><input type="text" placeholder="  Novembre"><input type="text" placeholder="  Décembre">
+                                                        <input type="submit" value="Afficher" class="envoyer">
+                                                    </form>
+                                            </div>
+                                            <div class="box-A aff-timeP personalise">
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-chart">
+                                            <p>Chart histo</p>
+                                            <span class="colorer2 timeB">J</span><span class="timeB">M</span><span class="timeB">A</span><span class="personnalisé timeB">Personnalisé</span>
+                                            <div class="box-formulaire">
+                                                <div class="box-J aff-timeB">
+                                                    <form action="">
+                                                        <input type="text" placeholder="  Lundi"><input type="text" placeholder="  Mardi"><input type="text" placeholder="  Mercredi"><input type="text" placeholder="  Jeudi"><input type="text" placeholder="  Vendredi"><input type="text" placeholder="  Samedi"><input type="text" placeholder="  Dimanche">
+                                                        <input type="submit" value="Afficher" id="sendhisto-J"class="envoyer">
+                                                    </form>
+                                                </div>
+                                                <div class="box-M aff-timeB">
+                                                        <form action="">
+                                                            <input type="text" placeholder="  1ere semaine "><input type="text" placeholder="  2eme semaine"><input type="text" placeholder="  3eme semaine"><input type="text" placeholder="  4eme semaine"><input type="text" placeholder="  5eme semaine">
+                                                            <input type="submit" value="Afficher" class="envoyer">
+                                                        </form>
+                                                </div>
+                                                <div class="box-A aff-timeB">
+                                                        <form action="">
+                                                            <input type="text" placeholder="  Janvier"><input type="text" placeholder="  Férvier"><input type="text" placeholder="  Marse"><input type="text" placeholder="  Avril"><input type="text" placeholder="  Mai"><input type="text" placeholder="  Juin"><input type="text" placeholder="  Juillet"><input type="text" placeholder="  Aout"><input type="text" placeholder="  Septembre"><input type="text" placeholder="  Octobre"><input type="text" placeholder="  Novembre"><input type="text" placeholder="  Décembre">
+                                                            <input type="submit" value="Afficher" class="envoyer">
+                                                        </form>
+                                                </div>
+                                                <div class="box-A aff-timeB personalise">
+                                            
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="box-chart">
+                                                <p>Chart MAP</p>
+                                                <span class="colorer2 timeM">J</span><span class="timeM">M</span><span class="timeM">A</span><span class="personnalisé timeM">Personnalisé</span>
+                                                <div class="box-formulaire">
+                                                    <div class="box-J aff-timeM">
+                                                        <form action="">
+                                                            <input type="text" placeholder="  Lundi"><input type="text" placeholder="  Mardi"><input type="text" placeholder="  Mercredi"><input type="text" placeholder="  Jeudi"><input type="text" placeholder="  Vendredi"><input type="text" placeholder="  Samedi"><input type="text" placeholder="  Dimanche">
+                                                            <input type="submit" value="Afficher" class="envoyer">
+                                                        </form>
+                                                    </div>
+                                                    <div class="box-M aff-timeM">
+                                                            <form action="">
+                                                                <input type="text" placeholder="  1ere semaine "><input type="text" placeholder="  2eme semaine"><input type="text" placeholder="  3eme semaine"><input type="text" placeholder="  4eme semaine"><input type="text" placeholder="  5eme semaine">
+                                                                <input type="submit" value="Afficher" class="envoyer">
+                                                            </form>
+                                                    </div>
+                                                    <div class="box-A aff-timeM">
+                                                            <form action="">
+                                                                <input type="text" placeholder="  Janvier"><input type="text" placeholder="  Férvier"><input type="text" placeholder="  Marse"><input type="text" placeholder="  Avril"><input type="text" placeholder="  Mai"><input type="text" placeholder="  Juin"><input type="text" placeholder="  Juillet"><input type="text" placeholder="  Aout"><input type="text" placeholder="  Septembre"><input type="text" placeholder="  Octobre"><input type="text" placeholder="  Novembre"><input type="text" placeholder="  Décembre">
+                                                                <input type="submit" value="Afficher" class="envoyer">
+                                                            </form>
+                                                    </div>
+                                                    <div class="box-A aff-timeM personalise">
+                                            
+                                                    </div>
+                                                </div>
+                                            </div>
+                        </div>
+                    </div>
+
+                            <!-- images -->
+                            <div class="BL-admin image">
+                                    <div class="retour-right"><i class="fa fa-caret-right retour-bl" ></i></div>
+                                    <div class="BL-image">
+                                        <div class="box-lien">
+                                            <form >
+                                                    <label for="">Copier l'url de l'image:</label><br>
+                                                    <input type="url" placeholder="   http://" class="lien-image">
+                                                    <div class="box-envoyer"><input type="submit" value="Afficher" class="envoyer-image"></div>
+                                                    
+                                            </form>
+                                        </div>
+                                        <div class="box-upload">
+                                            <form  >
+                                                <label for="">Importer image:</label><br><br>
+                                                <div class="box-file">
+                                                    <i class="fa fa-plus "></i>
+                                                    <input  type="file"  id="up-image" >
+                                                </div> 
+                                                <div class="apercus-image"> Listes des images </div>
+                                                <button id="im"> ok </button>
+                                            </form>   
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+
+
+        </div>
+
+    </div>
+<script src="socket.js"></script>
+<!-- <script src="app/js/main.js"></script> -->
+<script src="app/js/Listeconnecter.js"></script>
+
+<script src="app/js/zone.js"></script>
+<script src="app/js/appmenu.js"></script>
+ <script src="bundle.js"></script>
+ 
+ <script src="app/js/dom-to-image.min.js"></script>
+
+<script src="app/js/wyswing.js"></script>
+<script src="app/js/outilSupplementaire.js"></script>
+<script src="app/js/html2canvas.min.js"></script>
+<!-- <script src="app/js/takeRetouche.js"></script> -->
+</body>
+</html>

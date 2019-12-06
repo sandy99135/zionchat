@@ -7527,85 +7527,362 @@ function config (name) {
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],31:[function(require,module,exports){
 
+
+
+
+
+
+
+
+
+
 let Peer = require('simple-peer')
 let socket = io()
 const video = document.querySelector('video')
 const filter = document.querySelector('#filter')
-const checkboxTheme = document.querySelector('#theme')
+// const checkboxTheme = document.querySelector('#theme')
 let client = {}
 let currentFilter
 //get stream
-navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+
+navigator.getUserMedia=navigator.getUserMedia||navigator.webkitGetUserMedia||navigator.mozGetUserMedia;
+if(navigator.getUserMedia){
+  
+  navigator.mediaDevices.getUserMedia({ video: true, audio: true })
     .then(stream => {
-        socket.emit('NewClient')
+      socket.emit("NewClient")
         video.srcObject = stream
         video.play()
 
-        filter.addEventListener('change', (event) => {
-            currentFilter = event.target.value
-            video.style.filter = currentFilter
-            SendFilter(currentFilter)
-            event.preventDefault
-        })
-  function CreateVideo(stream) {
-            socket.on("appe",function(response){
-              console.log(response)
-              CreateDiv()
-            let video = document.createElement('video')
+        // filter.addEventListener('change', (event) => {
+        //     currentFilter = event.target.value
+        //     video.style.filter = currentFilter
+        //     SendFilter(currentFilter)
+        //     event.preventDefault
+        // })
+       function CreateVideo(stream) { 
+
+        socket.on("appe",function(response){
+
+          console.log(response)
+          let video = document.createElement('video')
             video.id = 'peerVideo'
             video.srcObject = stream
             video.setAttribute('class', 'embed-responsive-item')
             document.querySelector('#peerDiv').appendChild(video)
             video.play()
-            let videopeer= document.querySelectorAll("#peerVideo");
-            let mute=document.querySelectorAll("#muteText"); 
+          let videopeer= document.querySelectorAll("#peerVideo");
+       
             for(var i=0;i<videopeer.length-1;i++){
-            videopeer[i].remove()
+              videopeer[i].remove()
             }
-            for(var j=0;j<mute.length-1;j++){
-            mute[j].remove()  
-          }
-            //wait for 1 sec
-            // setTimeout(() => SendFilter(currentFilter), 1000)
-            // let couperappel = document.querySelectorAll(".stop-apel")
-            //     couperappel.innerHTML = '<i class="fa fa-phone "></i>'
-            //     couperappel.className = "stop-apel"
-                
-                  
-            //      document.querySelector(".commande-lors-apl").appendChild(couperappel)
-                 document.querySelector(".commande-lors-apl").style.display = "block"
+           
+      
+          
+        video.addEventListener('click', () => {
+            if (video.volume != 0)
+                video.volume = 0
+            else
+                video.volume = 1
+        })
+        reponse.style.display="none"
+        if(response==localStorage.getItem("user")){
+          appel.style.display="none"
 
-                //  solution a un ptt problem
-                //  var couperappel =  document.querySelectorAll(".stop-apel")
-                //  for(var i = 0; i <couperappel.length ;i++) { 
-                //   // stopAPbout[0].style.display= "none";
-                //   couperappel[i].addEventListener("click",function(e){
-                //     e.preventDefault()
-                //     socket.emit("couperappel",reponse)
-                //     document.querySelector(".commande-lors-apl").style.display = "none";    
-                //  },false) 
-                // }
-                 
-                
+        }
+          })
+
+            // take photo 
+           
+              var boutTake = document.querySelector('.take-it');
+              var boxTake = document.querySelector('.box-take');
+
+              var canvasTake = document.querySelector('.take-photo');
+                  canvasTake.width = 150;
+                  canvasTake.height = 120;
+              var context  = canvasTake.getContext('2d');
+              
+              boutTake.addEventListener('click',function() {
+                   takePhoto();
+                   AjoutakePhoto();
+              },true)
+              
+              function takePhoto(){
+                boxTake.style.display = 'block';
+                context.drawImage(video,0,0,150,120);
+              }
+              function AjoutakePhoto(){
+                var boxCaptureApercus = document.querySelector('.box-capture-apercus');
+                var boxImg = document.createElement('div');
+                    boxImg.className =" boxImg";
+                    boxImg.style.width = '150px';
+                    boxImg.style.height = '120px';
+                    boxImg.style.display = 'inline-block';
+                    boxImg.style.marginRight = '10px';
+                    boxImg.style.marginBottom = '5px';
+                    boxImg.style.borderRadius = '3px';
+                    boxImg.style.overflow = 'hidden';
+
+                var edittake = document.createElement('button');
+                    edittake.innerHTML = '<i class="fa fa-pencil "></i>';
+
+                var imgTake = document.createElement('canvas');  
+                    imgTake.width = 150;
+                    imgTake.height = 110;
+                var ctApercus  = imgTake.getContext('2d'); 
+                ctApercus.drawImage(video,0,0,150,110);
+
+                          imgTake.addEventListener('click',function() { 
+                                  domtoimage.toPng(this).then(function(dataUrl) {
+                                    console.log(dataUrl)
+                                    var aRetouché = document.createElement("img");
+                                        aRetouché.src = dataUrl;
+                                        aRetouché.style.width = "100%";
+
+                                    document.querySelector('.box-img-aRetouché').innerHTML = "";
+                                    document.querySelector('.box-img-aRetouché').appendChild(aRetouché);
+                                    document.querySelector('.remove-retouche').style.display = "block";
+
+                                    // GERE FILTRE 
+
+                                    var brightness = 100;
+                                    var contrast = 100;
+                                    var saturate = 100;
+                                    var grayscale = 0;
+                                    var invert = 0;
+                                    var huerotate = 0;
+                                    var blur = 0;
+                                    var opacity = 100;
+                                    var sepia = 0;
+                                    var dropshadow = 0;
+
+                                    const imgture = aRetouché;
+                                    const resetAll = document.querySelector(".remove-bl-filtre");
+
+                                    const slider1 = document.getElementById("slider1");
+                                    const value1 = document.getElementById("bright");
+                                    const slider2 = document.getElementById("slider2");
+                                    const value2 = document.getElementById("contrast");
+                                    const slider3 = document.getElementById("slider3");
+                                    const value3 = document.getElementById("saturate");
+                                    const slider4 = document.getElementById("slider4");
+                                    const value4 = document.getElementById("gray");
+                                    const slider5 = document.getElementById("slider5");
+                                    const value5 = document.getElementById("invert");
+                                    const slider6 = document.getElementById("slider6");
+                                    const value6 = document.getElementById("hue");
+                                    const slider7 = document.getElementById("slider7");
+                                    const value7 = document.getElementById("blur");
+                                    const slider8 = document.getElementById("slider8");
+                                    const value8 = document.getElementById("s-opacity");
+                                    const slider9 = document.getElementById("slider9");
+                                    const value9 = document.getElementById("sepia");
+
+                                    //Update filters
+                                    function updateFilters() {
+                                        imgture.style.filter =
+                                            "brightness(" +
+                                            brightness +
+                                            "%) contrast(" +
+                                            contrast +
+                                            "%) saturate(" +
+                                            saturate +
+                                            "%) grayscale(" +
+                                            grayscale +
+                                            "%) invert(" +
+                                            invert +
+                                            "%) hue-rotate(" +
+                                            huerotate +
+                                            "deg) blur(" +
+                                            blur +
+                                            "px) opacity(" +
+                                            opacity +
+                                            "%) sepia(" +
+                                            sepia +
+                                            "%)";
+                                    }
+                                    //Reset All
+                                    function resetALL(){
+                                        brightness = 100;
+                                        slider1.value = 100;
+                                        value1.innerHTML = slider1.value + "%";
+                                        contrast = 100;
+                                        slider2.value = 100;
+                                        value2.innerHTML = slider2.value + "%";
+                                        saturate = 100;
+                                        slider3.value = 100;
+                                        value3.innerHTML = slider3.value + "%";
+                                        grayscale = 0;
+                                        slider4.value = 0;
+                                        value4.innerHTML = slider4.value + "%";
+                                        invert = 0;
+                                        slider5.value = 0;
+                                        value5.innerHTML = slider5.value + "%";
+                                        huerotate = 0;
+                                        slider6.value = 0;
+                                        value6.innerHTML = slider6.value + "%";
+                                        blur = 0;
+                                        slider7.value = 0;
+                                        value7.innerHTML = slider7.value + "px";
+                                        opacity = 100;
+                                        slider8.value = 0;
+                                        value8.innerHTML = 100 - slider8.value + "%";
+                                        sepia = 0;
+                                        slider9.value = 0;
+                                        value9.innerHTML = slider9.value + "%";
+                                        updateFilters();
+                                    }
+                                    resetAll.addEventListener("click", function() {
+                                        // console.log("resset");
+                                        resetALL();
+                                    });
+
+                                    //Brightness slider
+                                    slider1.addEventListener("input", function() {
+                                        value1.innerHTML = slider1.value + "%";
+                                        brightness = slider1.value;
+                                        updateFilters();
+                                    });
+
+                                    slider1.addEventListener("focus", function() {
+                                        // console.log("focus gotten");
+                                        value1.style.visibility = "visible";
+                                    });
 
 
-            video.addEventListener('click', () => {
-                if (video.volume != 0)
-                    video.volume = 0
-                else
-                    video.volume = 1
-            })
-            reponse.style.display="none"
-            if(response==localStorage.getItem("user")){
-              appel.style.display="none"
 
+                                    //Contrast slider
+                                    slider2.addEventListener("input", function() {
+                                        value2.innerHTML = slider2.value + "%";
+                                        contrast = slider2.value;
+                                        updateFilters();
+                                    });
+
+                                    slider2.addEventListener("focus", function() {
+                                        value2.style.visibility = "visible";
+                                    });
+
+
+
+                                    //Saturation slider
+                                    slider3.addEventListener("input", function() {
+                                        value3.innerHTML = slider3.value + "%";
+                                        saturate = slider3.value;
+                                        updateFilters();
+                                    });
+
+                                    slider3.addEventListener("focus", function() {
+                                        value3.style.visibility = "visible";
+                                    });
+
+
+
+
+                                    //Grayscale slider
+                                    slider4.addEventListener("input", function() {
+                                        value4.innerHTML = slider4.value + "%";
+                                        grayscale = slider4.value;
+                                        updateFilters();
+                                    });
+
+                                    slider4.addEventListener("focus", function() {
+                                        value4.style.visibility = "visible";
+                                    });
+
+
+                                    //Invert slider
+                                    slider5.addEventListener("input", function() {
+                                        value5.innerHTML = slider5.value + "%";
+                                        invert = slider5.value;
+                                        updateFilters();
+                                    });
+
+                                    slider5.addEventListener("focus", function() {
+                                        value5.style.visibility = "visible";
+                                    });
+
+
+                                    //Hue-rotate slider
+                                    slider6.addEventListener("input", function() {
+                                        value6.innerHTML = slider6.value + "%";
+                                        huerotate = slider6.value;
+                                        updateFilters();
+                                    });
+
+                                    slider6.addEventListener("focus", function() {
+                                        value6.style.visibility = "visible";
+                                    });
+
+
+
+                                    //Blur slider
+                                    slider7.addEventListener("input", function() {
+                                        value7.innerHTML = slider7.value + "px";
+                                        blur = slider7.value;
+                                        updateFilters();
+                                    });
+
+                                    slider7.addEventListener("focus", function() {
+                                        value7.style.visibility = "visible";
+                                    });
+
+                                    //Opacity slider
+                                    slider8.addEventListener("input", function() {
+                                        // console.log(100 - slider8.value);
+                                        opacity = 100 - slider8.value;
+                                        value8.innerHTML = (100- slider8.value) + "%";
+                                        updateFilters();
+                                    });
+
+                                    slider8.addEventListener("focus", function() {
+                                        value8.style.visibility = "visible";
+                                    });
+
+
+                                    //Sepia slider
+                                    slider9.addEventListener("input", function() {
+                                        value9.innerHTML = slider9.value + "%";
+                                        sepia = slider9.value;
+                                        updateFilters();
+                                    });
+
+                                    slider9.addEventListener("focus", function() {
+                                        value9.style.visibility = "visible";
+                                    });
+
+
+                                    })
+                          },true)
+
+                boxImg.appendChild(imgTake);
+                boxImg.appendChild(edittake);
+                boxCaptureApercus.appendChild(boxImg);
+               }
+
+          
+
+            // pause
+            function pause(){
+              var pause = document.querySelector('.pause');
+                  pause.addEventListener('click',function() {
+                        video.pause();
+                  },true)
             }
-              })
-                       
+            pause();
+
+            // play
+            function play(){
+              var play = document.querySelector('.play');
+                  play.addEventListener('click',function() {
+                        video.play();
+                  },true)
+            }
+            play();
+
             
 
         }
-
+    
 
 
         //used to initialize a peer
@@ -7668,28 +7945,28 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
         }
        
 
-        // function RemovePeer() {
-        //   let videopeer= document.querySelectorAll("#peerVideo");
-        //   let mute=document.querySelectorAll("#muteText");
-        //   for(var i=0;i<videopeer.length;i++){
-        //     for(var j=0;j<mute.length;j++){
-        //       videopeer[i].remove()
-        //       mute[j].remove()
-        //     }
-        //   }
-        //     // document.getElementById("peerVideo").remove();
-        //     // document.getElementById("muteText").remove();
+        function RemovePeer() {
+          let videopeer= document.querySelectorAll("#peerVideo");
+          let mute=document.querySelectorAll("#muteText");
+          for(var i=0;i<videopeer.length;i++){
+            for(var j=0;j<mute.length;j++){
+              videopeer[i].remove()
+              mute[j].remove()
+            }
+          }
+            // document.getElementById("peerVideo").remove();
+            // document.getElementById("muteText").remove();
           
-        // }
-        //  socket.on("coupe",function(response){
+        }
+         socket.on("coupe",function(response){
                         
-        //                      //if(response==localStorage.getItem("user")){
-        //                       RemovePeer()
-        //                       document.querySelector(".coupappel").style.display="none"  
+                             //if(response==localStorage.getItem("user")){
+                              RemovePeer()
+                              document.querySelector(".coupappel").style.display="none"  
 
-        //           //}
+                  //}
                           
-        //                     })
+                            })
         socket.on('BackOffer', FrontAnswer)
         // socket.on('BackOffer2', FrontAnswer2)
         socket.on('BackAnswer', SignalAnswer)
@@ -7700,6 +7977,8 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
 
     })
     .catch(err => document.write(err))
+}
+
 
 // checkboxTheme.addEventListener('click', () => {
 //     if (checkboxTheme.checked == true) {
@@ -7718,22 +7997,6 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
 // }
 // )
 
-function CreateDiv() {
-    let div = document.createElement('div')
-    div.setAttribute('class', "centered")
-    div.id = "muteText"
-    div.innerHTML = "Click to Mute/Unmute"
-    document.querySelector('#peerDiv').appendChild(div)
-    if (checkboxTheme.checked == true)
-        document.querySelector('#muteText').style.color = "#fff"
-}
-// function CreateDiv2() {
-//     let div = document.createElement('div')
-//     div.setAttribute('class', "centered")
-//     div.id = "muteText"
-//     div.innerHTML = "Click to Mute/Unmute"
-//     document.querySelector('#peerDiv2').appendChild(div)
-//     if (checkboxTheme.checked == true)
-//         document.querySelector('#muteText').style.color = "#fff"
-// }
+
+
 },{"simple-peer":24}]},{},[31]);

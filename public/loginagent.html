@@ -108,8 +108,8 @@ background:#3594D2;
 <div class="box">
 <h1>Entrer votre agent identifiant</h1>
 
-<input type="text" placeholder="username" name="username" class=" username email" />
-<input type="password" placeholder="password" name="password" class=" password email" />
+<input type="text" placeholder="username"  class=" username email" />
+<input type="password" placeholder="password"  class=" password email" />
 <button type="submit" id="sign"class="btn">Connexion</button>
   
 </div> <!-- End Box -->
@@ -145,7 +145,7 @@ background:#3594D2;
                             localStorage.setItem("iduserconnecte", data1.iduser);
                             socket.emit("envoieconnecte", localStorage.getItem("user"))
                          
-                            window.location="/agent.html"
+                            window.location="/app.html"
                            }
                             console.log(data1)
                               })

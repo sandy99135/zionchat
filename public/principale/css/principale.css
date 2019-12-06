@@ -1,0 +1,299 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+.contenaire{
+    position: absolute;
+    top:0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    font-family: sans-serif;
+}
+header{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 2px solid rgba(190, 166, 166, 0.267);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.068);
+    z-index: 1;
+}
+header .header-tete{
+    position: absolute;
+    top:0px;
+    left: 20px;
+    font-size: 20px;
+  }
+header .header-tete span{
+    margin-right: 10px;
+  }
+header .fa{
+    font-size: 25px;
+    margin-right: 10px;
+}
+header .th{
+    margin-left: 50px;
+}
+
+header .menus{
+    position: relative;
+    margin-left: 300px;
+}
+
+header .menus span{
+    display: inline-block;
+    padding: 0px 20px;
+    margin: 0;
+    transition: 0.2s;
+}
+header .menus span:hover{
+    color: white;
+    background: #292929 ;
+}
+.m-p{
+    transition: 0.2 ;
+}
+.fond-m-p{
+    color: white;
+    background: #292929 ;
+}
+
+header .header-parametre{
+    position: absolute;
+    top: 0px;
+    right: 100px;
+    height: 50px;
+    line-height: 50px;
+}
+header .header-parametre .fa{
+   color: #292929 ;
+}
+
+header .user{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    height: 50px;
+    line-height: 50px;
+}
+header .user div{
+     width: 36px;
+     height: 36px;
+     margin-top:6px;
+     margin-right:  30px;
+     overflow: hidden;
+     border-radius: 50px;
+     /* border: 2px solid  #292929b7 ; */
+}
+header .user div img{
+     width: 100%;
+}
+header .user .fa{
+    position: absolute;
+     top:20px;
+     right: 0px;
+     font-size: 10px;
+}
+
+
+
+
+.B-M-C{
+    position: absolute;
+    width: 100%;
+    top:50px;
+    bottom: 0px;
+    overflow: hidden;
+}
+.B-M-C .BL-Menu{
+    position: absolute;
+    width: 100%;
+    top:0px;
+    bottom: 0px;
+    display: none;
+}
+.B-M-C .BL-g-appel{
+    display:block;
+}
+.B-M-C .BL-fct{
+    background: #292929 ;
+}
+
+
+/* gestion d'appel */
+
+.BL-g-appel .dispo{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 2px solid rgba(190, 166, 166, 0.267);
+    /* box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.068); */
+}
+.BL-g-appel .dispo span{
+    margin-left: 20px;
+}
+.BL-g-appel .dispo span .fa{
+    font-size: 20px;
+}
+
+.BL-g-appel .box-dispo{
+    position: absolute;
+    top:0px;
+    right: 20px;
+    height: 50px;
+    line-height: 50px;
+}
+.BL-g-appel .box-dispo button{
+    margin-top: 5px;
+    border: none;
+    border-radius:  3px;
+    padding: 0px 30px;
+    height: 40px;
+    color:rgba(255, 255, 255, 0.932);
+    background: #292929 ;
+    font-size: 18px;
+}
+
+/* start session */
+
+.session{
+    position: absolute;
+    width: 50%;
+    top:50px;
+    left: 0px;
+    bottom: 0px;
+    background: #ececec62;
+}
+.box-u{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    left: 20px;
+}
+.box-u h2{
+    margin:0px ;
+    font-size: 20px;
+}
+
+.box-session{
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+.box-session .session-thumb{
+    position: relative;
+    width:48.6%;
+    border-radius:3px;
+    border: 2px solid rgba(190, 166, 166, 0.267);
+    background: #ffffff;
+    height:135px ;
+}
+.box-session .session-email{
+    position: absolute;
+    top:0px;
+    right: 0px;
+}
+.box-session .box-thumb{
+    position: absolute;
+    top:10px;
+    left: 10px;
+    right: 10px;
+}
+.box-session .box-thumb h3{
+    margin-top: 0px;
+}
+.box-session .box-saisie{
+    position: relative;
+    margin-top: 10px;
+    height: 50px;
+    line-height: 50px;
+}
+
+.box-session .box-saisie input{
+    position: absolute;
+    width: 70%;
+    height: 40px;
+    border: 2px solid #292929 ;
+    border-radius: 3px;
+    transition: 0.2s;
+}
+.box-session .box-saisie span{
+    display: block;
+    position: absolute;
+    top:0px;
+    right: 0px;
+    width: 20%;
+    height:40px ;
+    line-height: 40px;
+    text-align: center;
+    border: 2px solid #292929 ;
+    border-radius: 3px;
+    transition: 0.2s;
+}
+.box-session .box-saisie span:hover{
+    background: #292929 ;
+    color: white;
+}
+/* conversation */
+
+.discussion{
+    position: absolute;
+    width: 30%;
+    top:50px;
+    right: 20%;
+    bottom: 0px;
+    border-left: 2px solid rgba(190, 166, 166, 0.267);
+}
+
+
+/* user connectés */
+
+.user-actif{
+    position: absolute;
+    width: 20%;
+    top:50px;
+    right: 0px;
+    bottom: 0px;
+    border-left: 2px solid rgba(190, 166, 166, 0.267);
+}
+.libre{
+    position: absolute;
+    top:0px;
+    right: 0px;
+}
+.notif-libre{
+    position: absolute;
+    right: 0px;
+    font-size: 10px;
+}
+.box-user-actif{
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+.box-user-actif .us-act {
+   position: relative;
+   width: 100%;
+   height: 40px;
+   line-height: 40px;
+}
+.box-user-actif .us-act img{
+    position: absolute;
+    top:5px;
+    left:0px;
+    width: 30px;
+ }
+ .box-user-actif .us-act span{
+    margin: 0px 10px;
+ }
+ .box-user-actif .us-act .actif-name{
+     width: 50%;
+     margin-left: 40px;
+     overflow: hidden;
+ }
+ .box-user-actif .us-act .notif{
+    font-size: 10px;
+}

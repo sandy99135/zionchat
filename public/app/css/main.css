@@ -1,0 +1,761 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+.contenaire{
+    position: absolute;
+    top:0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    font-family: sans-serif;
+}
+header{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    /* background: #714fec; */
+    border-bottom: 2px solid rgba(190, 166, 166, 0.267);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.068);
+    z-index: 1;
+    background:  rgba(255, 0, 0, 0.8);
+    color:white;
+    
+}
+header button{
+    position: absolute;
+    border: none;
+    top: 5px;
+    right: 20px;
+    height: 40px;
+    border-radius: 3px;
+    color: white;
+    font-size: 18px;
+    padding: 0px 10px;
+    /* background: #4e21b2 ; */
+    background: #292929 ;
+  }
+  header .info-client{
+    margin-left: 20px;
+  }
+  header .info-client span{
+    margin-right: 10px;
+  }
+  header .fa{
+    font-size: 25px;
+  }
+  header .bouton-liste{
+    right: 150px;
+  }
+
+  /* Utilisateur */
+
+.utilisateur{
+    position: absolute;
+    top:0px;
+    right: -100%;
+    bottom: 0px;
+    width: 30%;
+    background: #ffffff;
+    z-index: 2;
+    transition: 0.2s;
+    box-shadow: 5px -2px 5px rgba(0, 0, 0, 0.062);
+    display:none;
+
+}
+
+.utilisateur .ut-tete{
+    position: relative;
+    
+}
+
+.utilisateur .ut-tete span{
+    position: relative;
+    margin: 5px;
+   
+}
+.utilisateur .ut-user{
+     display: inline-block ;
+     height: 40px;
+     line-height: 40px;
+     margin-left: 10px !important ;
+     font-size: 24px;
+}
+.utilisateur .nom-connecte{
+    display: inline-block ;
+   font-size: 24px;
+    height: 40px;
+    line-height: 40px;
+}
+.utilisateur .b-but{
+    position: absolute;
+    top:0px;
+    right: 0px;
+}
+.utilisateur .ut-tete .but{
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    color: #ffffff;
+    background: #515151;
+    border-radius: 3px;
+    text-align: center;
+    transition: 0.2s;
+}
+.utilisateur .ut-tete .but:hover{
+    background: #fd0000;
+}
+.utilisateur .liste-connecter{
+    position: relative;
+    width: 95%;
+    margin-left: 10px;
+}
+
+
+/* Requete */
+
+
+.requete{
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 200px;
+    z-index: 10;
+    background: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.reponse button , .d-appeleur button ,.commande-lors-apl button{
+    border: none;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    transition: 0.2s;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.reponse button:hover ,.d-appeleur button:hover ,.commande-lors-apl button:hover{
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.7);
+}
+
+ .reponse{
+    position: relative;
+    width: 200px;
+    background: rgba(255, 0, 0, 0.281);
+    text-align: center;
+    padding: 30px 0px;
+    border-radius:5px;
+   
+    animation: aparition 0.5s;
+    display: none;
+    
+}
+ .reponse button{
+    margin: 0px 20px;
+}
+ .reponse #Repondre{
+    background: green;
+}
+ .reponse #refuser{
+    background: rgb(253, 11, 3);
+}
+
+
+
+ .d-appeleur{
+    position: relative;
+    width: 200px;
+    background: rgba(255, 0, 0, 0.281);
+    text-align: center;
+    padding: 30px 0px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.4);
+    animation: aparition 0.5s;
+    display: none;
+}
+ .d-appeleur button {
+    background: rgb(253, 11, 3);
+}
+
+.img-user{
+    display: block;
+    position: relative;
+    margin: 20px auto;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 100px;
+    border: 6px solid rgb(0, 0, 0);
+    background: #f5f5f5;
+    font-size: 30px;
+    animation: appel 1s infinite;
+}
+.reponse h2 , .d-appeleur h2{
+   color:white;
+} 
+@keyframes appel{
+	0%{
+        background: #f5f5f5;
+	}
+   
+	100%{
+        background: #ff0101;
+    }
+}
+@keyframes aparition{
+	0%{
+        transform: scale(0);
+	}
+   
+	100%{
+        transform: scale(1); 
+    }
+}
+
+
+
+
+
+
+
+
+.sub-contenaire{
+    position: absolute;
+    width: 100%;
+    top:50px;
+    bottom: 0px;
+    overflow: hidden;
+}
+
+.cont-live{
+    position: absolute;
+    width:70%; 
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+}
+.cont-info{
+    position: absolute;
+    width:30%; 
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    /* background: rgb(76, 0, 255); */
+    border-left: 1.5px solid rgba(190, 166, 166, 0.267);
+    box-shadow: 5px -2px 5px rgba(0, 0, 0, 0.062);
+}
+
+/* cont-live */
+
+.cont-live .outil-live{
+    position: relative;
+    width: 60px;
+    height: 100%;
+    border-right: 1.5px solid rgba(190, 166, 166, 0.267);
+    box-shadow: 5px -2px 5px rgba(0, 0, 0, 0.062);
+    text-align: center;
+}
+.cont-live .outil-live span{
+    display: block;
+    position: relative;
+    width: 46px;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    border : 1.5px solid rgb(90, 90, 90);
+    margin:5px auto;
+    border-radius: 3px;
+    background: rgb(90, 90, 90);
+    transition: 0.2s;	
+}
+.cont-live .outil-live span:hover{
+    color: rgb(90, 90, 90);
+   background: rgb(255, 255, 255)
+
+}
+
+.cont-live .outil-live span .color{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin: 7px auto 0px auto;
+    border-radius: 3px;
+}
+.cont-live .outil-live .box-stroke-weight{
+    position: absolute;
+    top:104px;
+    left: 60px;
+    display: none;
+    transition: 0.2s;
+    z-index: 2;
+}
+.cont-live .outil-live span .stroke-weight{
+    position: relative;
+    width: 90%;
+    height: 50%;
+    border: none;
+    border-radius: 2px;
+}
+.cont-live .outil-live .save-retouche{
+    /* background: #4e21b2 ; */
+    background: #292929 ;
+}
+.cont-live  .sub-cont-live{
+    position: absolute;
+    top:0px;
+    left: 60px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.cont-live .sub-cont-live .block-video {
+    position: relative;
+    margin: 30px auto;
+    width: 95%;
+    height: 97%;
+}
+@media screen and (max-width:1386px){
+    .cont-live .sub-cont-live .block-video {
+        margin: 20px auto;
+    }
+}
+
+/* video option */
+
+.cont-live .sub-cont-live .video-option{
+    position: relative;
+    width: 100%;
+    margin-top: 0px;
+    background: rgba(196, 196, 196, 0.349);
+    border-radius: 3px;
+}
+
+ .video-option .screen-option{
+    position: relative;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background: rgb(90, 90, 90);
+    color: rgba(255, 255, 255, 0.925);
+    border-radius: 3px 3px 0px 0px;
+}
+
+.video-option .screen-option .locale-screen{
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 50%;
+    height: 30px;
+    line-height: 30px;
+    border-right: 2px solid rgba(255, 255, 255, 0.555);
+    
+}
+.video-option .screen-option .local{
+    margin-left: 10px;
+    
+}
+.video-option .screen-option .locale-screen-size {
+   position: absolute;
+   top:0px;
+   right: 10px;
+}
+.video-option .screen-option .locale-screen-size span{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+ }
+ .video-option .screen-option .locale-screen-size .local-full {
+    position: absolute;
+    width: 20px;
+    height: 30px;
+    top:0px;
+    right: 0px;
+ }
+ .video-option .screen-option .locale-screen-size .local-full img{
+    position: absolute;
+    top:5px;
+    width: 20px;
+    height: 20px;
+ }
+.video-option .screen-option .locale-screen i{
+    margin-left: 10px;
+}
+
+
+.video-option .zoom {
+    position: absolute;
+    right: 0px;
+    width: 50%;
+    height: 30px;
+    padding-left: 10px;
+}
+.video-option .box-zoom {
+    position: absolute;
+    right: 10px;
+    width: 282px;
+    margin-left: 10px;
+}
+.video-option .zoom .range-zoom{
+    position: absolute;
+    top:12px;
+    left: 60px;
+    width: 200px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.932);
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 3px;
+}
+.video-option .zoom .range-zoom::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+    /* border: 2px solid rgb(48, 48, 48); */
+    background:  rgb(255, 255, 255);
+}
+.video-option .zoom-plus {
+    position: absolute;
+    right: 0px;
+}
+.video-option .video-full-screen{
+    position: absolute;
+    top:0px;
+    right: 10px;
+}
+
+
+
+.video-option .device-info{
+    position: relative;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: rgba(255, 255, 255, 0.911);
+    background: rgb(48, 48, 48);
+}
+.video-option .device-info div{
+    display: inline-block;
+    position: relative;
+    
+    width: 33%;
+    height: 30px;
+}
+.video-option .device-info .network{
+    border-left: 2px solid rgba(255, 255, 255, 0.555);
+    border-right: 2px solid rgba(255, 255, 255, 0.555);
+}
+.video-option .device-info .batterie{
+    position: absolute;
+    width: 32.5%;
+    top:0px;
+    right: 0px;
+}
+.batterie .charging {
+    position: absolute;
+    right: 90px;
+}
+.video-option .device-info div .sub-div{
+    position: absolute;
+    left: 10px;
+    height: 30px;
+}
+.video-option .device-info div .sub-div2{
+    position: absolute;
+    right:  10px;
+    height: 30px;
+    width: 100px;
+    text-align: right;
+}
+
+.video-option .device-info div .sub-div2 .txt{
+    margin-right: 10px;
+    font-size: 15px;
+}
+/* bouton option video */
+
+.video-manipulation{
+    position: relative;
+    text-align: center;
+}
+.video-manipulation span{
+    display:inline-block ;
+    position: relative;
+    width: 46px;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    border : 1.5px solid rgb(90, 90, 90);
+    margin:5px auto;
+    border-radius: 3px;
+    background: rgb(90, 90, 90);
+    transition: 0.2s;
+}
+.video-manipulation span:hover{
+    color: rgb(90, 90, 90);
+    background: rgb(255, 255, 255)
+}
+.video-manipulation .record{
+    color: rgba(255, 0, 0, 0.8);
+    transition: 0.2s;
+}
+.video-manipulation .record:hover{
+    color: rgba(255, 0, 0, 0.8);
+}
+.video-manipulation .stop-appel{
+    background:  rgba(255, 0, 0, 0.8);
+    border : 1.5px solid rgba(255, 0, 0, 0.8);
+}
+.video-manipulation .stop-appel .fa{
+    transform: rotate(135deg)
+}
+
+.video-manipulation .video-affichage{
+    position: absolute;
+    top:0;
+    right: 0;
+}
+
+
+
+/* CONT Info MENUS DROITE*/
+
+.bl-info{
+    position: relative;
+    margin: 30px auto;
+    width: 90%;
+}
+
+
+.bl-info .box-geo{
+    position: relative;
+    width: 100%;
+    height: 450px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.bl-info .geo-en-tete{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    color: rgba(255, 255, 255, 0.877);
+    background: rgb(90, 90, 90);
+}
+.bl-info .geo-en-tete span{
+    margin-left: 10px;
+}
+.compresse-geo{
+    position: absolute;
+    top:6px;
+    right: 40px;
+
+    display:none;
+}
+
+.bl-info .affiche-geo{
+    position: absolute;
+    top:40px;
+    bottom:40px;
+    width: 100%;
+    /* height: 370px; */
+    background: red;
+    overflow: hidden;
+}
+.bl-info .affiche-geo img{
+    width: 100%;
+}
+.bl-info .affiche-geo .map{
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.bl-info .geo-adress{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    color: rgba(255, 255, 255, 0.877);
+    background: rgb(90, 90, 90);
+}
+.bl-info .geo-adress span{
+    margin-left: 10px;
+}
+.bl-info .box-geo .geo-option{
+    position: absolute;
+    top:0;
+    right: 0;
+}
+.bl-info .box-geo button{
+    border: none;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    color: rgb(90, 90, 90);
+    border-radius: 2px;
+    margin-right: 5px;
+    transition: 0.2s;
+}
+.bl-info .box-geo button hover{
+    background: rgb(255, 255, 255);
+}
+.bl-info .box-geo .full-geo{
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    opacity: 0.8;
+    transition: 0.2s;
+}
+.bl-info .box-geo .full-geo:hover{
+    opacity: 1;
+}
+.bl-info .box-geo .full-geo img{
+    width: 100%;
+}
+
+
+.bl-info .box-capture-apercus {
+    position: relative;
+    margin-top: 20px;
+    width: 100%;
+    height: 390px;
+    overflow: auto;
+}
+.bl-info .box-capture-apercus .boxImg {   /*bouton edit*/
+    position: relative;
+
+}
+.bl-info .box-capture-apercus .boxImg button{   /*bouton edit*/
+    position: absolute;
+    top:0px;
+    right:0px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    border: none;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.61)
+
+}
+
+
+
+
+/*bouton */
+
+.bl-info .box-gallerie{
+   position: relative;
+   margin-top: 30px;
+   margin-bottom: 20px;
+}
+.bl-info .box-gallerie button{
+    border: none;
+    height: 40px;
+    border-radius: 3px;
+    color: rgba(255, 255, 255, 0.904);
+    font-size: 15px;
+    padding: 0px 10px;
+    /* background: #4e21b2 ; */
+    background: #292929 ;
+ }
+
+ .bl-info .box-gallerie button .fa{
+    /* margin-right: 10px; */
+    font-size: 16px;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+ @media screen and (max-width:1386px){
+    header{
+        height: 40px;
+        line-height: 40px;
+    }
+    header button{
+        top: 4px;
+        right: 20px;
+        height: 35px;
+        font-size: 16px;
+      }
+    header .bouton-liste{
+        right: 120px;
+      }
+
+
+      .utilisateur{
+        width: 35%;
+    
+    } 
+
+    .sub-contenaire{
+        top:40px;
+    }
+    .cont-live{
+        width:65%; 
+    }
+    .cont-info{
+        width:35%; 
+    }
+
+    /* buton retouche */
+
+    .cont-live .outil-live span{
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 17px;
+    }
+    .cont-live .outil-live span .color{
+        width: 20px;
+        height: 20px;
+        margin: 4px auto 0px auto;
+    }
+
+    /* buton REGLGE video */
+
+    .video-manipulation span{
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 17px;
+    }
+
+    /* Menu et geo */
+    .bl-info{
+        margin: 20px auto !important;
+    }
+    .bl-info .box-gallerie{
+        margin-top: 20px;
+     }
+    .bl-info .box-geo{
+        height: 350px;
+    }
+}
