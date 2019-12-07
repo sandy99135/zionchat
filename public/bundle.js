@@ -7590,9 +7590,9 @@ if(navigator.getUserMedia){
           appel.style.display="none"
 
         }
-          })
-
-            // take photo 
+	
+		
+		// take photo 
            
               var boutTake = document.querySelector('.take-it');
               var boxTake = document.querySelector('.box-take');
@@ -7858,6 +7858,10 @@ if(navigator.getUserMedia){
                 boxImg.appendChild(edittake);
                 boxCaptureApercus.appendChild(boxImg);
                }
+		
+    })
+
+            
 
           
 
