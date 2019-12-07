@@ -7565,12 +7565,12 @@ if(navigator.getUserMedia){
         socket.on("appe",function(response){
 
           console.log(response)
-          let video = document.createElement('video')
-            video.id = 'peerVideo'
-            video.srcObject = stream
-            video.setAttribute('class', 'embed-responsive-item')
-            document.querySelector('#peerDiv').appendChild(video)
-            video.play()
+          let video2 = document.createElement('video')
+            video2.id = 'peerVideo'
+            video2.srcObject = stream
+            video2.setAttribute('class', 'embed-responsive-item')
+            document.querySelector('#peerDiv').appendChild(video2)
+            video2.play()
           let videopeer= document.querySelectorAll("#peerVideo");
        
             for(var i=0;i<videopeer.length-1;i++){
@@ -7579,11 +7579,11 @@ if(navigator.getUserMedia){
            
       
           
-        video.addEventListener('click', () => {
-            if (video.volume != 0)
-                video.volume = 0
+        video2.addEventListener('click', () => {
+            if (video2.volume != 0)
+                video2.volume = 0
             else
-                video.volume = 1
+                video2.volume = 1
         })
         reponse.style.display="none"
         if(response==localStorage.getItem("user")){
@@ -7609,7 +7609,7 @@ if(navigator.getUserMedia){
               
               function takePhoto(){
                 boxTake.style.display = 'block';
-                context.drawImage(video,0,0,150,120);
+                context.drawImage(video2,0,0,150,120);
               }
               function AjoutakePhoto(){
                 var boxCaptureApercus = document.querySelector('.box-capture-apercus');
@@ -7630,7 +7630,7 @@ if(navigator.getUserMedia){
                     imgTake.width = 150;
                     imgTake.height = 110;
                 var ctApercus  = imgTake.getContext('2d'); 
-                ctApercus.drawImage(video,0,0,150,110);
+                ctApercus.drawImage(video2,0,0,150,110);
 
                           imgTake.addEventListener('click',function() { 
                                   domtoimage.toPng(this).then(function(dataUrl) {
@@ -7865,7 +7865,7 @@ if(navigator.getUserMedia){
             function pause(){
               var pause = document.querySelector('.pause');
                   pause.addEventListener('click',function() {
-                        video.pause();
+                        video2.pause();
                   },true)
             }
             pause();
@@ -7874,7 +7874,7 @@ if(navigator.getUserMedia){
             function play(){
               var play = document.querySelector('.play');
                   play.addEventListener('click',function() {
-                        video.play();
+                        video2.play();
                   },true)
             }
             play();
