@@ -121,6 +121,9 @@ background:#3594D2;
         let sign =document.querySelector("#sign")
         let username=document.querySelector(".username")
         let password=document.querySelector(".password")
+         if(localStorage.getItem("user")!==null){
+            window.location="/client"
+         }
           sign .addEventListener("click",function(e){
             e.preventDefault()
             console.log(username.value )
