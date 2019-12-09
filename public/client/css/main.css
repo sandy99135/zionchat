@@ -503,12 +503,19 @@ video {
 
 
 
+ 
   @media screen and (max-width:1200px){
 
         .reponse{
                 width: 40%;
                 right:30% ;
                 top:25%;
+            }
+
+        .d-appeleur{
+                position: absolute;
+                width: 50%;
+                right:25% ;
             }
   }
   @media screen and (max-width:1000px){
@@ -526,6 +533,34 @@ video {
             right:15% ;
             top:25%;
         }
+
+
+        .d-appeleur{
+            position: absolute;
+            width: 50%;
+            right:25% ;
+        }
+           
+            .reponse button , .d-appeleur button ,.commande-lors-apl button{
+                width: 60px;
+                height: 60px;
+                line-height: 60px;
+                border-radius: 50px;
+                font-size: 25px;
+            }
+            .reponse button{
+                margin: 0px 40px;
+            }
+        
+            .img-user{
+                margin: 20px auto;
+                width: 100px;
+                height: 100px;
+                line-height: 100px;
+                border-radius: 100px;
+                font-size: 50px;
+                animation: appel 1s infinite;
+            }    
 }
 
 
@@ -599,50 +634,12 @@ video {
 
 @media screen and (max-width:400px){
 
-    
- .d-appeleur{
-    position: absolute;
-    width: 80%;
-    right:35% ;
-    top:25%;
-    background: rgba(255, 0, 0, 0.281);
-    text-align: center;
-    padding: 30px 0px;
-    border-radius: 10px;
-    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.4);
-    animation: aparition 0.5s;
-    z-index: 3;
-    display: none;
-}
-    .reponse{
+    .d-appeleur{
+        position: absolute;
         width: 80%;
         right:10% ;
-        top:25%;
-        text-align: center;
-        padding: 30px 0px;
-        /* display: none; */
-        z-index: 3;
     }
-    .reponse button , .d-appeleur button ,.commande-lors-apl button{
-        width: 60px;
-        height: 60px;
-        line-height: 60px;
-        border-radius: 50px;
-        font-size: 25px;
-    }
-    .reponse button{
-        margin: 0px 40px;
-    }
-
-    .img-user{
-        margin: 20px auto;
-        width: 100px;
-        height: 100px;
-        line-height: 100px;
-        border-radius: 100px;
-        font-size: 50px;
-        animation: appel 1s infinite;
-    }
+ 
 
     .video-locale{
         top:5px;
