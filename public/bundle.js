@@ -7591,7 +7591,23 @@ if(navigator.getUserMedia){
 
         }
 	
-		
+		  // pause
+            function pause(){
+              var pause = document.querySelector('.pause');
+                  pause.addEventListener('click',function() {
+                        video2.pause();
+                  },true)
+            }
+            pause();
+
+            // play
+            function play(){
+              var play = document.querySelector('.play');
+                  play.addEventListener('click',function() {
+                        video2.play();
+                  },true)
+            }
+            play();
 		// take photo 
            
               var boutTake = document.querySelector('.take-it');
@@ -7865,23 +7881,7 @@ if(navigator.getUserMedia){
 
           
 
-            // pause
-            function pause(){
-              var pause = document.querySelector('.pause');
-                  pause.addEventListener('click',function() {
-                        video2.pause();
-                  },true)
-            }
-            pause();
-
-            // play
-            function play(){
-              var play = document.querySelector('.play');
-                  play.addEventListener('click',function() {
-                        video2.play();
-                  },true)
-            }
-            play();
+          
 
             
 
