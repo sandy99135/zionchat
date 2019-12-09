@@ -56,7 +56,11 @@ app.use(express.static(__dirname + "/public"));
 app.get("/login",function(req,res){
   res.sendFile(__dirname + "/public/login.html")
 })
+//acceder client
 
+app.get("/client",function(req,res){
+  res.sendFile(__dirname + "/public/client.html")
+})
 //login agent
 
 app.get("/loginagent",function(req,res){
