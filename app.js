@@ -61,6 +61,11 @@ app.get("/login",function(req,res){
 app.get("/client",function(req,res){
   res.sendFile(__dirname + "/public/client.html")
 })
+//acceder page principal
+
+app.get("/",function(req,res){
+  res.sendFile(__dirname + "/public/login.html")
+})
 //login agent
 
 app.get("/loginagent",function(req,res){
