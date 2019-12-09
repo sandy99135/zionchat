@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Video Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="client/css/font-awesome.min.css" />
+    <link href="client/css/main.css" rel="stylesheet">
+    <!-- <link href="client/css/theme.css" rel="stylesheet">
+    <link href="client/css/message.css" rel="stylesheet"> -->
+     <!-- gere scrool barre -->
+    
+    
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- <div class=" bl-col">
+            
+                <select id="filter" class="">
+                    <option value="none">Normal</option>
+                    <option value="grayscale(100%)">B  W</option>
+                    <option value="sepia(100%)">Old School</option>
+                    <option value="contrast(150%)">Lumination</option>
+                    <option value="blur(20px)">Hidden Mist</option>
+                    <option value="invert(100%)">Dracula</option>
+                    <option value="hue-rotate(180deg">X-men Beast</option>
+                    <option value="saturate(25)">Super Saiyan God</option>
+                </select>
+
+                <div class="float-right mt-3 theme">
+                    <input class="form-check-input" type="checkbox" id="theme">
+                    <label class="form-check-label" for="theme">
+                        Dark Theme
+                    </label>
+                </div>
+               
+        </div> -->
+
+
+        <header>
+            <span class="etendre"><i class="fa fa-th-list "></i></span>
+            <span><i class="fa fa-comment "></i></span>
+            <span class="active-geo"><i class="fa fa-map-marker "></i></span>
+            <span><i class="fa fa-share-square "></i></span>
+        </header>
+
+         <!-- Utilisateur-->
+        <div class="utilisateur">
+          
+           <div class="ut-tete">
+                <span class="ut-user"><i class="fa fa-user "></i></span>
+                <span class="nom-connecte"></span> 
+                <div class="b-but">
+                        <span class="deconnecter but"><i class="fa fa-power-off "></i> </span> 
+                        <span class="but retour-utilisateur"><i class="fa fa-times "></i>  </span>
+                </div>
+                 
+            </div>
+
+          <div class="liste-connecter">
+             <h3>Entreprises  disponibles :</h3> 
+          </div>
+          
+        </div>
+
+        <div class="block-video">
+             
+            <!-- <div class="video-fond"><img src="images/comference.png" alt=""> </div> -->
+
+            <div class="video-locale">
+                <div class="">
+                    <video class="" muted></video>
+                </div>
+            </div>
+
+            <!-- Video diffusion-->
+            <div class="video-diffusion">
+                 <div id="peerDiv" class="">     <!-- recois la video creer -->
+                 </div>
+            </div>
+        </div>
+
+        <!-- Apercus d'image retouché -->
+        <div class="box-apercus-img-retouché">
+            <div class="apercusimgretouché"></div>
+            <button class="retBaperc"><i class="fa fa-times "></i> </button>
+
+            </div>
+
+        <!-- receveur d'image retouché -->
+        <div class="box-receveur-img-retouché">
+
+        </div>
+
+
+        <!-- Manager d'apel video-->
+        <!-- <div class="BL-Manager-apel"> -->
+            <div  class="reponse " >
+                <span class="img-user"><i class="fa fa-user "></i></span>
+                    
+                    <h2 class="appeleur" >TOKY</h2>
+                    <button  id="Repondre"><i class="fa fa-phone "></i> </button>
+                    <button  id="refuser"><i class="fa fa-phone refuser"></i> </button>
+                      
+            </div>
+
+            <div class="appel d-appeleur" >
+                <span class="img-user"><i class="fa fa-user "></i></span>
+                <h3 class="personne">Appeler vers TOKY</h3> 
+                <button  id="annulerappel"><i class="fa fa-phone "></i> </button>
+            </div> 
+
+          
+            <!-- <div class="commande-lors-apl">
+                <button  id="" ><i class="fa fa-volume-up"></i> </button>
+                <button  id=""><i class="fa fa-microphone"></i> </button>
+                <button  id=""><i class="fa fa-video-camera"></i> </button>
+                <button  id="" class="stop-apel"><i class="fa fa-phone "></i> </button>
+            </div> -->
+        
+            
+
+            <div class="controle-video-client commande-lors-apl">
+                    <span class="mute"><i class="fa fa-microphone-slash" ></i></span>
+                    <span><i class="fa fa-video-camera" ></i></span>
+                    <span class="take-it"><i class="fa fa-camera" ></i></span>
+                    <span class="pause"><i class="fa fa-pause" ></i></span>
+                    <span class="record"><i class="fa fa-circle" ></i></span>
+                    <span class="stop-appel"><i class="fa fa-phone " ></i></span>
+            </div>
+    </div>   
+        <!-- </div> -->
+       
+   <!--  <script src="js/wyswing.js"></script> -->
+    <script src="socket.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <!-- <script src="js/affichage.js" ></script>
+    <script src="js/chat.js"></script> -->
+    <script src="bundle.js"></script>
+    <script src="client/js/user.js"></script>
+    <!-- <script src="js/avance.js"></script>
+    <script src="js/appel.js" ></script>
+    <script src="js/message.js" ></script> -->
+    <!-- <script src="js/dom-to-image.min.js"></script>
+    <script src="js/FileSaver.min.js"></script> telecharger direct le ficher image -->
+    <!-- <script src="js/conference.js" ></script> -->
+ 
+   
+</body>
+
+</html>
