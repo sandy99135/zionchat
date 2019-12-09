@@ -46,7 +46,7 @@ retourutilisateur.addEventListener('click',function() {
   
       
   })
-      setTimeout(function(){window.location="/login"},3000)
+      setTimeout(function(){window.location="/loginagent.html"},3000)
       
   })
   //liste des agents disponible
