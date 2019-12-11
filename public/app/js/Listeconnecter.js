@@ -179,7 +179,7 @@ retourutilisateur.addEventListener('click',function() {
         
         })
      
-     socket.on(function(user){
+     socket.on("connecte",function(user){
           outil(user);
     
         })
