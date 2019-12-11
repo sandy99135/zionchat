@@ -41,11 +41,10 @@ retourutilisateur.addEventListener('click',function() {
       fetch("https://zioncall.herokuapp.com/deconnect/"+localStorage.getItem("iduserconnecte")).then(function(reponse){
       return reponse.json()
   }).then(function(disponible){
+      console.log(disponible)
+  })
       localStorage.removeItem("user")
       localStorage.removeItem("iduserconnecte")
-  
-      
-  })
       setTimeout(function(){window.location="/loginagent.html"},3000)
       
   })
