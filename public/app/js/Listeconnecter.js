@@ -51,7 +51,7 @@ retourutilisateur.addEventListener('click',function() {
 
   //definir la fonction qui contient l' outil appel
     function outil(personne){
-      var listAgent= document.createElement("div");
+          var listAgent= document.createElement("div");
           var nomAgent= document.createElement("span");
           var appelerAgent= document.createElement("i");
             listAgent.style.borderBottom="1px solid silver"
@@ -67,7 +67,7 @@ retourutilisateur.addEventListener('click',function() {
           appelerAgent.addEventListener('click',function(e) {
                      e.preventDefault()
                      appel.style.display="block"
-                     personne.innerHTML="Appel vers " +personne
+                     personne.innerHTML="Appel vers " + personne
                      socket.emit("requeteappel",personne)
                      socket.emit("requeteappeler",localStorage.getItem("user"))
                      couperappel.addEventListener("click",function(e){
@@ -88,7 +88,7 @@ retourutilisateur.addEventListener('click',function() {
           listAgent.appendChild(appelerAgent)
           listConnecte.appendChild(listAgent)
      }
-  //liste des agents disponible
+  //liste des clients disponible
   fetch("https://zioncall.herokuapp.com/connect").then(function(reponse){
       return reponse.json()
   }).then(function(disponible){
@@ -106,8 +106,8 @@ retourutilisateur.addEventListener('click',function() {
               }
            })
     
-          //couper le video
-           function RemovePeer() {
+   //couper le video
+         function RemovePeer() {
               let videopeer= document.querySelectorAll("#peerVideo");
               let mute=document.querySelectorAll("#muteText"); 
               for(var i=0;i<videopeer.length;i++){
