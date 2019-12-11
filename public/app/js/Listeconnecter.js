@@ -48,37 +48,32 @@ retourutilisateur.addEventListener('click',function() {
       setTimeout(function(){window.location="/loginagent.html"},3000)
       
   })
-  //liste des agents disponible
-  fetch("https://zioncall.herokuapp.com/connect").then(function(reponse){
-      return reponse.json()
-  }).then(function(disponible){
-      console.log(disponible)
-      socket.on(function(user){
-        disponible.push({nom:user})
-      })
-      disponible.map(function(data){
-          var listAgent= document.createElement("div");
+
+  //definir la fonction qui contient l' outil appel
+    function outil(personne){
+      var listAgent= document.createElement("div");
           var nomAgent= document.createElement("span");
           var appelerAgent= document.createElement("i");
             listAgent.style.borderBottom="1px solid silver"
-            nomAgent.innerHTML=data.nom
+            nomAgent.innerHTML=personne
             listAgent.appendChild(nomAgent)
             appelerAgent.className="fa fa-phone"
             appelerAgent.style.color="green"
             appelerAgent.style.marginLeft="200px"
             appelerAgent.style.cursor="pointer"
-  
-          //appeler un agent 
+         
+         
+         //appeler un agent 
           appelerAgent.addEventListener('click',function(e) {
                      e.preventDefault()
                      appel.style.display="block"
-                     personne.innerHTML="Appel vers " +data.nom
-                     socket.emit("requeteappel",data.nom)
+                     personne.innerHTML="Appel vers " +personne
+                     socket.emit("requeteappel",personne)
                      socket.emit("requeteappeler",localStorage.getItem("user"))
                      couperappel.addEventListener("click",function(e){
                       e.preventDefault()
                       RemovePeer()
-                      socket.emit("couperappel",data.nom)
+                      socket.emit("couperappel",personne)
                       document.querySelector(".commande-lors-apl").style.display = "none";    
                   },false)
                    })
@@ -86,12 +81,21 @@ retourutilisateur.addEventListener('click',function() {
                    annulerappel.addEventListener("click",function(e){
                      e.preventDefault()
                      appel.style.display="none"
-                     socket.emit("annulerappel",data.nom)
+                     socket.emit("annulerappel",personne)
                      
                      },false) 
   
           listAgent.appendChild(appelerAgent)
           listConnecte.appendChild(listAgent)
+     }
+  //liste des agents disponible
+  fetch("https://zioncall.herokuapp.com/connect").then(function(reponse){
+      return reponse.json()
+  }).then(function(disponible){
+      console.log(disponible)
+     
+      disponible.map(function(data){
+         outil(data.nom)
   
       })
   })
@@ -173,6 +177,11 @@ retourutilisateur.addEventListener('click',function() {
             // document.querySelector(".commande-lors-apl").style.display="none"
             }  
         
+        })
+     
+     socket.on(function(user){
+          outil(user);
+    
         })
 
      
