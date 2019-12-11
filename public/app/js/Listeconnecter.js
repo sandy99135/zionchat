@@ -53,6 +53,9 @@ retourutilisateur.addEventListener('click',function() {
       return reponse.json()
   }).then(function(disponible){
       console.log(disponible)
+      socket.on(function(user){
+        disponible.push({nom:user})
+      })
       disponible.map(function(data){
           var listAgent= document.createElement("div");
           var nomAgent= document.createElement("span");
