@@ -144,8 +144,8 @@ background:#3594D2;
                           .then((data1) =>  {
                            localStorage.setItem("user", data1.username);
                            if(data1!=="cet utilisateur n existe pas" ||data1!=="ereur mot de passe"){
-                              setCookie(data.nom, data._id)
-                            socket.emit("envoieconnecte", localStorage.getItem("user"))
+                              setCookie(data1.nom, data1._id)
+                              socket.emit("envoieconnecte", localStorage.getItem("user"))
                          
                             window.location.href="/client.html"
                            }
