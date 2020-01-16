@@ -121,6 +121,10 @@ background:#3594D2;
         let sign =document.querySelector("#sign")
         let username=document.querySelector(".username")
         let password=document.querySelector(".password")
+        function setCookie(name, params) {
+           
+           document.cookie = name + "," + params;
+         }
          if(localStorage.getItem("user")!==null){
             window.location="/client.html"
          }
@@ -139,8 +143,7 @@ background:#3594D2;
                           .then((data1) =>  {
                            localStorage.setItem("user", data1.username);
                            if(data1!=="cet utilisateur n existe pas" ||data1!=="ereur mot de passe"){
-                            localStorage.setItem("user", data1.nom);
-                            localStorage.setItem("iduserconnecte", data1._id);
+                           setCookie(data.nom, data._id)
                             socket.emit("envoieconnecte", localStorage.getItem("user"))
                          
                             window.location.href="/client.html"
