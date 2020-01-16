@@ -23,7 +23,7 @@ nomconnecte.innerHTML=document.cookie.split(",")[0]
 
 //condition pour securiser l' entreé dans l' espace client
 
-if(localStorage.getItem("user")==""){
+if(document.cookie==""){
 	window.location="/login"
 }
 
