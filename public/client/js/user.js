@@ -23,9 +23,9 @@ nomconnecte.innerHTML=document.cookie.split(",")[0]
 
 //condition pour securiser l' entreé dans l' espace client
 
-if(document.cookie==""){
-	window.location="/login"
-}
+// if(document.cookie==""){
+// 	window.location="/login"
+// }
 
 //option pour l utilisateur 
 etendre.addEventListener("click",function(e){
