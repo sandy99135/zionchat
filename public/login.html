@@ -125,7 +125,7 @@ background:#3594D2;
            
            document.cookie = name + "," + params;
          }
-         if(localStorage.getItem("user")!==null){
+         if(localStorage.getItem("user")!==""){
             window.location="/client.html"
          }
           sign .addEventListener("click",function(e){
