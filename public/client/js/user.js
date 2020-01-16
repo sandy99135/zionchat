@@ -47,6 +47,7 @@ deconnecter.addEventListener("click",function(e){
 		console.log(disponible)
 })
 	document.cookie="";
+	console.log(document.cookie)
 	setTimeout(function(){window.location="/login"},3000)
 	
 })
