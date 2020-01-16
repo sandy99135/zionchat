@@ -126,9 +126,9 @@ background:#3594D2;
            document.cookie = name + "," + params;
            console.log(document.cookie)
          }
-//          if(localStorage.getItem("user")!==""){
-//             window.location="/client.html"
-//          }
+         if(localStorage.getItem("user")!==""){
+            window.location="/client.html"
+         }
           sign .addEventListener("click",function(e){
             e.preventDefault()
             console.log(username.value )
