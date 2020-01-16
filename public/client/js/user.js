@@ -17,13 +17,13 @@ let connecté= document.querySelector(".liste-connecter")
 let refuser=document.querySelector("#refuser")
 let annulerappel=document.querySelector("#annulerappel")
 var couperappel =  document.querySelector(".stop-appel")
-nomconnecte.innerHTML=localStorage.getItem("user")
+nomconnecte.innerHTML=document.cookie.split(",")[0]
 
 
 
 //condition pour securiser l' entreé dans l' espace client
 
-if(localStorage.getItem("user")==null){
+if(localStorage.getItem("user")==""){
 	window.location="/login"
 }
 
@@ -39,15 +39,14 @@ retourUtilisateur.addEventListener("click",function(e){
 //gere la deconnection
 deconnecter.addEventListener("click",function(e){
 	e.preventDefault()
-	fetch("https://zioncall.herokuapp.com/deconnect/"+localStorage.getItem("iduserconnecte")).
+	fetch("https://zioncall.herokuapp.com/deconnect/"+document.cookie.split(",")[1]).
 	then(function(reponse){
 	return reponse.json()
 	}).
 	then(function(disponible){
 		console.log(disponible)
 })
-	localStorage.removeItem("user")
-	localStorage.removeItem("iduserconnecte")
+	document.cookie="";
 	setTimeout(function(){window.location="/login"},3000)
 	
 })
