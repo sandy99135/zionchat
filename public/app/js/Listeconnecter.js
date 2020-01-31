@@ -33,7 +33,7 @@ retourutilisateur.addEventListener('click',function() {
   let annulerappel=document.querySelector("#annulerappel")
   var couperappel =  document.querySelector(".stop-appel")
   
-  nomconnecte.innerHTML=localStorage.getItem("user")
+  nomconnecte.innerHTML=document.cookie.split(",")[0]
 
   //gere la deconnection
   deconnecter.addEventListener("click",function(e){
@@ -69,7 +69,7 @@ retourutilisateur.addEventListener('click',function() {
                      appel.style.display="block"
                      personne.innerHTML="Appel vers " + personne
                      socket.emit("requeteappel",personne)
-                     socket.emit("requeteappeler",localStorage.getItem("user"))
+                     socket.emit("requeteappeler",document.cookie.split(",")[0])
                      couperappel.addEventListener("click",function(e){
                       e.preventDefault()
                       RemovePeer()
