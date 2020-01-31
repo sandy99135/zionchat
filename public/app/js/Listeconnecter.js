@@ -43,8 +43,7 @@ retourutilisateur.addEventListener('click',function() {
   }).then(function(disponible){
       console.log(disponible)
   })
-      localStorage.removeItem("user")
-      localStorage.removeItem("iduserconnecte")
+      document.cookie="";
       setTimeout(function(){window.location="/loginagent.html"},3000)
       
   })
