@@ -49,12 +49,21 @@ retourutilisateur.addEventListener('click',function() {
   })
 
   //definir la fonction qui contient l' outil appel
-    function outil(personne){
-          var listAgent= document.createElement("div");
+//     function outil(personne){
+          
+//      }
+//   //liste des clients disponible
+  fetch("https://zioncall.herokuapp.com/connect").then(function(reponse){
+      return reponse.json()
+  }).then(function(disponible){
+      console.log(disponible)
+     
+      disponible.map(function(data){
+         var listAgent= document.createElement("div");
           var nomAgent= document.createElement("span");
           var appelerAgent= document.createElement("i");
             listAgent.style.borderBottom="1px solid silver"
-            nomAgent.innerHTML=personne
+            nomAgent.innerHTML=data.nom
             listAgent.appendChild(nomAgent)
             appelerAgent.className="fa fa-phone"
             appelerAgent.style.color="green"
@@ -66,13 +75,13 @@ retourutilisateur.addEventListener('click',function() {
           appelerAgent.addEventListener('click',function(e) {
                      e.preventDefault()
                      appel.style.display="block"
-                     personne.innerHTML="Appel vers " + personne
+                     personne.innerHTML="Appel vers " + data.nom
                      socket.emit("requeteappel",personne)
                      socket.emit("requeteappeler",document.cookie.split(",")[0])
                      couperappel.addEventListener("click",function(e){
                       e.preventDefault()
                       RemovePeer()
-                      socket.emit("couperappel",personne)
+                      socket.emit("couperappel",data.nom)
                       document.querySelector(".commande-lors-apl").style.display = "none";    
                   },false)
                    })
@@ -86,15 +95,6 @@ retourutilisateur.addEventListener('click',function() {
   
           listAgent.appendChild(appelerAgent)
           listConnecte.appendChild(listAgent)
-     }
-  //liste des clients disponible
-  fetch("https://zioncall.herokuapp.com/connect").then(function(reponse){
-      return reponse.json()
-  }).then(function(disponible){
-      console.log(disponible)
-     
-      disponible.map(function(data){
-         outil(data.nom)
   
       })
   })
