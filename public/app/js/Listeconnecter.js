@@ -76,7 +76,7 @@ retourutilisateur.addEventListener('click',function() {
                      e.preventDefault()
                      appel.style.display="block"
                      personne.innerHTML="Appel vers " + data.nom
-                     socket.emit("requeteappel",personne)
+                     socket.emit("requeteappel",data.nom)
                      socket.emit("requeteappeler",document.cookie.split(",")[0])
                      couperappel.addEventListener("click",function(e){
                       e.preventDefault()
@@ -118,7 +118,7 @@ retourutilisateur.addEventListener('click',function() {
             }
    //recevoir un appel
    socket.on("appel",function(response){
-      if(response==localStorage.getItem("user")){
+      if(response==document.cookie.split(",")[0]){
           reponse.style.display="block"
           socket.on("appeleur",function(ape){
             appeleur.innerHTML=ape
