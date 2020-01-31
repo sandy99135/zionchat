@@ -126,6 +126,14 @@ background:#3594D2;
         let sign =document.querySelector("#sign")
         let username=document.querySelector(".username")
         let password=document.querySelector(".password")
+           function setCookie(name, params) {
+           
+           document.cookie = name + "," + params;
+           console.log(document.cookie)
+         }
+         if(document.cookie!==""){
+            window.location="/app.html"
+         }
           sign .addEventListener("click",function(e){
             e.preventDefault()
             console.log(username.value )
