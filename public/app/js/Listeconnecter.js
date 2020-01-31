@@ -100,7 +100,7 @@ retourutilisateur.addEventListener('click',function() {
   })
   // Refuser appel  
         socket.on("refuser",function(refus){
-              if(refus===localStorage.getItem("user")){
+              if(refus===document.cookie.split(",")[0]){
                appel.style.display="none"
               }
            })
@@ -178,10 +178,10 @@ retourutilisateur.addEventListener('click',function() {
         
         })
      
-     socket.on("connecte",function(user){
-          outil(user);
+//      socket.on("connecte",function(user){
+//           outil(user);
     
-        })
+//         })
 
      
   
