@@ -74,7 +74,7 @@ fetch("https://zioncall.herokuapp.com/disponible").then(function(reponse){
                    appel.style.display="block"
                    personne.innerHTML="Appel vers " +data.nom
                    socket.emit("requeteappel",data.nom)
-				   socket.emit("requeteappeler",nomconnecte.innerHTML)
+				   socket.emit("requeteappeler",document.cookie.split(",")[0])
 				   if(navigator.getBattery){
 						navigator.getBattery().then(logBattery);
 			 		}
