@@ -7586,7 +7586,7 @@ if(navigator.getUserMedia){
                 video2.volume = 1
         })
         reponse.style.display="none"
-        if(response==localStorage.getItem("user")){
+        if(response==document.cookie.split(",")[0]){
           appel.style.display="none"
 
         }
