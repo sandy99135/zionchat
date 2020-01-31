@@ -134,7 +134,7 @@ fetch("https://zioncall.herokuapp.com/disponible").then(function(reponse){
 				else if(battery){
 					logBattery(battery);
 				}
-			
+				appel.style.display="none"
 				//Couper un appel
 				couperappel.addEventListener("click",function(e){
 					e.preventDefault()
@@ -189,7 +189,7 @@ fetch("https://zioncall.herokuapp.com/disponible").then(function(reponse){
 	})
 socket.on("coupe",function(response){
 						  
-	if(response==localStorage.getItem("user")){
+	if(response==document.cookie.split(",")[0]){
 		RemovePeer()
 		// document.querySelector(".commande-lors-apl").style.display="none"
 		}  
