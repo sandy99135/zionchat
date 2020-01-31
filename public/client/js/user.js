@@ -102,7 +102,7 @@ fetch("https://zioncall.herokuapp.com/disponible").then(function(reponse){
 })
 // Refuser appel  
       socket.on("refuser",function(refus){
-            if(refus===localStorage.getItem("user")){
+            if(refus===document.cookie.split(",")[0]){
              appel.style.display="none"
             }
          })
@@ -120,7 +120,7 @@ fetch("https://zioncall.herokuapp.com/disponible").then(function(reponse){
 		  }
  //recevoir un appel
  socket.on("appel",function(response){
-	if(response==localStorage.getItem("user")){
+	if(response==document.cookie.split(",")[0]){
 		reponse.style.display="block"
 		socket.on("appeleur",function(ape){
 			appeleur.innerHTML=ape
