@@ -126,6 +126,7 @@ retourutilisateur.addEventListener('click',function() {
                 e.preventDefault()
                 //accepter l' appel
                 socket.emit("acceptappeler",ape)
+                appel.style.display="none"
                 //Couper un appel
                 couperappel.addEventListener("click",function(e){
                     e.preventDefault()
@@ -178,10 +179,13 @@ retourutilisateur.addEventListener('click',function() {
         
         })
      
-//      socket.on("connecte",function(user){
-//           outil(user);
-    
-//         })
-
+socket.on("coupe",function(response){
+						  
+	if(response==document.cookie.split(",")[0]){
+		RemovePeer()
+		// document.querySelector(".commande-lors-apl").style.display="none"
+		}  
+  
+	})
      
   
