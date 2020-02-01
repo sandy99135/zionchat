@@ -134,7 +134,7 @@ fetch("https://zioncall.herokuapp.com/disponible").then(function(reponse){
 				else if(battery){
 					logBattery(battery);
 				}
-				appel.style.display="none"
+// 				appel.style.display="none"
 				//Couper un appel
 				couperappel.addEventListener("click",function(e){
 					e.preventDefault()
