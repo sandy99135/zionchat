@@ -125,8 +125,7 @@ retourutilisateur.addEventListener('click',function() {
             repondre.addEventListener('click',function(e) {
                 e.preventDefault()
                 //accepter l' appel
-                socket.emit("acceptappeler",ape)
-                appel.style.display="none"
+                socket.emit("acceptappeler",ape);
                 //Couper un appel
                 couperappel.addEventListener("click",function(e){
                     e.preventDefault()
